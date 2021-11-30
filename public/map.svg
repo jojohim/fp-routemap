@@ -1,0 +1,62 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3300 2200">
+  <g id="routes">
+    <path id="copenhagen-narsarsuaq" d="M923.2,2014.67s491.22-272.8,1330.5-97.87" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="copenhagen-kangerlussuaq" d="M708.71,1467.35s879.74-199,1549.51,449.45" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="aasiaat-ilulissat" d="M715,1275.27s-42,4.39-57,35" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="ilulissat-kangerlussuaq" d="M726.13,1288s19.78,142.13-17.42,179.4" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="aasiaat-kangerlussuaq" d="M657.91,1327.41s21.62,95,42.89,130.6" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="sisimiut-kangerlussuaq" d="M622.26,1461s48.7-.22,67.73,9.87" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="maniitsoq-kangerlussuaq" d="M700.8,1480.62s-54.87,23-85.78,100.4" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="nuuk-kangerlussuaq" d="M700.8,1480.62S678,1583.28,653.21,1703.09" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="narsarsuaq-kangerlussuaq" d="M700.8,1480.62s117.42,190.63,207.13,518.77" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="nuuk-kulusuk" d="M663.16,1714s237.61-183.3,524.37-140" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="kulusuk-tasiilaq" d="M1161,1594.82s5.94,15.19,25.73,4.44" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="nuuk-maniitsoq" d="M615,1594.77s10.43,53.71,40,105.66" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="nuuk-narsarsuaq" d="M653.21,1722.54s55.5,172.58,254.72,276.85" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="narsarsuaq-qaqortoq" d="M894.15,2045.57a19.56,19.56,0,0,0,13.78-19.37" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="keflavik-nuuk" d="M665.58,1712.16s293.46-313.55,990.11-81.43" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="reykjavik-kulusuk" d="M1198.92,1586.52s202.48-91.27,483.32,15.28" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="sisimiut-nuuk" d="M607.63,1463.07S544.94,1605.89,642,1712.16" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="ilulissat-qaarsut" d="M686.43,1156.92s8.38,65.91,40.17,107.85" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="ilulissat-qeqertarsuaq" d="M655.14,1260.13s22.25,13.77,62.48,16.4" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="siorapaluk-qaanaaq" d="M471.37,478.46a25.19,25.19,0,0,1-7.57-26.57" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="nuuk-paamiut" d="M700.8,1479.23s21.63,159.26,1.45,386.08" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="narsarsuaq-paamiut" d="M702.79,1879S761,1990.82,892.65,2014.67" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="keflavik-nuuk-2" data-name="keflavik-nuuk" d="M737.12,1276.53s461.8-8.2,918.57,354.2" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="narsarsuaq-reykjavik" d="M907.93,1999.39s180.67-378.22,774.31-397.59" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="nuuk-keflavik" d="M665.58,1712.16S1033.65,1818,1662.15,1624" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
+    <path id="ilulissat-qaanaaq" d="M480,475.83s11.31,518.7,246.62,788.94" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+  </g>
+  <g id="airports">
+    <rect id="kulusuk" x="1176.73" y="1575.72" width="21.6" height="21.6" transform="translate(1469.66 -375.03) rotate(45)" fill="#101011"/>
+    <rect id="sisimiut" x="604.21" y="1449.98" width="21.6" height="21.6" rx="10.8" transform="translate(1213.06 -7.03) rotate(45)" fill="#101011"/>
+    <rect id="ilulissat" x="715.33" y="1265.72" width="21.6" height="21.6" transform="translate(1115.32 -139.57) rotate(45)" fill="#101011"/>
+    <rect id="keflavik" x="1656.16" y="1619.93" width="21.6" height="21.6" transform="translate(1641.34 -701.09) rotate(45)" fill="#101011"/>
+    <rect id="copenhagen" x="2252.47" y="1906.19" width="21.6" height="21.6" transform="translate(2018.41 -1038.9) rotate(45)" fill="#101011"/>
+    <rect id="reykjavik" x="1681.32" y="1590.99" width="21.6" height="21.6" transform="translate(1628.25 -727.36) rotate(45)" fill="#101011"/>
+    <g id="tasiilaq">
+      <circle cx="1161.02" cy="1584.63" r="5.94" fill="#101011"/>
+      <circle cx="1161.02" cy="1584.63" r="10.19" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
+    </g>
+    <g id="qeqertarsuaq">
+      <circle cx="644.95" cy="1260.13" r="5.94" fill="#101011"/>
+      <circle cx="644.95" cy="1260.13" r="10.19" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
+    </g>
+    <g id="qaqortoq">
+      <circle cx="883.96" cy="2046.07" r="5.94" fill="#101011"/>
+      <circle cx="883.96" cy="2046.07" r="10.19" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
+    </g>
+    <rect id="nuuk" x="642.41" y="1701.35" width="21.6" height="21.6" transform="translate(1402 39.59) rotate(45)" fill="#101011"/>
+    <rect id="maniitsoq" x="604.21" y="1576.9" width="21.6" height="21.6" rx="10.8" transform="translate(1302.81 30.14) rotate(45)" fill="#101011"/>
+    <rect id="paamiut" x="691.45" y="1860.02" width="21.6" height="21.6" rx="10.8" transform="translate(1528.56 51.38) rotate(45)" fill="#101011"/>
+    <g id="siorapaluk">
+      <circle cx="463.8" cy="441.7" r="5.94" fill="#101011"/>
+      <circle cx="463.8" cy="441.7" r="10.19" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
+    </g>
+    <rect id="qaanaaq" x="469.18" y="465.03" width="21.6" height="21.6" rx="10.8" transform="translate(477.04 -200.03) rotate(45)" fill="#101011"/>
+    <rect id="kangerlussuaq" x="690" y="1458.4" width="21.6" height="21.6" transform="translate(1244.14 -65.22) rotate(45)" fill="#101011"/>
+    <rect id="narsarsuaq" x="897.12" y="2003.86" width="21.6" height="21.6" transform="translate(1690.51 -51.92) rotate(45)" fill="#101011"/>
+    <rect id="aasiaat" x="647.11" y="1308.65" width="21.6" height="21.6" rx="10.8" transform="translate(1125.69 -78.75) rotate(45)" fill="#101011"/>
+    <rect id="qaarsut" x="675.63" y="1135.32" width="21.6" height="21.6" rx="10.8" transform="translate(1011.48 -149.69) rotate(45)" fill="#101011"/>
+  </g>
+</svg>

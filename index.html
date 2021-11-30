@@ -4,11 +4,30 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Vite - Greenland Route Map</title>
   </head>
   <body>
-    <h1>TEST TEST NETLIFY</h1>
-    <div id="app"></div>
+
+    <section class="disclaimerWindow">
+      <img src="info-icon.svg">
+      <p>This map is for illustrative purposes only.<br> Flights might defer based on operational conditions. </p>
+    </section>
+
+    <section class="screenOne formWindow">
+      <h1>I'm travelling from:</h1>
+      <input type="text" id="searchbar" placeholder="Search destinations..">
+      <ul id="destList">
+        <!--destination template will be appended here-->
+      </ul>
+      <template id="destTemplate">
+        <li class="destItem">
+        <p data-field="airport">DESTINATION NAME</p>
+        <div class="line"></div>
+        </li>
+      </template>
+    </section>
     <script type="module" src="/main.js"></script>
+    <img id="mapOverlay" src="map.svg">
+    <img id="mapBG" src="map-bg.png">
   </body>
 </html>

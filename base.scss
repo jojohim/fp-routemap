@@ -1,0 +1,29 @@
+//contains all the resets, variables, mixins, and utility classes
+
+body{
+    margin: 0;
+    background-color: #83B5F4;
+}
+
+#mapOverlay{
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+}
+
+#mapBG{
+    height: 100vh;
+    position: absolute;
+    z-index: -2;
+}
+
+.line{
+    height: 1px;
+    background-color: grey;
+    width: 95%;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
