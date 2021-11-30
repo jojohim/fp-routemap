@@ -26,7 +26,6 @@ async function start(){
 
 function buildList(){
   globalFilteredDest = filterDestBySearch(globalDestinations);
-  console.table(globalFilteredDest);
   displayDestList(globalFilteredDest);
 }
 
@@ -34,8 +33,13 @@ function buildList(){
 function setEventListeners(){
   //SEARCH INPUT EL
   searchInput.addEventListener("keyup", checkSearch);
-  //If destination clicked check if From window visible  
+  //DESTINATION CLICKED EL
+  document.querySelector(".destName").addEventListener("click", checkDest)
 
+}
+
+function checkDest(event){
+console.log(event)
 }
 
 function checkSearch(){
