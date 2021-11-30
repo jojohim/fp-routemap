@@ -97,7 +97,7 @@ function displayDestList(destinations){
 
 function displayDest(destination){
  const copy = document.querySelector("template#destTemplate").content.cloneNode(true);
- copy.querySelector("[data-field=airport]").textContent = destination.airport;
+ copy.querySelector("[data-field=airport]").textContent = `${destination.airport}` ;
  document.querySelector("ul#destList").appendChild(copy);
 
 }
