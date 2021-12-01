@@ -22,20 +22,17 @@ async function start(){
   setEventListeners();
 }
 
-///////COLLECT SORTED / FILTERED LISTS
-
-function buildList(){
-  globalFilteredDest = filterDestBySearch(globalDestinations);
-  console.table(globalFilteredDest);
-  displayDestList(globalFilteredDest);
-}
-
-
 function setEventListeners(){
   //SEARCH INPUT EL
   searchInput.addEventListener("keyup", checkSearch);
-  //If destination clicked check if From window visible  
+}
 
+///////COLLECT SORTED / FILTERED LISTS
+
+function buildList(){
+  globalFilteredDest = filterByDestinationClicked(globalDestinations);
+  globalFilteredDest = filterDestBySearch(globalFilteredDest);
+  displayDestList(globalFilteredDest);
 }
 
 function checkSearch(){
@@ -97,7 +94,58 @@ function displayDestList(destinations){
 
 function displayDest(destination){
  const copy = document.querySelector("template#destTemplate").content.cloneNode(true);
- copy.querySelector("[data-field=airport]").textContent = destination.airport;
- document.querySelector("ul#destList").appendChild(copy);
 
+ copy.querySelector("[data-field=airport]").textContent = `${destination.airport}` ;
+ copy.querySelector("[data-field=airport]").addEventListener("click", function(){
+   clickDestination(destination);
+ })
+
+ document.querySelector("ul#destList").appendChild(copy);
+}
+
+function clickDestination(destination){
+  console.log(destination);
+  //IF globalFilteredDest array DOES NOT include isFromLocation = true THEN: 
+    //set from location to true 
+    destination.isFromLocation = true;
+    //unhide departFrom article
+    document.getElementById("departFrom").style.display = 'block';
+    //set textContent of h1 to 'depart from <destination.airport + (destination.code)>
+    document.querySelector("#departFrom h1").textContent = `Depart from ${destination.airport} (${destination.code})`;
+    //build list 
+    buildList();
+  //IF A DESTINATION ALREADY HAS isFromLocation THEN / ELSE
+    //set to location to true 
+    //initialise result screen
+}
+
+function filterByDestinationClicked(destinations){
+  const fromLocation = destinations.find(element => element.isFromLocation === true);
+
+  
+  if (checkIfHasFromDest(destinations) == true) {
+
+    const fromLocation = destinations.find(element => element.isFromLocation === true);
+
+    if (fromLocation.country == "Denmark" | fromLocation.country == "Iceland"){
+    //return destinations only with greenlandic locations
+    return destinations.filter(destination => destination.country == "Greenland")
+    } else if (fromLocation.country == "Greenland"){
+    console.log(fromLocation.airport);
+    return destinations.filter(destination => destination.airport !== fromLocation.airport);
+  }
+
+}
+  else{
+    return destinations;
+  }
+}
+
+
+function checkIfHasFromDest(destinations){
+  if (destinations.some(e => e.isFromLocation === true)){
+    return true; 
+  } else {
+    return false;
+  }
 }
