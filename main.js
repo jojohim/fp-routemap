@@ -35,6 +35,10 @@ function buildList(){
   displayDestList(globalFilteredDest);
 }
 
+function checkDest(event){
+console.log(event)
+}
+
 function checkSearch(){
   settings.searchQuery = searchInput.value;
   buildList();
