@@ -14,11 +14,11 @@
     </section>
 
     <section class="screenOne formWindow">
-      <article id="departFrom">
+      <article id="departFrom" class="hidden">
       <h1>Depart from</h1>
       <div class="line"></div>
     </article>
-      <h1>I'm travelling from:</h1>
+      <h1 id="listTitle">I'm travelling from:</h1>
       <input type="text" id="searchbar" placeholder="Search destinations..">
       <ul id="destList">
         <!--destination template will be appended here-->
@@ -31,7 +31,7 @@
       </template>
     </section>
     <script type="module" src="/main.js"></script>
-    <img id="mapOverlay" src="map.svg">
+    <img id="mapOverlay" src="routes-and-airports.svg">
     <img id="mapBG" src="map-bg.png">
   </body>
 </html>

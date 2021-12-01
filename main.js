@@ -4,10 +4,10 @@ window.addEventListener("DOMContentLoaded", start);
 
 let globalDestinations = [];
 let globalFilteredDest = [];
+let toFromLocations = [];
 
 // Search Input
 const searchInput = document.getElementById("searchbar");
-
 //Settings for filtering and sorting 
 
 let settings = {
@@ -33,10 +33,6 @@ function buildList(){
   globalFilteredDest = filterByDestinationClicked(globalDestinations);
   globalFilteredDest = filterDestBySearch(globalFilteredDest);
   displayDestList(globalFilteredDest);
-}
-
-function checkDest(event){
-console.log(event)
 }
 
 function checkSearch(){
@@ -108,24 +104,32 @@ function displayDest(destination){
 }
 
 function clickDestination(destination){
-  console.log(destination);
+
   //IF globalFilteredDest array DOES NOT include isFromLocation = true THEN: 
+  if (globalFilteredDest.length === 0){
     //set from location to true 
     destination.isFromLocation = true;
-    //unhide departFrom article
-    document.getElementById("departFrom").style.display = 'block';
+    toFromLocations.push(destination);
+    //unhide departFrom article & change 'travelling from' to 'travelling to'
+    document.getElementById("departFrom").classList.remove("hidden");
+    document.getElementById("listTitle").textContent = "I'm travelling to:";
     //set textContent of h1 to 'depart from <destination.airport + (destination.code)>
     document.querySelector("#departFrom h1").textContent = `Depart from ${destination.airport} (${destination.code})`;
     //build list 
     buildList();
+  } 
+  else {
+    destination.isToLocation = true;
+    toFromLocations.push(destination);
+    console.table(toFromLocations);
+  }
   //IF A DESTINATION ALREADY HAS isFromLocation THEN / ELSE
     //set to location to true 
     //initialise result screen
 }
 
 function filterByDestinationClicked(destinations){
-  const fromLocation = destinations.find(element => element.isFromLocation === true);
-
+  //reset search input
   
   if (checkIfHasFromDest(destinations) == true) {
 
