@@ -8,18 +8,24 @@
   </head>
   <body>
 
+    <div class="loader">
+      <img src="loading.gif" alt="loading...">
+    </div>
+
     <section class="disclaimerWindow">
       <img src="info-icon.svg">
       <p>This map is for illustrative purposes only.<br> Flights might defer based on operational conditions. </p>
     </section>
 
     <section class="screenOne formWindow">
+      <div id="screenOneHeader">
       <article id="departFrom" class="hidden">
-      <h1>Depart from</h1>
+      <h1>Depart from <span class="binIcon"></span></h1>
       <div class="line"></div>
     </article>
-      <h1 id="listTitle">I'm travelling from:</h1>
+      <h2 id="listTitle">I'm travelling from:</h2>
       <input type="text" id="searchbar" placeholder="Search destinations..">
+    </div>
       <ul id="destList">
         <!--destination template will be appended here-->
       </ul>
@@ -30,8 +36,8 @@
         </li>
       </template>
     </section>
-    <script type="module" src="/main.js"></script>
     <section id="mapOverlay"></section>
     <img id="mapBG" src="map-bg.png">
+    <script type="module" src="/main.js"></script>
   </body>
 </html>

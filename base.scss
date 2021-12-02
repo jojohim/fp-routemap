@@ -1,4 +1,8 @@
 //contains all the resets, variables, mixins, and utility classes
+//VARIABLES
+
+$primary-color: white;
+$secondary-color: #BD242B;
 
 body{
     margin: 0;
@@ -8,13 +12,13 @@ body{
 #mapOverlay svg{
     height: 100vh;
     position: absolute;
-    z-index: -1;
+    z-index: 0;
 }
 
 #mapBG{
     height: 100vh;
     position: absolute;
-    z-index: -2;
+    z-index: -1;
 }
 
 .line{
@@ -29,6 +33,7 @@ ul{
 }
 
 .hidden{
+    transition: 0.3s;
     display: none;
 }
 
@@ -36,6 +41,38 @@ ul{
     visibility: hidden;
 }
 
-/*#mapOverlay svg .label{
-    visibility: hidden
+#mapOverlay svg .pin:hover::after {
+    content: "HELLO";
+}
+
+
+
+//#mapOverlay svg .pin:before {
+//    content: attr(data-hover);
+//    visibility: hidden;
+//    opacity: 0;
+//    width: 140px;
+//    background-color: black;
+//    color: #fff;
+//    text-align: center;
+//    border-radius: 5px;
+//    padding: 5px 0;
+//    transition: opacity 0.3s ease-in-out;
+//
+//    position: absolute;
+//    left: 0;
+//    top: 110%;
+//}
+//
+//#mapOverlay svg .pin:hover:before {
+//    opacity: 1;
+//    visibility: visible;
+//}
+
+
+
+/*#mapOverlay svg .pin:hover::after{
+    transition: 0.3s ease-in-out;
+    opacity: 0.75;
+
 }*/

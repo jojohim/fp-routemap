@@ -1,32 +1,34 @@
 //all the Sass code handling the layout, which is the container and grid systems
 
-body{
-    display: grid;
-    grid-template-columns: 65% 35%;
-    grid-template-rows: 12vh 88vh;
-}
-
 
 .formWindow{
+    position: absolute;
+    overflow: scroll;
+    z-index: 2;
     grid-column-start: 2;
     box-shadow: 4px 3px 21px -8px rgba(0,0,0,0.56);
-    grid-row-start: 2;
+    right: 1vw;
+    top: 11vh;
     background-color: white;
     margin: 2vh 2vh 2vh 0;
     border-radius: 10px;
     padding: 1vw 3vw;
-    overflow: scroll;
+    width: 25%;
+    height: 80vh;
+    
 }
 
 .disclaimerWindow{
-    grid-column-start: 2;
+    position: absolute;
     box-shadow: 4px 3px 21px -8px rgba(0,0,0,0.56);
     grid-row-start: 1;
     height: 10vh;
+    width: 31%;
     margin: 2vh 2vh 0 0;
     background-color: white;
     border-radius: 10px;
     display: flex;
+    right: 1vw;
     align-items: center;
     justify-content: center;
 
@@ -35,3 +37,20 @@ body{
         margin-right: 1vw;
     }
 }
+
+.destItem p{
+    transition: 0.3s ease-in-out;
+}
+.destItem p:hover{
+    cursor: pointer;
+    transform: translateX(2px);
+    font-weight: 600;
+    color: $secondary-color;
+}
+
+//#screenOneHeader{
+//    height: min-content;
+//    margin-top: 0;
+//    padding-bottom: 1vw;
+//    background-color: white;
+//}

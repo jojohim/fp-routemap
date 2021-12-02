@@ -30,7 +30,7 @@
   <g id="pins">
     <rect class="pin" id="kulusukPin" x="1176.73" y="1575.72" width="21.6" height="21.6" transform="translate(1469.66 -375.03) rotate(45)" fill="#101011"/>
     <rect class="pin" id="sisimiutPin" x="604.21" y="1449.98" width="21.6" height="21.6" rx="10.8" transform="translate(1213.06 -7.03) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="ilulissatPin" x="715.33" y="1265.72" width="21.6" height="21.6" transform="translate(1115.32 -139.57) rotate(45)" fill="#101011"/>
+    <rect class="pin"  id="ilulissatPin" x="715.33" y="1265.72" width="21.6" height="21.6" transform="translate(1115.32 -139.57) rotate(45)" fill="#101011"/>
     <rect class="pin" id="keflavikPin" x="1656.16" y="1619.93" width="21.6" height="21.6" transform="translate(1641.34 -701.09) rotate(45)" fill="#101011"/>
     <rect class="pin" id="copenhagenPin" x="2252.47" y="1906.19" width="21.6" height="21.6" transform="translate(2018.41 -1038.9) rotate(45)" fill="#101011"/>
     <rect class="pin" id="reykjavikPin" x="1681.32" y="1590.99" width="21.6" height="21.6" transform="translate(1628.25 -727.36) rotate(45)" fill="#101011"/>

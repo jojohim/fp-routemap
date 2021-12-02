@@ -1,10 +1,16 @@
 import './styles.scss';
 
+window.addEventListener("load", function(){
+  const loader = document.querySelector(".loader");
+  loader.className += " hide";
+})
 window.addEventListener("DOMContentLoaded", start);
 
+//ARRAYS 
 let globalDestinations = [];
 let globalFilteredDest = [];
 let toFromLocations = [];
+let globalRoutes = [];
 
 // Search Input
 const searchInput = document.getElementById("searchbar");
@@ -23,7 +29,9 @@ async function start(){
 
   let labels =document.querySelectorAll('#mapOverlay svg #labels .label');
   labels.forEach(label =>{
-    label.classList.add("hidden");
+  label.classList.add("hidden");
+
+
   })
 
   handleDest(destResponseArray);
@@ -34,6 +42,31 @@ async function start(){
 function setEventListeners(){
   //SEARCH INPUT EL
   searchInput.addEventListener("keyup", checkSearch);
+  //CLICK ON PIN EL
+  const pins = document.querySelector("#mapOverlay svg #pins");
+  pins.addEventListener("click", checkPin);
+  //HOVER OVER EL 
+//  pins.addEventListener("mouseover", pinEventCheck);
+//  pins.addEventListener("mouseout", pinEventCheck)
+}
+
+//function pinEventCheck(e){
+//  const clickedDest = e.srcElement.id.slice(0, -3);
+//  if(e.type === "mouseover"){
+//  document.querySelector(`svg g #${clickedDest}Label`).classList.remove("hidden");
+//} else if (e.type === "mouseout"){
+//  document.querySelector(`svg g #${clickedDest}Label`).classList.add("hidden");
+//} else if(e.type === "click"){
+//  checkPin(e);
+//}
+//}
+
+function checkPin(e){
+  console.log(e)
+  console.log(e.srcElement.id);
+  const clickedDest = e.srcElement.id.slice(0, -3);
+  const destinationInArray = globalDestinations.find(({airport}) => airport === clickedDest);
+  clickDestination(destinationInArray)
 }
 
 ///////COLLECT SORTED / FILTERED LISTS
@@ -105,7 +138,8 @@ function displayDestList(destinations){
 function displayDest(destination){
  const copy = document.querySelector("template#destTemplate").content.cloneNode(true);
 
- copy.querySelector("[data-field=airport]").textContent = `${destination.airport}` ;
+ const upperCasedDest = makeUpperCase(destination.airport);
+ copy.querySelector("[data-field=airport]").textContent = `${upperCasedDest} (${destination.code})` ;
  copy.querySelector("[data-field=airport]").addEventListener("click", function(){
    clickDestination(destination);
  })
@@ -113,19 +147,20 @@ function displayDest(destination){
  document.querySelector("ul#destList").appendChild(copy);
 }
 
+function makeUpperCase(item){
+  const fixedItem = item.charAt(0).toUpperCase() + item.slice(1);
+  return fixedItem;
+}
+
 function clickDestination(destination){
 
   //IF globalFilteredDest array DOES NOT include isFromLocation = true THEN: 
   if (globalFilteredDest.length === 0){
-    //set from location to true 
+    //set from location to true & save as from location
     destination.isFromLocation = true;
     toFromLocations.push(destination);
-    //unhide departFrom article & change 'travelling from' to 'travelling to'
-    document.getElementById("departFrom").classList.remove("hidden");
-    document.getElementById("listTitle").textContent = "I'm travelling to:";
-    //set textContent of h1 to 'depart from <destination.airport + (destination.code)>
-    document.querySelector("#departFrom h1").textContent = `Depart from ${destination.airport} (${destination.code})`;
-    //build list 
+
+    changeScreenView(destination);
     buildList();
     addLabel(destination);
   } 
@@ -135,9 +170,18 @@ function clickDestination(destination){
   else {
     destination.isToLocation = true;
     toFromLocations.push(destination);
+
+
     addLabel(destination);
   }
+}
 
+function changeScreenView(destination){
+      //unhide departFrom article & change 'travelling from' to 'travelling to'
+      document.getElementById("departFrom").classList.remove("hidden");
+      document.getElementById("listTitle").textContent = "I'm travelling to:";
+      //set textContent of h1 to 'depart from <destination.airport + (destination.code)>
+      document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(destination.airport)} (${destination.code})`;
 }
 
 function addLabel(destination){
