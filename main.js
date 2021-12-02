@@ -8,7 +8,6 @@ let toFromLocations = [];
 
 // Search Input
 const searchInput = document.getElementById("searchbar");
-//Settings for filtering and sorting 
 
 let settings = {
   searchQuery: ""
@@ -17,6 +16,16 @@ let settings = {
 async function start(){
   const destinationsURL = "https://routemap-fa64.restdb.io/rest/destinations";
   let destResponseArray = await getDestinations(destinationsURL);
+
+  let svgMapResponse = await fetch("routes-and-airports.svg");
+  let mySVGData = await svgMapResponse.text();
+  document.getElementById("mapOverlay").innerHTML = mySVGData;
+
+  let labels =document.querySelectorAll('#mapOverlay svg #labels .label');
+  labels.forEach(label =>{
+    label.classList.add("hidden");
+  })
+
   handleDest(destResponseArray);
   displayDestList(globalDestinations);
   setEventListeners();
@@ -82,6 +91,7 @@ return{
   code: destination.code,
   country: destination.country,
   type: destination.type,
+  connectsTo: destination.connectsTo, 
   isFromLocation: false,
   isToLocation: false,
 }
@@ -117,15 +127,23 @@ function clickDestination(destination){
     document.querySelector("#departFrom h1").textContent = `Depart from ${destination.airport} (${destination.code})`;
     //build list 
     buildList();
+    addLabel(destination);
   } 
+    //IF A DESTINATION ALREADY HAS isFromLocation THEN / ELSE
+    //set to location to true 
+    //initialise result screen
   else {
     destination.isToLocation = true;
     toFromLocations.push(destination);
-    console.table(toFromLocations);
+    addLabel(destination);
   }
-  //IF A DESTINATION ALREADY HAS isFromLocation THEN / ELSE
-    //set to location to true 
-    //initialise result screen
+
+}
+
+function addLabel(destination){
+
+  console.log(`#${destination.airport}Label`);
+  document.querySelector(`svg g #${destination.airport}Label`).classList.remove("hidden");
 }
 
 function filterByDestinationClicked(destinations){
@@ -139,7 +157,6 @@ function filterByDestinationClicked(destinations){
     //return destinations only with greenlandic locations
     return destinations.filter(destination => destination.country == "Greenland")
     } else if (fromLocation.country == "Greenland"){
-    console.log(fromLocation.airport);
     return destinations.filter(destination => destination.airport !== fromLocation.airport);
   }
 
