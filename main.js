@@ -156,6 +156,7 @@ function clickDestination(destination){
 
   //IF globalFilteredDest array DOES NOT include isFromLocation = true THEN: 
   if (globalFilteredDest.length === 0){
+    document.getElementById("textContainer").classList.add("changeScreen");
     //set from location to true & save as from location
     destination.isFromLocation = true;
     toFromLocations.push(destination);
@@ -178,9 +179,12 @@ function clickDestination(destination){
 
 function changeScreenView(destination){
 
-  document.getElementById("textContainer").classList.add("changeScreen");
+      setTimeout(function() {
+        //code to be executed after 1 second
+        document.getElementById("departFrom").classList.remove("hidden");
+      }, 300);
+
       //unhide departFrom article & change 'travelling from' to 'travelling to'
-      document.getElementById("departFrom").classList.remove("hidden");
       document.getElementById("listTitle").textContent = "I'm travelling to:";
       //set textContent of h1 to 'depart from <destination.airport + (destination.code)>
       document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(destination.airport)} (${destination.code})`;

@@ -33,6 +33,7 @@ ul{
 }
 
 .hidden{
+    transition-delay: 1s;
     transition: 0.3s;
     display: none;
 }
@@ -46,29 +47,26 @@ ul{
 }
 
 .changeScreen{
-    animation: fadeOutIn 2s;
+    animation: fadeOutIn 1s;
     animation-fill-mode: forwards;
 }
 
 @keyframes fadeOutIn{
     0% {
         opacity: 1;
-        visibility:  visible;
     }
-    30%{
+    20%{
+        transform: translateX(5px);
         opacity: 0;
-        visibility: hidden;
     }
 
     30%{
         opacity: 0;
-        visibility: hidden;
-        transform: translateX(-50px);
+        transform: translateX(-10px);
     }
 
     100%{
         opacity: 1;
-        visibility: visible;
         transform: translateX(0);
     }
 }
