@@ -45,8 +45,33 @@ ul{
     content: "HELLO";
 }
 
+.changeScreen{
+    animation: fadeOutIn 2s;
+    animation-fill-mode: forwards;
+}
 
+@keyframes fadeOutIn{
+    0% {
+        opacity: 1;
+        visibility:  visible;
+    }
+    30%{
+        opacity: 0;
+        visibility: hidden;
+    }
 
+    30%{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50px);
+    }
+
+    100%{
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+}
 //#mapOverlay svg .pin:before {
 //    content: attr(data-hover);
 //    visibility: hidden;

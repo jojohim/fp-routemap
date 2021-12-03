@@ -177,6 +177,8 @@ function clickDestination(destination){
 }
 
 function changeScreenView(destination){
+
+  document.getElementById("textContainer").classList.add("changeScreen");
       //unhide departFrom article & change 'travelling from' to 'travelling to'
       document.getElementById("departFrom").classList.remove("hidden");
       document.getElementById("listTitle").textContent = "I'm travelling to:";
