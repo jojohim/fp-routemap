@@ -41,9 +41,7 @@ ul{
     visibility: hidden;
 }
 
-#mapOverlay svg .pin:hover::after {
-    content: "HELLO";
-}
+//ANIMATION WHEN SCREEN IS CHANGED
 
 .changeScreen{
     animation: fadeOutIn 1.5s;
@@ -52,6 +50,10 @@ ul{
 
 @keyframes fadeOutIn{
     0% {
+        opacity: 1;
+    }
+
+    15%{
         opacity: 1;
     }
 

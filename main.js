@@ -45,21 +45,9 @@ function setEventListeners(){
   //CLICK ON PIN EL
   const pins = document.querySelector("#mapOverlay svg #pins");
   pins.addEventListener("click", checkPin);
-  //HOVER OVER EL 
-//  pins.addEventListener("mouseover", pinEventCheck);
-//  pins.addEventListener("mouseout", pinEventCheck)
+
 }
 
-//function pinEventCheck(e){
-//  const clickedDest = e.srcElement.id.slice(0, -3);
-//  if(e.type === "mouseover"){
-//  document.querySelector(`svg g #${clickedDest}Label`).classList.remove("hidden");
-//} else if (e.type === "mouseout"){
-//  document.querySelector(`svg g #${clickedDest}Label`).classList.add("hidden");
-//} else if(e.type === "click"){
-//  checkPin(e);
-//}
-//}
 
 function checkPin(e){
   console.log(e)
@@ -157,41 +145,36 @@ function clickDestination(destination){
   //IF globalFilteredDest array DOES NOT include isFromLocation = true THEN: 
   if (globalFilteredDest.length === 0){
     document.getElementById("textContainer").classList.add("changeScreen");
-    //set from location to true & save as from location
     destination.isFromLocation = true;
     toFromLocations.push(destination);
+  } else {
+    destination.isToLocation = true;
+    toFromLocations.push(destination);
+  }
 
-    setTimeout(function() {
-    changeScreenView(destination);
+  setTimeout(function() {
+    showScreen(destination);
     buildList();
     addLabel(destination);
   }, 500);
-  
-  } 
-    //IF A DESTINATION ALREADY HAS isFromLocation THEN / ELSE
-    //set to location to true 
-    //initialise result screen
-  else {
-    destination.isToLocation = true;
-    toFromLocations.push(destination);
-
-
-    addLabel(destination);
-  }
 }
 
-function changeScreenView(destination){
-
+function showScreen(destination){
+  console.log(destination);
+if (destination.isFromLocation == true){
         //code to be executed after 1 second
         document.getElementById("departFrom").classList.remove("hidden");
         document.getElementById("listTitle").textContent = "I'm travelling to:";
         document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(destination.airport)} (${destination.code})`;
+} else if (destination.isToLocation == true){
+  document.getElementById("textContainer").classList.remove("changeScreen");
+  document.getElementById("textContainer").classList.add("hidden");
+}
     
 }
 
 function addLabel(destination){
 
-  console.log(`#${destination.airport}Label`);
   document.querySelector(`svg g #${destination.airport}Label`).classList.remove("hidden");
 }
 
