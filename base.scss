@@ -33,7 +33,6 @@ ul{
 }
 
 .hidden{
-    transition-delay: 1s;
     transition: 0.3s;
     display: none;
 }
@@ -47,7 +46,7 @@ ul{
 }
 
 .changeScreen{
-    animation: fadeOutIn 1s;
+    animation: fadeOutIn 1.5s;
     animation-fill-mode: forwards;
 }
 
@@ -55,12 +54,13 @@ ul{
     0% {
         opacity: 1;
     }
-    20%{
+
+    45%{
         transform: translateX(5px);
         opacity: 0;
     }
 
-    30%{
+    55%{
         opacity: 0;
         transform: translateX(-10px);
     }

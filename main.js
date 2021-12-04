@@ -161,9 +161,12 @@ function clickDestination(destination){
     destination.isFromLocation = true;
     toFromLocations.push(destination);
 
+    setTimeout(function() {
     changeScreenView(destination);
     buildList();
     addLabel(destination);
+  }, 500);
+  
   } 
     //IF A DESTINATION ALREADY HAS isFromLocation THEN / ELSE
     //set to location to true 
@@ -179,15 +182,11 @@ function clickDestination(destination){
 
 function changeScreenView(destination){
 
-      setTimeout(function() {
         //code to be executed after 1 second
         document.getElementById("departFrom").classList.remove("hidden");
-      }, 300);
-
-      //unhide departFrom article & change 'travelling from' to 'travelling to'
-      document.getElementById("listTitle").textContent = "I'm travelling to:";
-      //set textContent of h1 to 'depart from <destination.airport + (destination.code)>
-      document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(destination.airport)} (${destination.code})`;
+        document.getElementById("listTitle").textContent = "I'm travelling to:";
+        document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(destination.airport)} (${destination.code})`;
+    
 }
 
 function addLabel(destination){
