@@ -1,8 +1,8 @@
 import './styles.scss';
 
 window.addEventListener("load", function(){
-  const loader = document.querySelector(".loader");
-  loader.className += " hide";
+  const pageLoader = document.querySelector(".loader");
+  pageLoader.className += " hide";
 })
 window.addEventListener("DOMContentLoaded", start);
 
@@ -50,8 +50,6 @@ function setEventListeners(){
 
 
 function checkPin(e){
-  console.log(e)
-  console.log(e.srcElement.id);
   const clickedDest = e.srcElement.id.slice(0, -3);
   const destinationInArray = globalDestinations.find(({airport}) => airport === clickedDest);
   clickDestination(destinationInArray)
@@ -151,28 +149,37 @@ function clickDestination(destination){
     destination.isToLocation = true;
     toFromLocations.push(destination);
   }
-
-  setTimeout(function() {
-    showScreen(destination);
-    buildList();
-    addLabel(destination);
-  }, 500);
+    //code to be executed after 1 second
+     setTimeout(function() {
+       showScreen(destination);
+       buildList();
+       addLabel(destination);
+     }, 500);
 }
 
 function showScreen(destination){
-  console.log(destination);
+
 if (destination.isFromLocation == true){
-        //code to be executed after 1 second
         document.getElementById("departFrom").classList.remove("hidden");
         document.getElementById("listTitle").textContent = "I'm travelling to:";
         document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(destination.airport)} (${destination.code})`;
+
 } else if (destination.isToLocation == true){
   document.getElementById("textContainer").classList.remove("changeScreen");
   document.getElementById("textContainer").classList.add("hidden");
-}
-    
+  resultLoadAnimation();
 }
 
+}
+
+
+function resultLoadAnimation(){
+  document.getElementById("resultLoaderScreen").classList.remove("hidden");
+
+  setTimeout(function() {
+    document.getElementById("resultLoaderScreen").classList.add("hidden");
+  }, 3000);
+}
 function addLabel(destination){
 
   document.querySelector(`svg g #${destination.airport}Label`).classList.remove("hidden");
