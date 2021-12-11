@@ -33,13 +33,21 @@ ul{
     padding: 0;
 }
 
-.hidden{
+.hidden {
     transition: 0.3s;
     display: none;
 }
 
-#mapOverlay svg .route{
-    visibility: hidden;
+.isActive {
+    display: block;
+
+    .close {
+        display: block;
+    }
+}
+
+.close {
+    display: none;
 }
 
 //ANIMATION WHEN SCREEN IS CHANGED
