@@ -19,12 +19,13 @@ let settings = {
   searchQuery: ""
 }
 
-function hideRoutes() {
-  const routes = document.querySelectorAll('.route');
-  routes.forEach(route => route.classList.add('hidden'));
+function hideElements(elements) {
+  elements.forEach(element => element.classList.add('hidden'));
 }
 
 async function start(){
+
+  // Fetching data and drawinng svg data
   const destinationsURL = "https://routemap-fa64.restdb.io/rest/destinations";
   let destResponseArray = await getDestinations(destinationsURL);
 
@@ -35,13 +36,25 @@ async function start(){
   let mySVGData = await svgMapResponse.text();
   document.getElementById("mapOverlay").innerHTML = mySVGData;
 
+  // click clear selection
+  const resultScreen = document.querySelector('#resultScreen');
+  const closeIcon = resultScreen.querySelector('img');
+  closeIcon.addEventListener('click', () => clearSelection());
+
+  // setting up events listeners
   let labels = document.querySelectorAll('#mapOverlay svg #labels .label');
   labels.forEach(label => {
     label.classList.add("hidden");
 
     const closeElement = label.querySelector('.close');
     closeElement.addEventListener('click', () => {
-      hideRoutes();
+
+      // Hide all routes
+      const routes = document.querySelectorAll('.route');
+      hideElements(routes);
+
+      // Hide element/label that is clicked 
+      // + Remove element from toFromLocations list
       label.classList.remove('isActive')
       label.classList.add("hidden");
 
@@ -58,6 +71,13 @@ async function start(){
           }
         ]
       }
+    
+      // If your list of toFromLocations === 0 you should show all the pins
+      // (show the pins that have been filtered out by country)
+      const pins = document.querySelectorAll('#mapOverlay svg .pin');
+      pins.forEach(pin => {
+        pin.classList.remove('hidden');
+      });
     });
   });
 
@@ -66,13 +86,15 @@ async function start(){
     route.classList.add('hidden');
   });
 
+
+  // More setup (eventlistners, data parsing)
   handleRoutes(routesResponseArray);
   handleDest(destResponseArray);
   displayDestList(globalDestinations);
   setEventListeners();
 }
 
-async  function getRoutes(routesURL) {
+async function getRoutes(routesURL) {
   const response = await fetch(routesURL, {
     method: "get",
     headers: restdbHeaders,
@@ -102,8 +124,6 @@ function getRouteItems(route){
     food: route.food,
   }
 }
-
-
 
 function setEventListeners(){
   //SEARCH INPUT EL
@@ -142,7 +162,6 @@ function checkPin(pin){
 }
 
 /////// COLLECT SORTED / FILTERED LISTS
-
 function buildList(){
   globalFilteredDest = filterByDestinationClicked(globalDestinations);
   globalFilteredDest = filterDestBySearch(globalFilteredDest);
@@ -289,6 +308,11 @@ function getRouteConnection(from, to) {
   return routes;
 }
 
+function showResultsScreen() {
+  const resultsContainer = document.querySelector('#resultScreen');
+  resultsContainer.classList.remove('hidden');
+}
+
 function updateRouteVisibility(shouldShowRoute) {
   if (!shouldShowRoute) {
     return;
@@ -298,15 +322,20 @@ function updateRouteVisibility(shouldShowRoute) {
   const toLocation = toFromLocations.find(location => location.isToLocation).airport;
   const routes = getRouteConnection(fromLocation, toLocation);
 
-  console.log({routes});
-
   if (routes.length > 0) {
     routes.forEach(route => {
       const routeElement = document.querySelector(`#${route.routeName}`);
       routeElement.classList.remove('hidden');
-    })
+    });
+
+    showResultsScreen()
+
+    // Show the route information in the UI right sidebar
+
   } else {
     console.log('Too many transits, idiot');
+
+    // Show something went wrong in the UI
   }
 }
 
@@ -316,40 +345,69 @@ function clickDestination(destination){
   }
 
   updateToFromLocations(toFromLocations.length === 0, destination);
-
-  console.log({toFromLocations});
-
   updateRouteVisibility(toFromLocations.length === 2);
 
   //code to be executed after 1 second
   setTimeout(function() {
-    showScreen(destination);
+    updateScreen();
     buildList();
     addLabel(destination);
   }, 500);
 }
 
-function showScreen(destination){
+function clearSelection() {
+  const routes = document.querySelectorAll('.route');
+  const labels = document.querySelectorAll('.label');
+  const combinedElements = [...routes, ...labels];
+  hideElements(combinedElements);
 
-  if (destination.isFromLocation == true){
+  const activeLabels = document.querySelectorAll('.label.isActive');
+  activeLabels.forEach(label => label.classList.remove('isActive'));
+
+  const pins = document.querySelectorAll('#mapOverlay svg .pin');
+  pins.forEach(pin => {
+    pin.classList.remove('hidden');
+  });
+
+  toFromLocations = [];
+  setTimeout(function() {
+    document.getElementById("resultScreen").classList.add("hidden");
+    document.getElementById("departFrom").classList.add("hidden");
+    document.getElementById("textContainer").classList.remove("hidden");
+    buildList();
+  }, 500);
+}
+
+function updateScreen() {
+  // 1 - NONE SELECTED
+  if (toFromLocations.length === 0) {
+    document.getElementById("departFrom").classList.add("hidden");
+    document.getElementById("listTitle").textContent = "";
+    document.querySelector("#departFrom h1").textContent = "";
+  }
+
+  // 2 - 1 SELECTED
+  if (toFromLocations.length === 1) {
+    const fromLocation = toFromLocations.find(location => location.isFromLocation);
     document.getElementById("departFrom").classList.remove("hidden");
     document.getElementById("listTitle").textContent = "I'm travelling to:";
-    document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(destination.airport)} (${destination.code})`;
-  } else if (destination.isToLocation == true){
+    document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
+  }
+
+  // 3 - 2 SELECTED
+  if (toFromLocations.length === 2) {
     document.getElementById("textContainer").classList.remove("changeScreen");
     document.getElementById("textContainer").classList.add("hidden");
     resultLoadAnimation();
   }
-
 }
-
 
 function resultLoadAnimation(){
   document.getElementById("resultLoaderScreen").classList.remove("hidden");
 
   setTimeout(function() {
     document.getElementById("resultLoaderScreen").classList.add("hidden");
-  }, 3000);
+  }, 1000);
 }
 
 function addLabel(destination){
@@ -358,22 +416,28 @@ function addLabel(destination){
   label.classList.add("isActive");
 }
 
-
 function filterByDestinationClicked(destinations){
   //reset search input
-  
-  if (checkIfHasFromDest(destinations) == true) {
+  if (checkIfHasFromDest(toFromLocations)) {
+    const fromLocation = toFromLocations.find(element => element.isFromLocation === true);
+    if (fromLocation.country == "Denmark" || fromLocation.country == "Iceland"){
 
-    const fromLocation = destinations.find(element => element.isFromLocation === true);
+    // Hide pins which are not from greenland or selected destination
+    destinations.forEach((destination) => {
+      if (destination.country !== fromLocation.country && destination.country !== "Greenland") {
+        const pinId = `#${destination.airport}Pin`;
+        const pin = document.querySelector(pinId);
+        pin.classList.add('hidden');
+      }
+    })
 
-    if (fromLocation.country == "Denmark" | fromLocation.country == "Iceland"){
-    //return destinations only with greenlandic locations
-    return destinations.filter(destination => destination.country == "Greenland")
+    // Return destinations only with greenlandic locations
+    const filteredDestinations = destinations.filter(destination => destination.country == "Greenland")
+    return filteredDestinations;
     } else if (fromLocation.country == "Greenland"){
-    return destinations.filter(destination => destination.airport !== fromLocation.airport);
+      return destinations.filter(destination => destination.airport !== fromLocation.airport);
+    }
   }
-
-}
   else{
     return destinations;
   }
@@ -381,9 +445,5 @@ function filterByDestinationClicked(destinations){
 
 
 function checkIfHasFromDest(destinations){
-  if (destinations.some(e => e.isFromLocation === true)){
-    return true; 
-  } else {
-    return false;
-  }
+  return destinations.some(e => e.isFromLocation === true)
 }
