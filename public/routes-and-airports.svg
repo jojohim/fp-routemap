@@ -1,7 +1,7 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3300 2200">
   <g id="routes">
     <path class="route" id="copenhagen-narsarsuaq" d="M923.2,2014.67s491.22-272.8,1330.5-97.87" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
-    <path class="route" id="copenhagen-kangerlussuaq" d="M722.17,1465.49s866.28-197.16,1536,451.31" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path class="route" id="kangerlussuaq-copenhagen" d="M722.17,1465.49s866.28-197.16,1536,451.31" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="aasiaat-ilulissat" d="M715,1275.27s-42,4.39-57,35" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="ilulissat-kangerlussuaq" d="M726.13,1288s33.24,140.27-4,177.54" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="aasiaat-kangerlussuaq" d="M657.91,1327.41s35.08,93.19,56.36,128.74" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>

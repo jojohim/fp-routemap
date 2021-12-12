@@ -19,79 +19,70 @@ let settings = {
   searchQuery: ""
 }
 
-function hideElements(elements) {
-  elements.forEach(element => element.classList.add('hidden'));
-}
 
 async function start(){
 
-  // Fetching data and drawinng svg data
-  const destinationsURL = "https://routemap-fa64.restdb.io/rest/destinations";
-  let destResponseArray = await getDestinations(destinationsURL);
+  await(fetchData());
+  await(handleSVGData());
 
-  const routesURL = "https://routemap-fa64.restdb.io/rest/routes"
-  let routesResponseArray = await getRoutes(routesURL);
+  displayDestList(globalDestinations);
+  setEventListeners();
+}
 
+async function handleSVGData(){
   let svgMapResponse = await fetch("routes-and-airports.svg");
   let mySVGData = await svgMapResponse.text();
   document.getElementById("mapOverlay").innerHTML = mySVGData;
 
-  // click clear selection
-  const resultScreen = document.querySelector('#resultScreen');
-  const closeIcon = resultScreen.querySelector('img');
-  closeIcon.addEventListener('click', () => clearSelection());
-
-  // setting up events listeners
+  // Hide labels and routes
   let labels = document.querySelectorAll('#mapOverlay svg #labels .label');
+  const routes = document.querySelectorAll('#mapOverlay svg .route');
+  hideElements(labels);
+  hideElements(routes);
+
+}
+
+async function fetchData(){
+    // Fetching data and drawing svg data
+    const destinationsURL = "https://routemap-fa64.restdb.io/rest/destinations";
+    let destResponseArray = await getDestinations(destinationsURL);
+  
+    const routesURL = "https://routemap-fa64.restdb.io/rest/routes"
+    let routesResponseArray = await getRoutes(routesURL);
+  
+    // More setup (eventlistners, data parsing)
+    handleRoutes(routesResponseArray);
+    handleDest(destResponseArray);
+}
+
+
+function setEventListeners(){
+  //SEARCH INPUT EL
+  searchInput.addEventListener("keyup", checkSearch);
+  //PIN HOVER AND CLICK EL
+  const pins = document.querySelectorAll("#mapOverlay svg #pins .pin");
+  pins.forEach(pin => {
+    pin.addEventListener("click", () => checkPin(pin));
+    pin.addEventListener("mouseover", () => togglePinLabelVisibility(pin, true));
+    pin.addEventListener("mouseleave", (e) => togglePinLabelVisibility(pin, false));
+  })
+    // CLEAR ALL ON CLICK EL
+    const resultScreen = document.querySelector('#resultScreen');
+    const closeIcon = resultScreen.querySelector('img');
+    closeIcon.addEventListener('click', () => clearSelection());
+
+    //CLOSE ELEMENT CLICK EL
+    let labels = document.querySelectorAll('#mapOverlay svg #labels .label');
   labels.forEach(label => {
     label.classList.add("hidden");
 
     const closeElement = label.querySelector('.close');
-    closeElement.addEventListener('click', () => {
+    closeElement.addEventListener('click', ( )=> handleCloseElClicked(label));
+  }); 
+}
 
-      // Hide all routes
-      const routes = document.querySelectorAll('.route');
-      hideElements(routes);
-
-      // Hide element/label that is clicked 
-      // + Remove element from toFromLocations list
-      label.classList.remove('isActive')
-      label.classList.add("hidden");
-
-      const locationToRemove = label.id.split('Label')[0];
-      toFromLocations = toFromLocations.filter(location => location.airport !== locationToRemove);
-
-      if (toFromLocations.length > 0) {
-        const remainingLocation = toFromLocations[0];
-        toFromLocations = [
-          {
-            ...remainingLocation,
-            isFromLocation: true,
-            isToLocation: false
-          }
-        ]
-      }
-    
-      // If your list of toFromLocations === 0 you should show all the pins
-      // (show the pins that have been filtered out by country)
-      const pins = document.querySelectorAll('#mapOverlay svg .pin');
-      pins.forEach(pin => {
-        pin.classList.remove('hidden');
-      });
-    });
-  });
-
-  const routes = document.querySelectorAll('#mapOverlay svg .route');
-  routes.forEach(route => {
-    route.classList.add('hidden');
-  });
-
-
-  // More setup (eventlistners, data parsing)
-  handleRoutes(routesResponseArray);
-  handleDest(destResponseArray);
-  displayDestList(globalDestinations);
-  setEventListeners();
+function hideElements(elements) {
+  elements.forEach(element => element.classList.add('hidden'));
 }
 
 async function getRoutes(routesURL) {
@@ -125,18 +116,46 @@ function getRouteItems(route){
   }
 }
 
-function setEventListeners(){
-  //SEARCH INPUT EL
-  searchInput.addEventListener("keyup", checkSearch);
-  //CLICK ON PIN EL
+function handleCloseElClicked(label){
 
-  const pins = document.querySelectorAll("#mapOverlay svg #pins .pin");
+  // Hide all routes
+  const routes = document.querySelectorAll('.route');
+  hideElements(routes);
+
+  // Hide element/label that is clicked 
+  // + Remove element from toFromLocations list
+  label.classList.remove('isActive')
+  label.classList.add("hidden");
+
+  const locationToRemove = label.id.split('Label')[0];
+  toFromLocations = toFromLocations.filter(location => location.airport !== locationToRemove);
+
+  if (toFromLocations.length > 0) {
+    const remainingLocation = toFromLocations[0];
+    // always make remaining location From location
+    toFromLocations = [
+      {
+        ...remainingLocation,
+        isFromLocation: true,
+        isToLocation: false
+      }
+    ]
+      // If your list of toFromLocations === 0 you should show all the pins
+  // (show the pins that have been filtered out by country)
+  const pins = document.querySelectorAll('#mapOverlay svg .pin');
   pins.forEach(pin => {
-    pin.addEventListener("click", () => checkPin(pin));
-    pin.addEventListener("mouseover", () => togglePinLabelVisibility(pin, true));
-    pin.addEventListener("mouseleave", (e) => togglePinLabelVisibility(pin, false));
-  })
+    pin.classList.remove('hidden');
+  });
+
+  //update Screenn
+    updateScreen();
+//else if toFroLocation doesn't contain from then: / i.e. if remaining location is To location
+  } else {
+    clearSelection();
+  }
+
 }
+
 
 function togglePinLabelVisibility(pin, show) {
   const pinId = pin.id;
@@ -258,10 +277,12 @@ function updateToFromLocations(isFromLocation, destination) {
 
 function getRouteConnection(from, to) {
   let routes = [];
+  console.log(`from:${from}, to:${to}`)
+  console.table(globalRoutes);
   // Step 1 (check for directRoute)
   const directRoute = globalRoutes.find(gRoute => {
     if (gRoute.routeName.includes(from) && gRoute.routeName.includes(to)) {
-      return true
+      return true;
     }
 
     return false;
@@ -328,14 +349,13 @@ function updateRouteVisibility(shouldShowRoute) {
       routeElement.classList.remove('hidden');
     });
 
+      // Show the route information in the UI right sidebar
     showResultsScreen()
 
-    // Show the route information in the UI right sidebar
-
+     // Show something went wrong in the UI
   } else {
-    console.log('Too many transits, idiot');
+    console.log('Too many transits');
 
-    // Show something went wrong in the UI
   }
 }
 
@@ -374,15 +394,18 @@ function clearSelection() {
     document.getElementById("resultScreen").classList.add("hidden");
     document.getElementById("departFrom").classList.add("hidden");
     document.getElementById("textContainer").classList.remove("hidden");
-    buildList();
   }, 500);
+
+  buildList();
 }
 
 function updateScreen() {
   // 1 - NONE SELECTED
   if (toFromLocations.length === 0) {
+    document.getElementById("listTitle").textContent = "I'm travelling from:";
+    document.getElementById("resultScreen").classList.add("hidden");
+    document.getElementById("textContainer").classList.remove("hidden");
     document.getElementById("departFrom").classList.add("hidden");
-    document.getElementById("listTitle").textContent = "";
     document.querySelector("#departFrom h1").textContent = "";
   }
 
@@ -390,6 +413,8 @@ function updateScreen() {
   if (toFromLocations.length === 1) {
     const fromLocation = toFromLocations.find(location => location.isFromLocation);
     document.getElementById("departFrom").classList.remove("hidden");
+    document.getElementById("textContainer").classList.remove("hidden");
+    document.getElementById("resultScreen").classList.add("hidden");
     document.getElementById("listTitle").textContent = "I'm travelling to:";
     document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
   }
@@ -430,7 +455,6 @@ function filterByDestinationClicked(destinations){
         pin.classList.add('hidden');
       }
     })
-
     // Return destinations only with greenlandic locations
     const filteredDestinations = destinations.filter(destination => destination.country == "Greenland")
     return filteredDestinations;
@@ -438,6 +462,7 @@ function filterByDestinationClicked(destinations){
       return destinations.filter(destination => destination.airport !== fromLocation.airport);
     }
   }
+
   else{
     return destinations;
   }

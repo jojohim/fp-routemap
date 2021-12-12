@@ -3,6 +3,7 @@
 
 $primary-color: white;
 $secondary-color: #BD242B;
+$tertiary-color: #111112;
 $accent-1: #F5F5F5;
 
 body{
@@ -122,3 +123,17 @@ ul{
     opacity: 0.75;
 
 }*/
+
+.pin:hover{
+    cursor: pointer;
+}
+
+///////RESULT SCREEN STYLING 
+
+#resultHeader {
+    background-color: $accent-1;
+}
+
+#routeTitle {
+    
+}
