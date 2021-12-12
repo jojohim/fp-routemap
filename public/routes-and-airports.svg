@@ -1,6 +1,6 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3300 2200">
   <g id="routes">
-    <path class="route" id="copenhagen-narsarsuaq" d="M923.2,2014.67s491.22-272.8,1330.5-97.87" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path class="route" id="narsarsuaq-copenhagen" d="M923.2,2014.67s491.22-272.8,1330.5-97.87" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="kangerlussuaq-copenhagen" d="M722.17,1465.49s866.28-197.16,1536,451.31" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="aasiaat-ilulissat" d="M715,1275.27s-42,4.39-57,35" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="ilulissat-kangerlussuaq" d="M726.13,1288s33.24,140.27-4,177.54" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
@@ -9,13 +9,13 @@
     <path class="route" id="maniitsoq-kangerlussuaq" d="M714.27,1478.76S645.93,1503.58,615,1581" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="nuuk-kangerlussuaq" d="M714.27,1478.76S678,1583.28,653.21,1703.09" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="narsarsuaq-kangerlussuaq" d="M714.27,1478.76s104,192.49,193.66,520.63" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
-    <path class="route" id="nuuk-kulusuk" d="M663.16,1714s237.61-183.3,524.37-140" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
-    <path class="route" id="tasiilaq-kulusuk" d="M1161,1594.82s5.94,15.19,25.73,4.44" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path class="route" id="nuuk-kulusuk" d="M663.16,1714s290-199.38,524.37-140" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path class="route" id="tasiilaq-kulusuk" d="M1152.93,1597.78s17.44,23.55,38.46,0" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="nuuk-maniitsoq" d="M615,1594.77s10.43,53.71,40,105.66" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="nuuk-narsarsuaq" d="M653.21,1722.54s55.5,172.58,254.72,276.85" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
-    <path class="route" id="narsarsuaq-qaqortoq" d="M894.15,2045.57a19.56,19.56,0,0,0,13.78-19.37" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
-    <path class="route" id="keflavik-nuuk" d="M665.58,1712.16s293.46-313.55,990.11-81.43" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
-    <path class="route" id="kulusuk-reykjavik" d="M1198.92,1586.52s202.48-91.27,483.32,15.28" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
+    <path class="route" id="narsarsuaq-qaqortoq" d="M899,2047s32.18,1.56,24.24-32.34" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path class="route" id="keflavik-nuuk" d="M665.58,1712.16s357.66-342.21,990.11-81.43" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path class="route" id="reykjavik-kulusuk" d="M1198.92,1586.52s202.48-91.27,483.32,15.28" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="sisimiut-nuuk" d="M607.63,1463.07S544.94,1605.89,642,1712.16" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="ilulissat-qaarsut" d="M686.43,1156.92s8.38,65.91,40.17,107.85" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="ilulissat-qeqertarsuaq" d="M655.14,1260.13s22.25,13.77,62.48,16.4" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
@@ -25,148 +25,148 @@
     <path class="route" id="keflavik-nuuk-2" data-name="keflavik-nuuk" d="M737.12,1276.53s461.8-8.2,918.57,354.2" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="narsarsuaq-reykjavik" d="M907.93,1999.39s180.67-378.22,774.31-397.59" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="nuuk-keflavik" d="M665.58,1712.16S1033.65,1818,1662.15,1624" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
-    <path class="route" id="ilulissat-qaanaaq" d="M480,475.83s11.31,518.7,246.62,788.94" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
+    <path class="route" id="qaanaaq-ilulissat" d="M480,475.83s11.31,518.7,246.62,788.94" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
   </g>
   <g id="pins">
-    <rect class="pin" id="kulusukPin" x="1176.73" y="1575.72" width="21.6" height="21.6" transform="translate(1469.66 -375.03) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="sisimiutPin" x="604.21" y="1449.98" width="21.6" height="21.6" rx="10.8" transform="translate(1213.06 -7.03) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="ilulissatPin" x="715.33" y="1265.72" width="21.6" height="21.6" transform="translate(1115.32 -139.57) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="keflavikPin" x="1656.16" y="1619.93" width="21.6" height="21.6" transform="translate(1641.34 -701.09) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="copenhagenPin" x="2252.47" y="1906.19" width="21.6" height="21.6" transform="translate(2018.41 -1038.9) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="reykjavikPin" x="1681.32" y="1590.99" width="21.6" height="21.6" transform="translate(1628.25 -727.36) rotate(45)" fill="#101011"/>
+    <rect class="pin" id="kulusukPin" x="1179.01" y="1570.41" width="24.75" height="24.75" transform="translate(-770.25 1306.02) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="sisimiutPin" x="604.02" y="1445.78" width="30" height="30" rx="15" transform="translate(-851.62 865.57) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="ilulissatPin" x="713.76" y="1264.15" width="24.75" height="24.75" transform="translate(-689.96 887.34) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="keflavikPin" x="1654.59" y="1618.36" width="24.75" height="24.75" transform="translate(-664.86 1656.35) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="copenhagenPin" x="2250.89" y="1904.62" width="24.75" height="24.75" transform="translate(-692.62 2161.85) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="reykjavikPin" x="1679.75" y="1589.42" width="24.75" height="24.75" transform="translate(-637.03 1665.67) rotate(-45)" fill="#101011"/>
     <g class="pin" id="tasiilaqPin">
-      <circle cx="1161.02" cy="1584.63" r="5.94" fill="#101011"/>
-      <circle cx="1161.02" cy="1584.63" r="10.19" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
+      <circle cx="1152.93" cy="1582.78" r="8.75" fill="#101011"/>
+      <circle cx="1152.93" cy="1582.78" r="15" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
     </g>
-    <rect class="pin" id="nuukPin" x="642.41" y="1701.35" width="21.6" height="21.6" transform="translate(1402 39.59) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="maniitsoqPin" x="604.21" y="1576.9" width="21.6" height="21.6" rx="10.8" transform="translate(1302.81 30.14) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="paamiutPin" x="691.45" y="1860.02" width="21.6" height="21.6" rx="10.8" transform="translate(1528.56 51.38) rotate(45)" fill="#101011"/>
+    <rect class="pin" id="nuukPin" x="644.84" y="1699.78" width="24.75" height="24.75" transform="translate(-1018.18 966.2) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="maniitsoqPin" x="603.02" y="1572.7" width="30" height="30" rx="15" transform="translate(-941.66 902.03) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="paamiutPin" x="693.26" y="1855.82" width="30" height="30" rx="15" transform="translate(-1115.43 1048.77) rotate(-45)" fill="#101011"/>
     <g class="pin" id="siorapalukPin">
-      <circle cx="463.8" cy="439.14" r="7.44" fill="#101011"/>
-      <circle cx="463.8" cy="439.14" r="12.76" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
+      <circle cx="463.8" cy="436.8" r="8.89" fill="#101011"/>
+      <circle cx="463.8" cy="436.8" r="15.24" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
     </g>
-    <rect class="pin" id="qaanaaqPin" x="466.56" y="458.7" width="26.85" height="26.85" rx="13.42" transform="translate(474.42 -201.12) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="kangerlussuaqPin" x="703.47" y="1456.16" width="21.6" height="21.6" transform="translate(1246.5 -75.4) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="narsarsuaqPin" x="897.12" y="2003.86" width="21.6" height="21.6" transform="translate(1690.51 -51.92) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="aasiaatPin" x="647.11" y="1308.65" width="21.6" height="21.6" rx="10.8" transform="translate(1125.69 -78.75) rotate(45)" fill="#101011"/>
-    <rect class="pin" id="qaarsutPin" x="675.63" y="1135.32" width="21.6" height="21.6" rx="10.8" transform="translate(1011.48 -149.69) rotate(45)" fill="#101011"/>
+    <rect class="pin" id="qaanaaqPin" x="465.43" y="457.57" width="29.1" height="29.1" rx="13.42" transform="translate(474.42 -201.12) rotate(45)" fill="#101011"/>
+    <rect class="pin" id="kangerlussuaqPin" x="701.89" y="1454.59" width="24.75" height="24.75" transform="translate(-828.09 934.73) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="narsarsuaqPin" x="895.55" y="2000.29" width="24.75" height="24.75" transform="translate(-1157.24 1231.5) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="aasiaatPin" x="642.91" y="1304.46" width="30" height="30" rx="15" transform="translate(-740.3 851.67) rotate(-45)" fill="#101011"/>
+    <rect class="pin" id="qaarsutPin" x="671.43" y="1131.12" width="30" height="30" rx="15" transform="translate(-609.38 821.07) rotate(-45)" fill="#101011"/>
     <g class="pin" id="qeqertarsuaqPin">
-      <circle cx="644.95" cy="1260.13" r="5.94" fill="#101011"/>
-      <circle cx="644.95" cy="1260.13" r="10.19" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
+      <circle cx="644.95" cy="1260.13" r="8.75" fill="#101011"/>
+      <circle cx="644.95" cy="1260.13" r="15" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
     </g>
     <g class="pin" id="qaqortoqPin">
-      <circle cx="883.96" cy="2046.07" r="5.94" fill="#101011"/>
-      <circle cx="883.96" cy="2046.07" r="10.19" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
+      <circle cx="883.96" cy="2046.07" r="8.75" fill="#101011"/>
+      <circle cx="883.96" cy="2046.07" r="15" fill="none" stroke="#101011" stroke-miterlimit="10" stroke-width="2"/>
     </g>
   </g>
   <g id="labels">
     <g class="label" id="qaarsutLabel">
-      <polygon points="696.54 1118.3 685.3 1133.53 674.07 1118.3 685.3 1103.06 696.54 1118.3" fill="#111112"/>
-      <rect x="580.01" y="1077.97" width="210.58" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(632.25 1108.59)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Qaa<tspan x="53.5" y="0" letter-spacing="0em">r</tspan><tspan x="64.48" y="0">sut</tspan></text>
-      <path class="close" d="M777.18,1107.45l-7.45-7.45,7.45-7.46a2.26,2.26,0,0,0-3.2-3.19h0l-7.45,7.46-7.45-7.46a2.26,2.26,0,1,0-3.2,3.2l7.46,7.45-7.46,7.45a2.19,2.19,0,0,0-.11,3.09,1.14,1.14,0,0,1,.11.11,2.25,2.25,0,0,0,3.18,0l0,0,7.45-7.45,7.45,7.45a2.26,2.26,0,0,0,3.22-3.18Z" fill="#fff"/>
+      <polygon points="697.61 1112.55 686.38 1127.78 675.15 1112.55 686.38 1097.31 697.61 1112.55" fill="#111112"/>
+      <rect x="570.89" y="1064.62" width="230.98" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(620.11 1102.84)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Qaa<tspan x="63.54" y="0" letter-spacing="0em">r</tspan><tspan x="76.57" y="0" letter-spacing="0em">sut</tspan></text>
+      <path class="close" d="M793.36,1102l-9.87-9.89,9.87-9.88a3,3,0,0,0-4.23-4.24h0l-9.87,9.89-9.87-9.88a3,3,0,1,0-4.23,4.24l9.87,9.87-9.87,9.88a2.9,2.9,0,0,0-.14,4.1,1.85,1.85,0,0,0,.14.14,3,3,0,0,0,4.21,0l0,0,9.87-9.88,9.86,9.88a3,3,0,0,0,4.27-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="aasiaatLabel">
-      <polygon points="629.72 1330.69 614.48 1319.45 629.72 1308.22 644.95 1319.45 629.72 1330.69" fill="#111112"/>
-      <rect x="423.4" y="1297.42" width="210.58" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(479.98 1330.69)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="0.02em">A</tspan><tspan x="18.14" y="0">asia</tspan><tspan x="71.68" y="0" letter-spacing="-0.01em">a</tspan><tspan x="87.36" y="0">t</tspan></text>
-      <path class="close" data-name="close" d="M619.93,1326.91l-7.45-7.45,7.45-7.46a2.26,2.26,0,1,0-3.19-3.19h0l-7.46,7.45-7.45-7.45a2.26,2.26,0,1,0-3.2,3.2l7.46,7.45-7.46,7.45a2.18,2.18,0,0,0-.1,3.09l.1.11a2.25,2.25,0,0,0,3.18,0l0,0,7.45-7.45,7.45,7.45a2.26,2.26,0,0,0,3.22-3.18Z" fill="#fff"/>
+      <polygon points="623.3 1330.69 608.06 1319.46 623.3 1308.23 638.53 1319.46 623.3 1330.69" fill="#111112"/>
+      <rect x="400.83" y="1291.96" width="222.74" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(449.58 1331.69)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="0.02em">A</tspan><tspan x="21.55" y="0">asia</tspan><tspan x="85.12" y="0" letter-spacing="-0.01em">a</tspan><tspan x="103.74" y="0">t</tspan></text>
+      <path class="close" data-name="close" d="M613,1329.34l-9.87-9.88,9.87-9.88a3,3,0,0,0-4.24-4.24h0l-9.87,9.89-9.86-9.88a3,3,0,0,0-4.23,4.23l9.87,9.88-9.87,9.88a2.89,2.89,0,0,0-.14,4.09l.14.15a3,3,0,0,0,4.2,0l0,0,9.86-9.88,9.87,9.88a3,3,0,0,0,4.23,0,3,3,0,0,0,0-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="narsarsuaqLabel">
       <polygon points="919.58 1969.56 908.34 1984.8 897.11 1969.56 908.34 1954.32 919.58 1969.56" fill="#111112"/>
-      <rect x="787.13" y="1925.49" width="249.62" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(831.83 1955.9)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Na<tspan x="36.83" y="0" letter-spacing="0em">r</tspan><tspan x="47.81" y="0">sa</tspan><tspan x="77.34" y="0" letter-spacing="0em">r</tspan><tspan x="88.32" y="0">suaq</tspan></text>
-      <path class="close" data-name="close" d="M1025.5,1955l-7.45-7.46,7.45-7.45a2.26,2.26,0,1,0-3.2-3.2h0l-7.45,7.46-7.46-7.45a2.26,2.26,0,1,0-3.19,3.19l7.45,7.45-7.45,7.46a2.18,2.18,0,0,0-.11,3.08,1.14,1.14,0,0,0,.11.11,2.25,2.25,0,0,0,3.18,0l0,0,7.45-7.45,7.45,7.46a2.29,2.29,0,0,0,3.2,0,2.25,2.25,0,0,0,0-3.18Z" fill="#fff"/>
+      <rect x="756.72" y="1914.85" width="302.42" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(817.07 1953.32)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Na<tspan x="43.74" y="0" letter-spacing="0em">r</tspan><tspan x="56.77" y="0" letter-spacing="0em">sa</tspan><tspan x="91.84" y="0" letter-spacing="0em">r</tspan><tspan x="104.88" y="0">suaq</tspan></text>
+      <path class="close" data-name="close" d="M1044,1952.23l-9.87-9.89,9.87-9.88a3,3,0,0,0-4.23-4.24h0l-9.87,9.89-9.87-9.88a3,3,0,1,0-4.23,4.24l9.87,9.87-9.86,9.88a2.91,2.91,0,0,0-.15,4.1l.15.14a3,3,0,0,0,4.2,0l0,0,9.86-9.88,9.87,9.88a3,3,0,0,0,4.26-4.2Z" fill="#fff"/>
     </g>
     <g class="label" id="kangerlussuaqLabel">
-      <polygon points="725.5 1432.91 714.27 1448.14 703.03 1432.91 714.27 1417.67 725.5 1432.91" fill="#111112"/>
-      <rect x="574.47" y="1388.84" width="286.79" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(615.02 1419.25)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Kan<tspan x="52.16" y="0" letter-spacing="-0.01em">g</tspan><tspan x="67.84" y="0">erlussuaq</tspan></text>
-      <path class="close" data-name="close" d="M849.28,1418.33l-7.45-7.46,7.45-7.45a2.26,2.26,0,0,0-3.2-3.2h0l-7.45,7.46-7.45-7.45a2.26,2.26,0,1,0-3.2,3.19l7.46,7.45-7.46,7.46a2.18,2.18,0,0,0-.11,3.08l.11.11a2.25,2.25,0,0,0,3.18,0l0,0,7.45-7.45,7.45,7.45a2.27,2.27,0,0,0,3.2,0,2.24,2.24,0,0,0,0-3.17Z" fill="#fff"/>
+      <polygon points="725.25 1431.26 714.02 1446.49 702.78 1431.26 714.02 1416.02 725.25 1431.26" fill="#111112"/>
+      <rect x="546.97" y="1376.72" width="341.29" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(596.41 1414.02)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Kan<tspan x="61.94" y="0" letter-spacing="-0.01em">g</tspan><tspan x="80.56" y="0">erlussuaq</tspan></text>
+      <path class="close" data-name="close" d="M875.14,1414.1l-9.86-9.88,9.86-9.88a3,3,0,1,0-4.23-4.24h0L861,1400l-9.87-9.89a3,3,0,1,0-4.23,4.24l9.87,9.88L847,1414.1a2.89,2.89,0,0,0-.15,4.09l.15.14a3,3,0,0,0,4.2,0l0,0,9.86-9.87,9.87,9.88a3,3,0,0,0,4.26-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="qaanaaqLabel">
-      <polygon points="492.46 504.79 481.23 520.02 469.99 504.79 481.23 489.55 492.46 504.79" fill="#111112"/>
-      <rect x="364.92" y="504.79" width="234.86" height="45.27" rx="11.01" fill="#111112"/>
-      <text transform="translate(421.65 536.26)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Qaanaaq</text>
-      <path class="close" data-name="close" d="M588,534.87l-7.46-7.45L588,520a2.26,2.26,0,0,0-3.2-3.19h0l-7.46,7.46-7.45-7.46a2.26,2.26,0,1,0-3.2,3.2l7.46,7.45-7.45,7.45a2.19,2.19,0,0,0-.11,3.09l.11.11a2.24,2.24,0,0,0,3.17,0l0,0,7.45-7.45,7.46,7.45a2.26,2.26,0,0,0,3.22-3.18Z" fill="#fff"/>
+      <polygon points="491.33 503.26 480.1 518.5 468.87 503.26 480.1 488.03 491.33 503.26" fill="#111112"/>
+      <rect x="354.11" y="504.03" width="254.23" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(402.74 542.38)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Qaanaaq</text>
+      <path class="close" d="M594,541.41l-9.87-9.88,9.87-9.88a3,3,0,1,0-4.23-4.24h0l-9.87,9.89-9.87-9.88a3,3,0,1,0-4.23,4.24l9.87,9.87-9.86,9.88a2.89,2.89,0,0,0-.15,4.09l.15.15a3,3,0,0,0,4.2,0l0,0,9.86-9.88,9.87,9.88a3,3,0,0,0,4.26-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="siorapalukLabel">
-      <polygon points="474.9 406.32 463.67 421.55 452.44 406.32 463.67 391.08 474.9 406.32" fill="#111112"/>
-      <rect x="334.9" y="359.16" width="259.8" height="46.73" rx="11.01" fill="#111112"/>
-      <text transform="translate(391.86 391.08)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Sio<tspan x="42.3" y="0" letter-spacing="-0.02em">r</tspan><tspan x="52.64" y="0">a</tspan><tspan x="68.77" y="0" letter-spacing="-0.01em">p</tspan><tspan x="86.08" y="0">aluk</tspan></text>
-      <path class="close" data-name="close" d="M579.75,390l-7.45-7.46,7.45-7.45a2.26,2.26,0,0,0-3.19-3.2h0l-7.46,7.46-7.45-7.45a2.26,2.26,0,1,0-3.2,3.19l7.46,7.45L558.46,390a2.17,2.17,0,0,0-.11,3.09.57.57,0,0,0,.11.11,2.24,2.24,0,0,0,3.17,0l0,0,7.45-7.45,7.46,7.45a2.26,2.26,0,0,0,3.21-3.17Z" fill="#fff"/>
+      <polygon points="474.9 403.08 463.67 418.32 452.44 403.08 463.67 387.85 474.9 403.08" fill="#111112"/>
+      <rect x="324.12" y="349.85" width="281.35" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(377.4 387.85)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Sio<tspan x="50.23" y="0" letter-spacing="-0.02em">r</tspan><tspan x="62.51" y="0" letter-spacing="0em">a</tspan><tspan x="81.66" y="0" letter-spacing="-0.01em">p</tspan><tspan x="102.22" y="0">aluk</tspan></text>
+      <path class="close" data-name="close" d="M591.46,387.23l-9.87-9.88,9.87-9.88a3,3,0,1,0-4.23-4.24h0l-9.87,9.89-9.87-9.88a3,3,0,0,0-4.23,4.23l9.87,9.88-9.87,9.88a2.89,2.89,0,0,0-.14,4.09l.14.15a3,3,0,0,0,4.21,0l0,0,9.87-9.88,9.87,9.88a3,3,0,0,0,4.26-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="paamiutLabel">
       <polygon points="672.72 1882.06 657.48 1870.82 672.72 1859.59 687.95 1870.82 672.72 1882.06" fill="#111112"/>
-      <rect x="455.08" y="1848.79" width="221.92" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(510.23 1880.45)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="-0.04em">P</tspan><tspan x="16.74" y="0">aamiut</tspan></text>
-      <path class="close" data-name="close" d="M661.75,1878.28l-7.45-7.46,7.45-7.45a2.26,2.26,0,0,0-3.19-3.2h0l-7.46,7.46-7.45-7.45a2.26,2.26,0,0,0-3.2,3.19l7.46,7.45-7.45,7.45a2.18,2.18,0,0,0-.11,3.09,1.14,1.14,0,0,0,.11.11,2.24,2.24,0,0,0,3.17,0l0,0,7.45-7.45,7.46,7.45a2.26,2.26,0,0,0,3.19,0,2.23,2.23,0,0,0,0-3.17Z" fill="#fff"/>
+      <rect x="424.99" y="1843.32" width="249" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(483.22 1882.06)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="-0.04em">P</tspan><tspan x="19.87" y="0">aamiut</tspan></text>
+      <path class="close" data-name="close" d="M659,1880.7l-9.87-9.88,9.87-9.88a3,3,0,0,0-4.23-4.24h0l-9.87,9.89-9.87-9.88a3,3,0,1,0-4.23,4.23l9.87,9.88-9.86,9.88a2.89,2.89,0,0,0-.15,4.09l.15.15a3,3,0,0,0,4.2,0l0,0,9.86-9.88,9.87,9.88a3,3,0,0,0,4.26-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="maniitsoqLabel">
       <polygon points="584.64 1598.93 569.4 1587.7 584.64 1576.47 599.87 1587.7 584.64 1598.93" fill="#111112"/>
-      <rect x="363.42" y="1565.66" width="225.5" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(410.34 1597.58)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Manii<tspan x="72.64" y="0" letter-spacing="-0.01em">t</tspan><tspan x="83.13" y="0">soq</tspan></text>
-      <path class="close" data-name="close" d="M575.27,1595.15l-7.45-7.45,7.45-7.46a2.26,2.26,0,0,0-3.19-3.19h0l-7.46,7.45-7.45-7.45a2.26,2.26,0,0,0-3.2,3.2l7.46,7.45-7.45,7.45a2.17,2.17,0,0,0-.11,3.09l.11.11a2.24,2.24,0,0,0,3.17,0l0,0,7.45-7.45,7.46,7.45a2.26,2.26,0,0,0,3.21-3.18Z" fill="#fff"/>
+      <rect x="315.42" y="1560.2" width="273.49" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(374 1599.61)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Manii<tspan x="86.26" y="0" letter-spacing="-0.01em">t</tspan><tspan x="98.72" y="0" letter-spacing="0em">soq</tspan></text>
+      <path class="close" data-name="close" d="M578.73,1597.58l-9.87-9.89,9.87-9.88a3,3,0,0,0-4.23-4.23h0l-9.87,9.88-9.87-9.88a3,3,0,1,0-4.23,4.24l9.87,9.87-9.87,9.89a2.89,2.89,0,0,0-.14,4.09l.14.14a3,3,0,0,0,4.2,0l0,0,9.87-9.87,9.86,9.88a3,3,0,0,0,4.27-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="nuukLabel">
       <polygon points="618.91 1723.39 603.67 1712.16 618.91 1700.92 634.14 1712.16 618.91 1723.39" fill="#111112"/>
-      <rect x="412.6" y="1690.12" width="210.58" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(482.21 1722.54)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Nuuk</text>
-      <path class="close" data-name="close" d="M609.64,1719.61l-7.45-7.46,7.45-7.45a2.26,2.26,0,1,0-3.19-3.2h0L599,1709l-7.45-7.45a2.26,2.26,0,0,0-3.2,3.19l7.46,7.45-7.46,7.46a2.17,2.17,0,0,0-.1,3.08l.1.11a2.24,2.24,0,0,0,3.18,0l0,0,7.45-7.45,7.45,7.46a2.29,2.29,0,0,0,3.2,0,2.25,2.25,0,0,0,0-3.18Z" fill="#fff"/>
+      <rect x="409.6" y="1684.66" width="210.58" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(472.52 1722.54)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Nuuk</text>
+      <path class="close" data-name="close" d="M607.22,1722l-9.87-9.89,9.87-9.88A3,3,0,0,0,603,1698h0l-9.87,9.89-9.87-9.88a3,3,0,1,0-4.23,4.24l9.87,9.87L579,1722a2.91,2.91,0,0,0-.15,4.1l.15.14a3,3,0,0,0,4.2,0l0,0,9.86-9.88,9.87,9.88a3,3,0,0,0,4.26-4.2Z" fill="#fff"/>
     </g>
     <g class="label" id="qaqortoqLabel">
-      <polygon points="854.12 2056.8 838.88 2045.57 854.12 2034.34 869.35 2045.57 854.12 2056.8" fill="#111112"/>
-      <rect x="624.99" y="2023.54" width="233.4" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(677.16 2053.88)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Qaqor<tspan x="83.58" y="0" letter-spacing="-0.01em">t</tspan><tspan x="93.95" y="0">oq</tspan></text>
-      <path class="close" data-name="close" d="M845.37,2053l-7.45-7.46,7.45-7.45a2.26,2.26,0,0,0-3.19-3.2h0l-7.46,7.46-7.45-7.46a2.26,2.26,0,0,0-3.2,3.2l7.46,7.45-7.45,7.45a2.18,2.18,0,0,0-.11,3.09,1.14,1.14,0,0,0,.11.11,2.24,2.24,0,0,0,3.17,0l0,0,7.45-7.45,7.46,7.45a2.26,2.26,0,0,0,3.19,0,2.23,2.23,0,0,0,0-3.17Z" fill="#fff"/>
+      <polygon points="852.01 2056.8 836.78 2045.57 852.01 2034.34 867.25 2045.57 852.01 2056.8" fill="#111112"/>
+      <rect x="586.3" y="2018.07" width="266.99" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(643.16 2056.26)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Qaqor<tspan x="99.25" y="0" letter-spacing="-0.01em">t</tspan><tspan x="111.57" y="0">oq</tspan></text>
+      <path class="close" data-name="close" d="M839,2055.45l-9.86-9.88,9.86-9.88a3,3,0,0,0-4.23-4.24h0l-9.87,9.89-9.86-9.88a3,3,0,0,0-4.24,4.23l9.88,9.88-9.87,9.88a2.9,2.9,0,0,0-.15,4.09l.15.15a3,3,0,0,0,4.2,0l0,0,9.86-9.88,9.87,9.88a3,3,0,0,0,4.23,0,3,3,0,0,0,0-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="qeqertarsuaqLabel">
-      <polygon points="615 1272.83 599.76 1261.59 615 1250.36 630.23 1261.59 615 1272.83" fill="#111112"/>
-      <rect x="341.61" y="1239.56" width="277.66" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(381.9 1270.32)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Qeqer<tspan x="81.85" y="0" letter-spacing="-0.02em">t</tspan><tspan x="92" y="0">a</tspan><tspan x="108.13" y="0" letter-spacing="0em">r</tspan><tspan x="119.1" y="0">suaq</tspan></text>
-      <path class="close" data-name="close" d="M603.71,1269.05l-7.46-7.46,7.46-7.45a2.26,2.26,0,1,0-3.2-3.2h0l-7.45,7.46L585.6,1251a2.26,2.26,0,0,0-3.19,3.19l7.45,7.45-7.45,7.45a2.19,2.19,0,0,0-.11,3.09l.11.11a2.25,2.25,0,0,0,3.18,0l0,0,7.45-7.45,7.45,7.45a2.27,2.27,0,0,0,3.2,0,2.24,2.24,0,0,0,0-3.17Z" fill="#fff"/>
+      <polygon points="611.41 1270.11 596.18 1258.88 611.41 1247.65 626.65 1258.88 611.41 1270.11" fill="#111112"/>
+      <rect x="308.34" y="1231.38" width="303.35" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(338.83 1267.6)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Qeqer<tspan x="97.2" y="0" letter-spacing="-0.02em">t</tspan><tspan x="109.25" y="0">a</tspan><tspan x="128.4" y="0" letter-spacing="0em">r</tspan><tspan x="141.43" y="0">suaq</tspan></text>
+      <path class="close" data-name="close" d="M599.57,1268.76l-9.86-9.89,9.86-9.88a3,3,0,0,0-4.23-4.23h0l-9.87,9.88-9.87-9.88a3,3,0,0,0-4.23,4.24l9.87,9.87-9.86,9.89a2.89,2.89,0,0,0-.15,4.09l.15.14a3,3,0,0,0,4.2,0l0,0,9.86-9.87,9.87,9.88a3,3,0,0,0,4.26-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="tasiilaqLabel">
-      <polygon points="1171.86 1554.92 1160.63 1570.16 1149.4 1554.92 1160.63 1539.69 1171.86 1554.92" fill="#111112"/>
-      <rect x="1055.34" y="1514.59" width="210.58" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(1109.56 1546.94)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="-0.07em">T</tspan><tspan x="14.82" y="0">asiilaq</tspan></text>
-      <path class="close" data-name="close" d="M1251.47,1544.08l-7.45-7.46,7.45-7.45a2.26,2.26,0,0,0-3.2-3.2h0l-7.45,7.46-7.46-7.45a2.26,2.26,0,1,0-3.19,3.19l7.45,7.45-7.45,7.46a2.18,2.18,0,0,0-.11,3.08l.11.11a2.25,2.25,0,0,0,3.18,0l0,0,7.45-7.45,7.45,7.45a2.27,2.27,0,0,0,3.2,0,2.24,2.24,0,0,0,0-3.17Z" fill="#fff"/>
+      <polygon points="1164.16 1549.78 1152.92 1565.01 1141.69 1549.78 1152.92 1534.54 1164.16 1549.78" fill="#111112"/>
+      <rect x="1029.29" y="1494.77" width="247.27" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(1092.28 1534.54)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="-0.07em">T</tspan><tspan x="17.59" y="0">asiilaq</tspan></text>
+      <path class="close" data-name="close" d="M1262.22,1532.16l-9.87-9.89,9.87-9.88a3,3,0,1,0-4.23-4.24h0l-9.87,9.89-9.87-9.88a3,3,0,0,0-4.23,4.24l9.87,9.87-9.87,9.88a2.89,2.89,0,0,0-.14,4.09l.14.15a3,3,0,0,0,4.2,0l0,0,9.87-9.88,9.86,9.88a3,3,0,0,0,4.27-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="reykjavikLabel">
       <polygon points="1703.36 1568.33 1692.13 1583.56 1680.89 1568.33 1692.13 1553.09 1703.36 1568.33" fill="#111112"/>
-      <rect x="1575.75" y="1527.99" width="232.75" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(1628.59 1558.91)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="-0.01em">R</tspan><tspan x="17.89" y="0" letter-spacing="0em">e</tspan><tspan x="33.92" y="0">y</tspan><tspan x="48.86" y="0" letter-spacing="-0.01em">k</tspan><tspan x="64.38" y="0">javik</tspan></text>
-      <path class="close" data-name="close" d="M1794.64,1557.48l-7.46-7.46,7.46-7.45a2.26,2.26,0,0,0-3.2-3.2h0l-7.45,7.46-7.46-7.45a2.26,2.26,0,1,0-3.19,3.19l7.45,7.45-7.45,7.46a2.18,2.18,0,0,0-.11,3.08l.11.11a2.23,2.23,0,0,0,3.17,0l0,0,7.45-7.45,7.45,7.46a2.28,2.28,0,0,0,3.19,0,2.25,2.25,0,0,0,0-3.18Z" fill="#fff"/>
+      <rect x="1553.16" y="1514.65" width="277.92" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(1612.1 1552.75)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="-0.01em">R</tspan><tspan x="21.24" y="0" letter-spacing="0em">e</tspan><tspan x="40.28" y="0">y</tspan><tspan x="58.02" y="0" letter-spacing="-0.01em">k</tspan><tspan x="76.45" y="0">javik</tspan></text>
+      <path class="close" data-name="close" d="M1818.33,1552l-9.87-9.88,9.87-9.88a3,3,0,0,0-4.23-4.24h0l-9.87,9.89-9.87-9.88a3,3,0,1,0-4.23,4.23l9.87,9.88-9.87,9.88a2.89,2.89,0,0,0-.14,4.09l.14.15a3,3,0,0,0,4.21,0l0,0,9.87-9.88,9.86,9.88a3,3,0,0,0,4.27-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="copenhagenLabel">
       <polygon points="2274.5 1883.39 2263.27 1898.62 2252.03 1883.39 2263.27 1868.15 2274.5 1883.39" fill="#111112"/>
-      <rect x="2130.08" y="1843.05" width="266.37" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(2178.6 1875.16)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Copenha<tspan x="120.29" y="0" letter-spacing="-0.01em">g</tspan><tspan x="135.97" y="0">en</tspan></text>
-      <path class="close" data-name="close" d="M2385.52,1872.54l-7.45-7.45,7.45-7.46a2.26,2.26,0,1,0-3.19-3.19h0l-7.46,7.45-7.45-7.45a2.26,2.26,0,1,0-3.2,3.2l7.46,7.45-7.45,7.45a2.17,2.17,0,0,0-.11,3.09l.11.1a2.23,2.23,0,0,0,3.17,0l0,0,7.45-7.45,7.46,7.46a2.26,2.26,0,0,0,3.21-3.18Z" fill="#fff"/>
+      <rect x="2088.27" y="1828.75" width="349.99" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(2162.72 1866.32)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Copenha<tspan x="142.84" y="0" letter-spacing="-0.01em">g</tspan><tspan x="161.46" y="0">en</tspan></text>
+      <path class="close" data-name="close" d="M2424.36,1866.13l-9.87-9.89,9.87-9.88a3,3,0,0,0-4.23-4.23h0l-9.87,9.88-9.87-9.88a3,3,0,1,0-4.23,4.24l9.87,9.87-9.87,9.89a2.89,2.89,0,0,0-.14,4.09l.14.14a3,3,0,0,0,4.2,0l0,0,9.87-9.87,9.86,9.88a3,3,0,0,0,4.23,0,3,3,0,0,0,0-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="keflavikLabel">
       <polygon points="1655.73 1661.82 1666.96 1646.58 1678.2 1661.82 1666.96 1677.05 1655.73 1661.82" fill="#111112"/>
-      <rect x="1494.71" y="1660.02" width="356.1" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(1543.1 1691.74)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="-0.01em">R</tspan><tspan x="17.89" y="0" letter-spacing="0em">e</tspan><tspan x="33.92" y="0">y</tspan><tspan x="48.86" y="0" letter-spacing="-0.01em">k</tspan><tspan x="64.38" y="0">javik (</tspan><tspan x="143.17" y="0" letter-spacing="-0.01em">K</tspan><tspan x="161.47" y="0">eflavik)</tspan></text>
-      <path class="close" data-name="close" d="M1835.93,1689.51l-7.45-7.46,7.45-7.45a2.26,2.26,0,0,0-3.2-3.2h0l-7.45,7.46-7.45-7.45a2.26,2.26,0,0,0-3.2,3.19l7.46,7.45-7.46,7.45a2.19,2.19,0,0,0-.11,3.09l.11.11a2.25,2.25,0,0,0,3.18,0l0,0,7.45-7.45,7.45,7.45a2.27,2.27,0,0,0,3.2,0,2.24,2.24,0,0,0,0-3.17Z" fill="#fff"/>
+      <rect x="1455.74" y="1661.82" width="434.04" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(1512.99 1700.69)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="-0.01em">R</tspan><tspan x="21.24" y="0" letter-spacing="0em">e</tspan><tspan x="40.28" y="0">y</tspan><tspan x="58.02" y="0" letter-spacing="-0.01em">k</tspan><tspan x="76.45" y="0">javik (</tspan><tspan x="170.01" y="0" letter-spacing="-0.01em">K</tspan><tspan x="191.75" y="0">eflavik)</tspan></text>
+      <path class="close" data-name="close" d="M1877.79,1699.2l-9.87-9.89,9.87-9.88a3,3,0,1,0-4.23-4.24h0l-9.87,9.89-9.87-9.88a3,3,0,0,0-4.23,4.24l9.87,9.87-9.86,9.88a2.91,2.91,0,0,0-.15,4.1l.15.14a3,3,0,0,0,4.2,0l0,0,9.86-9.88,9.87,9.88a3,3,0,0,0,4.26-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="ilulissatLabel">
-      <polygon points="737.37 1243.64 726.13 1258.88 714.9 1243.64 726.13 1228.41 737.37 1243.64" fill="#111112"/>
-      <rect x="620.84" y="1203.31" width="210.58" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(674.94 1234.61)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Iluliss<tspan x="76.83" y="0" letter-spacing="-0.01em">a</tspan><tspan x="92.51" y="0">t</tspan></text>
-      <path class="close" data-name="close" d="M818.89,1232.8l-7.45-7.46,7.45-7.45a2.26,2.26,0,1,0-3.2-3.2h0l-7.45,7.46-7.45-7.45a2.26,2.26,0,0,0-3.2,3.19l7.46,7.45-7.46,7.45a2.19,2.19,0,0,0-.11,3.09l.11.11a2.25,2.25,0,0,0,3.18,0l0,0,7.45-7.45,7.45,7.45a2.27,2.27,0,0,0,3.2,0,2.24,2.24,0,0,0,0-3.17Z" fill="#fff"/>
+      <polygon points="737.37 1242.22 726.13 1257.45 714.9 1242.22 726.13 1226.98 737.37 1242.22" fill="#111112"/>
+      <rect x="620.84" y="1185.78" width="210.58" height="57" rx="11.01" fill="#111112"/>
+      <text transform="translate(660.82 1226.47)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Iluliss<tspan x="91.24" y="0" letter-spacing="-0.01em">a</tspan><tspan x="109.86" y="0">t</tspan></text>
+      <path class="close" data-name="close" d="M822.34,1224.16l-9.86-9.88,9.86-9.89a3,3,0,0,0-4.23-4.23h0l-9.87,9.88-9.86-9.88a3,3,0,0,0-4.24,4.24l9.88,9.88-9.87,9.88a2.89,2.89,0,0,0-.14,4.09l.14.14a3,3,0,0,0,4.2,0l0,0,9.86-9.87,9.87,9.88a3,3,0,0,0,4.23,0,3,3,0,0,0,0-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="sisimiutLabel">
       <polygon points="585.75 1472.02 570.51 1460.78 585.75 1449.55 600.98 1460.78 585.75 1472.02" fill="#111112"/>
-      <rect x="379.43" y="1438.75" width="210.58" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(430.3 1470.53)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Sisimiut</text>
-      <path class="close" data-name="close" d="M577.06,1468.24l-7.45-7.46,7.45-7.45a2.26,2.26,0,0,0-3.19-3.2h0l-7.46,7.46-7.45-7.45a2.26,2.26,0,0,0-3.2,3.19l7.46,7.45-7.45,7.45a2.18,2.18,0,0,0-.11,3.09l.11.11a2.24,2.24,0,0,0,3.17,0l0,0,7.45-7.45,7.46,7.45a2.26,2.26,0,0,0,3.19,0,2.23,2.23,0,0,0,0-3.17Z" fill="#fff"/>
+      <rect x="345.37" y="1433.28" width="244.65" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(398.03 1472.55)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro">Sisimiut</text>
+      <path class="close" data-name="close" d="M575.06,1470.66l-9.87-9.88,9.87-9.88a3,3,0,0,0-4.23-4.24h0l-9.87,9.89-9.87-9.88a3,3,0,0,0-4.23,4.23l9.87,9.88-9.87,9.88a2.89,2.89,0,0,0-.14,4.09l.14.15a3,3,0,0,0,4.2,0l0,0L561,1465l9.86,9.88a3,3,0,0,0,4.27-4.21Z" fill="#fff"/>
     </g>
     <g class="label" id="kulusukLabel">
-      <polygon points="1225.57 1596.59 1210.34 1585.36 1225.57 1574.12 1240.81 1585.36 1225.57 1596.59" fill="#111112"/>
-      <rect x="1221.94" y="1563.32" width="210.58" height="44.07" rx="11.01" fill="#111112"/>
-      <text transform="translate(1273.37 1596.59)" font-size="32" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro"><tspan letter-spacing="-0.01em">K</tspan><tspan x="18.08" y="0">ulusuk</tspan></text>
-      <path class="close" data-name="close" d="M1420.75,1592.81l-7.45-7.46,7.45-7.45a2.26,2.26,0,0,0-3.19-3.2h0l-7.46,7.46-7.45-7.45a2.26,2.26,0,0,0-3.2,3.19l7.46,7.45-7.45,7.46a2.17,2.17,0,0,0-.11,3.08l.11.11a2.23,2.23,0,0,0,3.17,0l0,0,7.45-7.45,7.46,7.46a2.28,2.28,0,0,0,3.19,0,2.25,2.25,0,0,0,0-3.18Z" fill="#fff"/>
+      <polygon points="1228.67 1594.02 1213.44 1582.78 1228.67 1571.55 1243.91 1582.78 1228.67 1594.02" fill="#111112"/>
+      <rect x="1229.04" y="1555.28" width="244.63" height="55" rx="11.01" fill="#111112"/>
+      <text transform="translate(1287.41 1594.02)" font-size="38" fill="#fff" font-family="SourceSansPro-Regular, Source Sans Pro" letter-spacing="-0.01em">K<tspan x="21.47" y="0" letter-spacing="0em">ulusuk</tspan></text>
+      <path class="close" data-name="close" d="M1458.6,1592.66l-9.86-9.88,9.86-9.88a3,3,0,0,0-4.23-4.24h0l-9.87,9.89-9.86-9.88a3,3,0,1,0-4.24,4.23l9.88,9.88-9.87,9.88a2.9,2.9,0,0,0-.15,4.09l.15.15a3,3,0,0,0,4.2,0l0,0,9.86-9.88,9.87,9.88a3,3,0,0,0,4.26-4.21Z" fill="#fff"/>
     </g>
   </g>
 </svg>

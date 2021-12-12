@@ -1,34 +1,19 @@
 //all the Sass code handling the layout, which is the container and grid systems
-
-
-.formWindow{
-    position: absolute;
-    overflow: scroll;
-    z-index: 2;
-    grid-column-start: 2;
+@mixin windowSettings{
     box-shadow: 4px 3px 21px -8px rgba(0,0,0,0.56);
-    right: 1vw;
-    top: 11vh;
+    position: absolute;
     background-color: white;
-    margin: 2vh 2vh 2vh 0;
     border-radius: 10px;
+    width: 36vw;
+    right: 1vw;
+}
+
+#textContainer {
     padding: 1vw 3vw;
-    width: 25%;
-    height: 80vh;
-    
 }
 
 .disclaimerWindow{
-    position: absolute;
-    box-shadow: 4px 3px 21px -8px rgba(0,0,0,0.56);
-    grid-row-start: 1;
-    height: 10vh;
-    width: 31%;
-    margin: 2vh 2vh 0 0;
-    background-color: white;
-    border-radius: 10px;
     display: flex;
-    right: 1vw;
     align-items: center;
     justify-content: center;
 
@@ -54,3 +39,43 @@
 //    padding-bottom: 1vw;
 //    background-color: white;
 //}
+
+
+/////DESKTOP ONLY 
+@media (min-width: 601px){
+
+    body {
+        background-color: #83B5F4;
+    }
+
+    .formWindow{
+        @include windowSettings;
+        overflow: scroll;
+        z-index: 2;
+        top: 11vh;
+        margin: 2vh 2vh 2vh 0;
+        height: 85vh;
+    }
+
+    .disclaimerWindow{
+        @include windowSettings;
+        height: 10vh;
+        margin: 2vh 2vh 0 0;
+    }
+    
+}
+/////MEDIA QUERY PHONE 
+@media (max-width: 600px) {
+
+    .disclaimerWindow{
+        background-color: $accent-1;
+        flex-direction: column;
+        padding-top: 4vw;
+    }
+
+    #mapBG,
+    #mapOverlay{
+        display: none;
+    }
+
+}

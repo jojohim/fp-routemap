@@ -153,7 +153,6 @@ function handleCloseElClicked(label){
   } else {
     clearSelection();
   }
-
 }
 
 
@@ -277,14 +276,11 @@ function updateToFromLocations(isFromLocation, destination) {
 
 function getRouteConnection(from, to) {
   let routes = [];
-  console.log(`from:${from}, to:${to}`)
-  console.table(globalRoutes);
   // Step 1 (check for directRoute)
   const directRoute = globalRoutes.find(gRoute => {
     if (gRoute.routeName.includes(from) && gRoute.routeName.includes(to)) {
       return true;
     }
-
     return false;
   });
 
@@ -332,7 +328,20 @@ function getRouteConnection(from, to) {
 function showResultsScreen() {
   const resultsContainer = document.querySelector('#resultScreen');
   resultsContainer.classList.remove('hidden');
+  populateResultScreen();
 }
+
+function populateResultScreen(){
+
+  //Dispaly to and from
+  const fromLocation = toFromLocations.find(location => location.isFromLocation);
+  const toLocation = toFromLocations.find(location => location.isToLocation);
+  document.querySelector("#routeTitle h1").textContent = `${makeUpperCase(fromLocation.airport)} - ${makeUpperCase(toLocation.airport)}`
+  document.querySelector("#fromLocationContainer h2").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
+  document.querySelector("#toLocationContainer h2").textContent = `Depart from ${makeUpperCase(toLocation.airport)} (${toLocation.code})`
+
+}
+
 
 function updateRouteVisibility(shouldShowRoute) {
   if (!shouldShowRoute) {
@@ -345,21 +354,56 @@ function updateRouteVisibility(shouldShowRoute) {
 
   if (routes.length > 0) {
     routes.forEach(route => {
+      showRoutesInfo(route);
+
+      setTimeout(function() {
       const routeElement = document.querySelector(`#${route.routeName}`);
       routeElement.classList.remove('hidden');
+      }, 2000);
     });
 
-      // Show the route information in the UI right sidebar
-    showResultsScreen()
-
-     // Show something went wrong in the UI
   } else {
     console.log('Too many transits');
 
   }
 }
 
+function showRoutesInfo(route){
+  
+  console.log(route)
+  const copy = document.querySelector("template#routeTemplate").content.cloneNode(true);
+
+  copy.querySelector(".flightDuration").textContent = `${route.duration}`;
+  copy.querySelector(".machineName").textContent = `${route.machine}`;
+  copy.querySelector(".machineImg").src = findMachineImage(route.machine, route.airline);
+  copy.querySelector(".capacity").textContent = `${route.capacity} passengers`;
+
+  copy.querySelector(".food").textContent = `${route.food}`;
+  copy.querySelector(".luggage").textContent = `${route.luggage}kg`;
+  if (!route.entertainment){
+    copy.querySelector(".entertainment").classList.add("hidden");
+  } 
+
+  document.querySelector(".routeContainer").appendChild(copy);
+
+}
+
+function findMachineImage(machine, airline){
+  if (machine === "Dash 8-200" && airline === "Air Greenland"){
+    return "machine-cutouts/dash8-ag.png";
+  } else if (machine === "Dash 8-200" && airline === "Icelandair"){
+    return "machine-cutouts/dash8-ia.png";
+  } else if (machine === "Boeing 737 All Series" || machine === "Airbus A330-200"){
+    return "machine-cutouts/airbus-ag.png";
+  } else if (machine === "Bell 212 Helicopter"){
+    return "machine-cutouts/bell-212-ag.png";
+  } else if (machine === "Eurocopter Ec155"){
+    return "machine-cutouts/eurocopter-ag.png";
+  }
+
+}
 function clickDestination(destination){
+  
   if (toFromLocations.includes(destination) || toFromLocations.length === 2) {
     return;
   }
@@ -376,6 +420,9 @@ function clickDestination(destination){
 }
 
 function clearSelection() {
+
+  toFromLocations = [];
+
   const routes = document.querySelectorAll('.route');
   const labels = document.querySelectorAll('.label');
   const combinedElements = [...routes, ...labels];
@@ -389,50 +436,51 @@ function clearSelection() {
     pin.classList.remove('hidden');
   });
 
-  toFromLocations = [];
-  setTimeout(function() {
-    document.getElementById("resultScreen").classList.add("hidden");
-    document.getElementById("departFrom").classList.add("hidden");
-    document.getElementById("textContainer").classList.remove("hidden");
-  }, 500);
+  document.getElementById("resultScreen").classList.add("hidden");
+  document.getElementById("departFrom").classList.add("hidden");
+  document.getElementById("textContainer").classList.remove("hidden");
 
+  document.querySelector(".routeContainer").innerHTML = "";
   buildList();
 }
 
 function updateScreen() {
   // 1 - NONE SELECTED
-  if (toFromLocations.length === 0) {
-    document.getElementById("listTitle").textContent = "I'm travelling from:";
+
+  if (toFromLocations.length <= 1){
     document.getElementById("resultScreen").classList.add("hidden");
     document.getElementById("textContainer").classList.remove("hidden");
-    document.getElementById("departFrom").classList.add("hidden");
-    document.querySelector("#departFrom h1").textContent = "";
-  }
 
-  // 2 - 1 SELECTED
-  if (toFromLocations.length === 1) {
-    const fromLocation = toFromLocations.find(location => location.isFromLocation);
-    document.getElementById("departFrom").classList.remove("hidden");
-    document.getElementById("textContainer").classList.remove("hidden");
-    document.getElementById("resultScreen").classList.add("hidden");
-    document.getElementById("listTitle").textContent = "I'm travelling to:";
-    document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
-  }
+    if (toFromLocations.length === 0) {
+      document.getElementById("listTitle").textContent = "I'm travelling from:";
+      document.getElementById("resultScreen").classList.add("hidden");
+      document.querySelector("#departFrom h1").textContent = "";
+    }
 
+    // 2 - 1 SELECTED
+    else if (toFromLocations.length === 1) {
+      const fromLocation = toFromLocations.find(location => location.isFromLocation);
+      document.getElementById("listTitle").textContent = "I'm travelling to:";
+      document.getElementById("departFrom").classList.remove("hidden");
+      document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
+    }
+
+}
   // 3 - 2 SELECTED
-  if (toFromLocations.length === 2) {
+  else if (toFromLocations.length === 2) {
+    document.getElementById("resultLoaderScreen").classList.remove("hidden");
     document.getElementById("textContainer").classList.remove("changeScreen");
     document.getElementById("textContainer").classList.add("hidden");
     resultLoadAnimation();
+    showResultsScreen();
+
   }
 }
 
 function resultLoadAnimation(){
-  document.getElementById("resultLoaderScreen").classList.remove("hidden");
-
   setTimeout(function() {
     document.getElementById("resultLoaderScreen").classList.add("hidden");
-  }, 1000);
+  }, 2000);
 }
 
 function addLabel(destination){
@@ -446,8 +494,6 @@ function filterByDestinationClicked(destinations){
   if (checkIfHasFromDest(toFromLocations)) {
     const fromLocation = toFromLocations.find(element => element.isFromLocation === true);
     if (fromLocation.country == "Denmark" || fromLocation.country == "Iceland"){
-
-    // Hide pins which are not from greenland or selected destination
     destinations.forEach((destination) => {
       if (destination.country !== fromLocation.country && destination.country !== "Greenland") {
         const pinId = `#${destination.airport}Pin`;
@@ -462,7 +508,6 @@ function filterByDestinationClicked(destinations){
       return destinations.filter(destination => destination.airport !== fromLocation.airport);
     }
   }
-
   else{
     return destinations;
   }

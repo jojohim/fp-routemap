@@ -20,10 +20,9 @@
     <section class="screenOne formWindow">
       <div id="textContainer">
       <article id="departFrom" class="hidden">
-      <h1>Depart from <span class="binIcon"></span></h1>
+        <h1>Depart from</h1>
       <div class="line"></div>
     </article>
-
       <h2 id="listTitle">I'm travelling from:</h2>
       <input type="text" id="searchbar" placeholder="Search destinations..">
       <ul id="destList">
@@ -42,14 +41,42 @@
       <article id="resultHeader">
         <div id="routeTitle">
           <h1>ROUTE SELECTED</h1>
-          <img src="closeIcon.svg">
+          <img class="closeIcon" src="closeIcon.svg">
         </div>
-        <p>Price from: <span id="priceFrom"></span> · Economy · One-Way <span id="priceInfoIcon"></span></p>
+        <p>Price from: <span id="priceFrom"></span> · Economy · One-Way <span class="infoIcon priceInfoIcon"></span></p>
         <p>Flight duration: <span id="durationTotal"></span></p>
     </article>
     <article id="routePresentation">
-      <h2><span><img src="international-airport-icon.svg" class="airportIcon"></span> FROM LOCATION</h2>
-      <div class="line"></div>
+
+      <div id="fromLocationContainer">
+        <h2><span><img src="international-airport-icon.svg" class="airportIcon"></span> FROM LOCATION</h2>
+      </div>
+
+      <div class="routeContainer">
+      </div>
+
+      <div id="toLocationContainer">
+        <h2><span><img src="international-airport-icon.svg" class="airportIcon"></span> TO LOCATION</h2>
+      </div>
+
+      <template id="routeTemplate">
+        <div class="line"></div>
+          <div class="topColumn column">
+            <p><span class="flightDuration">xxhrs xxmins</span><br>
+              Availability<span class="infoIcon scheduleInfoIcon"></span></p>
+            <p><span class="machineName">MachineName</span><br>
+                <span class="capacity">xx passengers</span></p>
+          </div>
+
+          <img class="machineImg" src="machine-cutouts/airbus-ag.png">
+
+          <div class="bottomColumn column">
+            <p class="food">Meals and Snacks</p>
+            <p class="luggage">xx kg</p>
+            <p class="entertainment">Entertainment Screen</p>
+          </div>
+          <div class="line"></div>
+      </template>
     </article>
       <h2></h2>
     </section>
