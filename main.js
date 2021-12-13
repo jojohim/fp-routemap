@@ -20,7 +20,6 @@ let globalDestinations = [];
 let globalFilteredDest = [];
 let toFromLocations = [];
 let globalRoutes = [];
-
 let connectingDestination = {};
 
 // Search Input
@@ -231,23 +230,23 @@ async function getAllDestinations(destinationsURL) {
 //HANDLE DESTINATIONS
 function handleDest(destResponseArray){
   destResponseArray.forEach(destination =>{
-    const destinationObject = getItems(destination);
-    globalDestinations.push(destinationObject);
+    //const destinationObject = getItems(destination);
+    globalDestinations.push(destination);
   });
 }
 
-function getItems(destination){
-
-  return {
-    airport: destination.airport,
-    code: destination.code,
-    country: destination.country,
-    type: destination.type,
-    connectsTo: destination.connectsTo, 
-    isFromLocation: false,
-    isToLocation: false,
-  }
-}
+//function getItems(destination){
+//
+//  return {
+//    airport: destination.airport,
+//    code: destination.code,
+//    country: destination.country,
+//    type: destination.type,
+//    connectsTo: destination.connectsTo, 
+//    isFromLocation: false,
+//    isToLocation: false,
+//  }
+//}
 
 function displayDestList(destinations){
   document.querySelector("ul#destList").innerHTML = "";
@@ -373,9 +372,26 @@ function handleRoutesToShow(routes){
 }
 
 function addAirlineButton(routes){
+
+  const agButton = document.getElementById("agButton");
+  const iaButton = document.getElementById("iaButton");
+  const containsAGRoute = routes.some(e => e.airline === "Air Greenland");
+  const containsIARoute = routes.some(e => e.airline === "Icelandair");
+
+  console.log(`${containsIARoute}, ${containsAGRoute}`);
+
+  if (containsAGRoute && !containsIARoute){
+    iaButton.classList.add("hidden");
+
+  } else if (!containsAGRoute && containsIARoute){
+    agButton.classList.add("hidden");
+
+  } else if (containsAGRoute && containsIARoute){
+    return;
+  }
+
   //if routes contain Air Greenland as airline add agButton 
   //if routes contain AirIceland as airline add aiButton 
-
   //(MAKE SURE TO UNHIDE ALL WHEN RESET);
 
 }
@@ -387,12 +403,14 @@ function populateResultScreen(routes){
   // add icon infront of 
   document.getElementById("fromLocationResult").classList.add(`${fromLocation.type}`);
   document.getElementById("toLocationResult").classList.add(`${toLocation.type}`);
-  //add class depending on airport 
 
-    //Dispaly to and from 
-    document.querySelector("#routeTitle h1").textContent = `From ${makeUpperCase(fromLocation.airport)} to ${makeUpperCase(toLocation.airport)}`
-    document.querySelector("#fromLocationContainer h2").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
-    document.querySelector("#toLocationContainer h2").textContent = `Depart from ${makeUpperCase(toLocation.airport)} (${toLocation.code})`
+  //Dispaly to and from 
+  document.querySelector("#routeTitle h1").textContent = `From ${makeUpperCase(fromLocation.airport)} to ${makeUpperCase(toLocation.airport)}`
+  document.querySelector("#fromLocationContainer h2").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
+  document.querySelector("#toLocationContainer h2").textContent = `Arrive in ${makeUpperCase(toLocation.airport)} (${toLocation.code})`
+
+  //Display price total and flight duration total
+  document.querySelector("#priceFrom").textContent = sum;
 
     //display routes for each
   routes.forEach(route => {
@@ -412,7 +430,8 @@ function addTransitDestinationToView(routesLength){
     //create new text el
     const connectingDestinationText = document.createElement("h2");
     connectingDestinationText.textContent = `Transit in ${makeUpperCase(connectingDestination.airport)} (${connectingDestination.code})`;
-    connectingDestinationText.classList.add(`${connectingDestination.type}`)
+    connectingDestinationText.classList.add(`${connectingDestination.type}`);
+    connectingDestinationText.classList.add(`transitDestination`);
     //insert before second element
     const routesContainer = document.querySelector(".routeContainer");
     routesContainer.insertBefore(connectingDestinationText, secondRouteElement)
@@ -432,9 +451,16 @@ function showRouteInfo(route){
 
   copy.querySelector(".food").textContent = `${route.food}`;
   copy.querySelector(".luggage").textContent = `${route.luggage}kg`;
+
   if (!route.entertainment){
     copy.querySelector(".entertainment").classList.add("hidden");
   } 
+  if (!route.food){
+    copy.querySelector(".food").classList.add("hidden");
+  }
+  if (!route.luggage){
+    copy.querySelector(".luggage").classList.add("hidden");
+  }
 
   document.querySelector(".routeContainer").appendChild(copy);
 
@@ -496,6 +522,9 @@ function updateScreens() {
     document.getElementById("textContainer").classList.remove("hidden");
     document.querySelector(".routeContainer").innerHTML = "";
     document.getElementById("notFoundWindow").classList.add("hidden");
+
+    const btn = document.querySelectorAll(".btn");
+    removeClassForEach(btn, 'hidden');
     updateScreenOne();
 
   } else if (toFromLocations.length === 2) {

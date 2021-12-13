@@ -19,6 +19,8 @@ body{
 
 #routePresentation{
     position: relative;
+    padding: 1vw;
+
 }
 #mapBG{
     height: 100vh;
@@ -153,6 +155,7 @@ body{
 #resultHeader {
     background-color: $accent-1;
     height: min-content;
+    padding: 1vw;
 }
 
 #routeTitle {
@@ -165,9 +168,6 @@ body{
         right: 1vw;
     }
 
-    article{
-        padding: 1vw;
-    }
     h2{
         color: $secondary-color;
         span{
@@ -240,16 +240,25 @@ body{
     opacity: 0.7;
 }
 
+.transitDestination{
+    font-weight: 400;
+  }
+
 //////////////RESULT FOOTER
 
 #resultFooter{
     position: absolute;
     bottom: 0;
-    width: 34vw;
+    min-width: 34vw;
+    max-width: 34vw;
+    padding: 1vw;
     display: flex;
     justify-content: space-evenly;
     background-color: $accent-1;
 
+    .btn{
+        margin: 0.5vw;
+    }
     #iaButton{
         border: 2px solid $ia-color;
         color: $ia-color;
@@ -283,8 +292,8 @@ body{
     h1{
         color: grey;
         position: relative;
-        top: 40%;
-        left: 37%;
+        top: 37%;
+        text-align: center;
     }
 
     img {
