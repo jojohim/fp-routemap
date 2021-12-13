@@ -4,15 +4,25 @@
     position: absolute;
     background-color: white;
     border-radius: 10px;
-    width: 36vw;
-    right: 1vw;
+}
+
+#legendWindow{
+    @include windowSettings;
+    height: min-content;
+    width: max-content;
+    bottom: 0;
+    left: 1vw;
+    bottom: 1vw;
+    padding: 0 10px 0 10px;
 }
 
 #textContainer {
-    padding: 1vw 3vw;
+    padding: 1vw 3vw; 
 }
 
 .disclaimerWindow{
+    width: 36vw;
+    right: 1vw;           
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,6 +60,8 @@
 
     .formWindow{
         @include windowSettings;
+        width: 36vw;
+        right: 1vw;  
         overflow: scroll;
         z-index: 2;
         top: 11vh;
@@ -67,6 +79,7 @@
 /////MEDIA QUERY PHONE 
 @media (max-width: 600px) {
 
+
     .disclaimerWindow{
         background-color: $accent-1;
         flex-direction: column;
@@ -74,6 +87,7 @@
     }
 
     #mapBG,
+    #legendWindow,
     #mapOverlay{
         display: none;
     }

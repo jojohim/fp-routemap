@@ -21,6 +21,8 @@ let globalFilteredDest = [];
 let toFromLocations = [];
 let globalRoutes = [];
 
+let connectingDestination = {};
+
 // Search Input
 const searchInput = document.getElementById("searchbar");
 let settings = {
@@ -45,16 +47,15 @@ async function handleSVGData(){
   const routes = document.querySelectorAll('#mapOverlay svg .route');
   addClassForEach(labels, 'hidden');
   addClassForEach(routes, 'hidden');
-
 }
 
 async function fetchData(){
     // Fetching data and drawing svg data
     const destinationsURL = "https://routemap-fa64.restdb.io/rest/destinations";
-    let destResponseArray = await getDestinations(destinationsURL);
+    let destResponseArray = await getAllDestinations(destinationsURL);
   
     const routesURL = "https://routemap-fa64.restdb.io/rest/routes"
-    let routesResponseArray = await getRoutes(routesURL);
+    let routesResponseArray = await getAllRoutes(routesURL);
   
     // More setup (eventlistners, data parsing)
     handleRoutes(routesResponseArray);
@@ -67,7 +68,7 @@ function setEventListeners(){
   const pins = document.querySelectorAll("#mapOverlay svg .pin");
 
   //BACK BUTTON EL
-  document.querySelector("#notFoundWindow").addEventListener("click", () =>{
+  document.querySelector("#notFoundWindow #backIcon").addEventListener("click", () =>{
     const fromLabel = document.querySelector(`svg #labels #${toFromLocations[1].airport}Label`);
     handleCloseElClicked(fromLabel);
   })
@@ -81,14 +82,13 @@ function setEventListeners(){
     pin.addEventListener("mouseover", () => togglePinLabelVisibility(pin, true));
     pin.addEventListener("mouseleave", (e) => togglePinLabelVisibility(pin, false));
   })
-    // CLEAR ALL ON CLICK EL
+  // CLEAR ALL ON CLICK EL
     const closeIcons = document.querySelectorAll('.closeIcon');
     closeIcons.forEach(closeIcon => {
       closeIcon.addEventListener("click", clearSelection);
     })
 
-
-    //CLOSE ELEMENT CLICK EL
+  //CLOSE ELEMENT CLICK EL
     addClassForEach(labels, 'hidden');
     labels.forEach(label => {
     const closeElement = label.querySelector('.close');
@@ -107,7 +107,7 @@ function removeClassForEach(elements, className) {
 
 
 
-async function getRoutes(routesURL) {
+async function getAllRoutes(routesURL) {
   const response = await fetch(routesURL, {
     method: "get",
     headers: restdbHeaders,
@@ -139,19 +139,21 @@ function getRouteItems(route){
 }
 
 function handleCloseElClicked(label){
+
   const pins = document.querySelectorAll("#mapOverlay svg .pin");
   const routes = document.querySelectorAll('.route');
   const locationToRemove = label.id.split('Label')[0];
-  const remainingLocation = toFromLocations[0];
 
   addClassForEach(routes, 'hidden');
   label.classList.remove('isActive')
   label.classList.add("hidden");
+
   toFromLocations = toFromLocations.filter(location => location.airport !== locationToRemove);
+  const remainingLocation = toFromLocations[0];
   
   if (toFromLocations.length > 0) {
+
     updateRemainingLocation(remainingLocation);
-    updateScreens();
     removeClassForEach(pins, 'hidden');
 
   } else {
@@ -161,13 +163,15 @@ function handleCloseElClicked(label){
 
 function updateRemainingLocation(location){
 
-    toFromLocations = [
-      {
-        ...location,
-        isFromLocation: true,
-        isToLocation: false
-      }
-    ]
+  toFromLocations = [
+    {
+      ...location,
+      isFromLocation: true,
+      isToLocation: false
+    }
+  ]
+
+  updateScreens();
 }
 
 
@@ -215,7 +219,7 @@ function filterDestBySearch(destinations) {
 
 //GET DESTINATIONS DATA
 
-async function getDestinations(destinationsURL) {
+async function getAllDestinations(destinationsURL) {
   const response = await fetch(destinationsURL, {
       method: "get",
       headers: restdbHeaders,
@@ -298,7 +302,7 @@ function getRouteConnection(from, to) {
   } 
 
   // Step 2 (check for connecting location)
-  const connectingDestination = globalDestinations.find(destination => {
+  connectingDestination = globalDestinations.find(destination => {
     if (destination.connectsTo.includes(from) && destination.connectsTo.includes(to)) {
       return true
     }
@@ -338,19 +342,6 @@ function showResultsScreen() {
   resultsContainer.classList.remove('hidden');
 }
 
-function populateResultScreen(){
-
-  //Dispaly to and from
-  const fromLocation = toFromLocations.find(location => location.isFromLocation);
-  const toLocation = toFromLocations.find(location => location.isToLocation);
-
-  document.querySelector("#routeTitle h1").textContent = `From ${makeUpperCase(fromLocation.airport)} to ${makeUpperCase(toLocation.airport)}`
-  document.querySelector("#fromLocationContainer h2").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
-  document.querySelector("#toLocationContainer h2").textContent = `Depart from ${makeUpperCase(toLocation.airport)} (${toLocation.code})`
-
-}
-
-
 function updateRouteVisibility(shouldShowRoute) {
   if (!shouldShowRoute) {
     return;
@@ -359,16 +350,12 @@ function updateRouteVisibility(shouldShowRoute) {
   const fromLocation = toFromLocations.find(location => location.isFromLocation).airport;
   const toLocation = toFromLocations.find(location => location.isToLocation).airport;
   const routes = getRouteConnection(fromLocation, toLocation);
+  //routes.forEach(route => {
+  //  selectedRoutes.push(route);
+  //})
 
   if (routes.length > 0) {
-    routes.forEach(route => {
-      showRoutesInfo(route);
-      setTimeout(function() {
-      const routeElement = document.querySelector(`#${route.routeName}`);
-      routeElement.classList.remove('hidden');
-      }, 2000);
-    });
-    populateResultScreen();
+    handleRoutesToShow(routes)
 
   } else {
     document.getElementById("notFoundWindow").classList.remove("hidden");
@@ -377,9 +364,65 @@ function updateRouteVisibility(shouldShowRoute) {
   }
 }
 
-function showRoutesInfo(route){
-  
-  console.log(route)
+function handleRoutesToShow(routes){
+
+    populateResultScreen(routes);
+    addAirlineButton(routes);
+    addTransitDestinationToView(routes.length);
+
+}
+
+function addAirlineButton(routes){
+  //if routes contain Air Greenland as airline add agButton 
+  //if routes contain AirIceland as airline add aiButton 
+
+  //(MAKE SURE TO UNHIDE ALL WHEN RESET);
+
+}
+
+function populateResultScreen(routes){
+  const fromLocation = toFromLocations.find(location => location.isFromLocation);
+  const toLocation = toFromLocations.find(location => location.isToLocation);
+
+  // add icon infront of 
+  document.getElementById("fromLocationResult").classList.add(`${fromLocation.type}`);
+  document.getElementById("toLocationResult").classList.add(`${toLocation.type}`);
+  //add class depending on airport 
+
+    //Dispaly to and from 
+    document.querySelector("#routeTitle h1").textContent = `From ${makeUpperCase(fromLocation.airport)} to ${makeUpperCase(toLocation.airport)}`
+    document.querySelector("#fromLocationContainer h2").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
+    document.querySelector("#toLocationContainer h2").textContent = `Depart from ${makeUpperCase(toLocation.airport)} (${toLocation.code})`
+
+    //display routes for each
+  routes.forEach(route => {
+    showRouteInfo(route);
+    setTimeout(function() {
+    const routeElement = document.querySelector(`#${route.routeName}`);
+    routeElement.classList.remove('hidden');
+    }, 2000);
+  });
+}
+
+function addTransitDestinationToView(routesLength){
+  if (routesLength >= 2) {
+    //get second route 
+    const routeElements = document.getElementsByClassName("routeInfo")
+    const secondRouteElement = routeElements[1];
+    //create new text el
+    const connectingDestinationText = document.createElement("h2");
+    connectingDestinationText.textContent = `Transit in ${makeUpperCase(connectingDestination.airport)} (${connectingDestination.code})`;
+    connectingDestinationText.classList.add(`${connectingDestination.type}`)
+    //insert before second element
+    const routesContainer = document.querySelector(".routeContainer");
+    routesContainer.insertBefore(connectingDestinationText, secondRouteElement)
+  } else {
+    return;
+  }
+}
+
+function showRouteInfo(route){
+
   const copy = document.querySelector("template#routeTemplate").content.cloneNode(true);
 
   copy.querySelector(".flightDuration").textContent = `${route.duration}`;

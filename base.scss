@@ -5,6 +5,7 @@ $primary-color: white;
 $secondary-color: #BD242B;
 $tertiary-color: #111112;
 $accent-1: #F5F5F5;
+$ia-color: #001B71;
 
 body{
     margin: 0;
@@ -16,6 +17,9 @@ body{
     z-index: 0;
 }
 
+#routePresentation{
+    position: relative;
+}
 #mapBG{
     height: 100vh;
     position: absolute;
@@ -28,10 +32,6 @@ body{
     width: 100%;
 }
 
-ul{
-    list-style: none;
-    padding: 0;
-}
 
 .hidden {
     transition: 0.3s;
@@ -152,6 +152,7 @@ ul{
 
 #resultHeader {
     background-color: $accent-1;
+    height: min-content;
 }
 
 #routeTitle {
@@ -175,11 +176,6 @@ ul{
         }
     }
 
-    //.icon {
-    //    height: 10px;
-    //    width: 10px;
-    //}
-
     .machineImg {
         width: 250px;
         padding: 10px 0;
@@ -188,7 +184,7 @@ ul{
         display: block;
     }
 
-    .routeContainer{
+    .routeInfo{
         padding: 0 2vw;
     }
 }
@@ -221,8 +217,16 @@ ul{
     @include icon-settings;
 }
 
+
 .column {
     display: flex;
+}
+
+.bottomColumn{
+    justify-content: space-around;
+}
+
+.topColumn{
     justify-content: space-between;
 }
 
@@ -234,6 +238,42 @@ ul{
 .closeIcon:hover{
     cursor: pointer;
     opacity: 0.7;
+}
+
+//////////////RESULT FOOTER
+
+#resultFooter{
+    position: absolute;
+    bottom: 0;
+    width: 34vw;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: $accent-1;
+
+    #iaButton{
+        border: 2px solid $ia-color;
+        color: $ia-color;
+        transition: 0.25s,
+      }
+
+    #agButton{
+        border: 2px solid $secondary-color;
+        color: $secondary-color;
+        transition: 0.25s,
+    }
+
+    #agButton:hover{
+        background-color: $secondary-color;
+    }
+
+    #iaButton:hover{
+        background-color: $ia-color;
+    }
+
+    #agButton:hover,
+    #iaButton:hover{
+        color: white;
+    }
 }
 
 ///////NOT FOUND PLACEHOLDER TEXT
@@ -254,4 +294,32 @@ ul{
         left: 5%;
 
     }
+}
+
+///////LEGEND
+.heliport::before{
+    background: url("heliport-icon.svg");
+    @include icon-settings;
+}
+
+.international::before{
+    background: url("international-airport-icon.svg");
+    @include icon-settings;
+}
+
+.domestic::before{
+    background: url("domestic-airport-icon.svg");
+    @include icon-settings;
+}
+
+.ag-route::before{
+    content: "– ";
+    color: $secondary-color;
+    font-weight: 800;
+}
+
+.ia-route::before{
+    content: "– ";
+    color: $ia-color;
+    font-weight: 800;
 }

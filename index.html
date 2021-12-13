@@ -48,19 +48,19 @@
         <p>Flight duration: <span id="durationTotal"></span></p>
     </article>
     <article id="routePresentation">
-
       <div id="fromLocationContainer">
-        <h2><span><img src="international-airport-icon.svg" class="airportIcon"></span> FROM LOCATION</h2>
+        <h2 id="fromLocationResult">FROM LOCATION</h2>
       </div>
 
       <div class="routeContainer">
       </div>
 
       <div id="toLocationContainer">
-        <h2><span><img src="international-airport-icon.svg" class="airportIcon"></span> TO LOCATION</h2>
+        <h2 id="toLocationResult">TO LOCATION</h2>
       </div>
 
       <template id="routeTemplate">
+        <div class="routeInfo">
         <div class="line"></div>
           <div class="topColumn column">
             <p><span class="flightDuration">xxhrs xxmins</span><br>
@@ -77,10 +77,14 @@
             <p class="entertainment">Entertainment Screen</p>
           </div>
           <div class="line"></div>
+          </div>
       </template>
     </article>
-      <h2></h2>
-    </section>
+      <article id="resultFooter">
+        <a href="https://www.airgreenland.com/" target="_blank" class="btn" id="agButton">AIR GREENLAND</a>
+        <a href="https://www.icelandair.com/" target="_blank" class="btn" id="iaButton">ICELANDAIR</a>
+        </article>
+   </section>
     
     <section id="resultLoaderScreen" class="hidden formWindow">
       <div class="dotFlashing"></div>
@@ -89,6 +93,14 @@
     <section id="notFoundWindow" class="hidden formWindow">
       <img id="backIcon" src="back-icon.svg">
       <h1>Route not found</h1>
+    </section>
+
+    <section id="legendWindow">
+        <p class="international">International Airport</p>
+        <p class="domestic">Domestic Airport</p>
+        <p class="heliport">Heliport</p>
+        <p class="ag-route">Air Greenland route</p>
+        <p class="ia-route">Icelandair route</p>
     </section>
 
     <section id="mapOverlay"></section>
