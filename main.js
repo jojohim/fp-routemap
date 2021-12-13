@@ -6,6 +6,15 @@ window.addEventListener("load", function(){
 })
 window.addEventListener("DOMContentLoaded", start);
 
+//HEADER FOR DESTINATION DATA
+const apiKey = "61a623ce81b6874e24b2ea01";
+
+const restdbHeaders = {
+    "Content-Type": "application/json; charset=utf-8",
+    "x-apikey": apiKey,
+    "cache-control": "no-cache"
+};
+
 // ARRAYS 
 let globalDestinations = [];
 let globalFilteredDest = [];
@@ -14,19 +23,16 @@ let globalRoutes = [];
 
 // Search Input
 const searchInput = document.getElementById("searchbar");
-
 let settings = {
   searchQuery: ""
 }
 
-
 async function start(){
 
   await(fetchData());
-  await(handleSVGData());
-
-  displayDestList(globalDestinations);
+  await(handleSVGData());;
   setEventListeners();
+  displayDestList(globalDestinations)
 }
 
 async function handleSVGData(){
@@ -37,8 +43,8 @@ async function handleSVGData(){
   // Hide labels and routes
   let labels = document.querySelectorAll('#mapOverlay svg #labels .label');
   const routes = document.querySelectorAll('#mapOverlay svg .route');
-  hideElements(labels);
-  hideElements(routes);
+  addClassForEach(labels, 'hidden');
+  addClassForEach(routes, 'hidden');
 
 }
 
@@ -55,35 +61,51 @@ async function fetchData(){
     handleDest(destResponseArray);
 }
 
-
 function setEventListeners(){
+
+  let labels = document.querySelectorAll('#mapOverlay svg #labels .label');
+  const pins = document.querySelectorAll("#mapOverlay svg .pin");
+
+  //BACK BUTTON EL
+  document.querySelector("#notFoundWindow").addEventListener("click", () =>{
+    const fromLabel = document.querySelector(`svg #labels #${toFromLocations[1].airport}Label`);
+    handleCloseElClicked(fromLabel);
+  })
+
   //SEARCH INPUT EL
   searchInput.addEventListener("keyup", checkSearch);
+
   //PIN HOVER AND CLICK EL
-  const pins = document.querySelectorAll("#mapOverlay svg #pins .pin");
   pins.forEach(pin => {
     pin.addEventListener("click", () => checkPin(pin));
     pin.addEventListener("mouseover", () => togglePinLabelVisibility(pin, true));
     pin.addEventListener("mouseleave", (e) => togglePinLabelVisibility(pin, false));
   })
     // CLEAR ALL ON CLICK EL
-    const resultScreen = document.querySelector('#resultScreen');
-    const closeIcon = resultScreen.querySelector('img');
-    closeIcon.addEventListener('click', () => clearSelection());
+    const closeIcons = document.querySelectorAll('.closeIcon');
+    closeIcons.forEach(closeIcon => {
+      closeIcon.addEventListener("click", clearSelection);
+    })
+
 
     //CLOSE ELEMENT CLICK EL
-    let labels = document.querySelectorAll('#mapOverlay svg #labels .label');
-  labels.forEach(label => {
-    label.classList.add("hidden");
-
+    addClassForEach(labels, 'hidden');
+    labels.forEach(label => {
     const closeElement = label.querySelector('.close');
     closeElement.addEventListener('click', ( )=> handleCloseElClicked(label));
   }); 
 }
 
-function hideElements(elements) {
-  elements.forEach(element => element.classList.add('hidden'));
+
+function addClassForEach(elements, className) {
+  elements.forEach(element => element.classList.add(className));
 }
+
+function removeClassForEach(elements, className) {
+  elements.forEach(element => element.classList.remove(className));
+}
+
+
 
 async function getRoutes(routesURL) {
   const response = await fetch(routesURL, {
@@ -117,42 +139,35 @@ function getRouteItems(route){
 }
 
 function handleCloseElClicked(label){
-
-  // Hide all routes
+  const pins = document.querySelectorAll("#mapOverlay svg .pin");
   const routes = document.querySelectorAll('.route');
-  hideElements(routes);
+  const locationToRemove = label.id.split('Label')[0];
+  const remainingLocation = toFromLocations[0];
 
-  // Hide element/label that is clicked 
-  // + Remove element from toFromLocations list
+  addClassForEach(routes, 'hidden');
   label.classList.remove('isActive')
   label.classList.add("hidden");
-
-  const locationToRemove = label.id.split('Label')[0];
   toFromLocations = toFromLocations.filter(location => location.airport !== locationToRemove);
-
+  
   if (toFromLocations.length > 0) {
-    const remainingLocation = toFromLocations[0];
-    // always make remaining location From location
+    updateRemainingLocation(remainingLocation);
+    updateScreens();
+    removeClassForEach(pins, 'hidden');
+
+  } else {
+    clearSelection();
+  }
+}
+
+function updateRemainingLocation(location){
+
     toFromLocations = [
       {
-        ...remainingLocation,
+        ...location,
         isFromLocation: true,
         isToLocation: false
       }
     ]
-      // If your list of toFromLocations === 0 you should show all the pins
-  // (show the pins that have been filtered out by country)
-  const pins = document.querySelectorAll('#mapOverlay svg .pin');
-  pins.forEach(pin => {
-    pin.classList.remove('hidden');
-  });
-
-  //update Screenn
-    updateScreen();
-//else if toFroLocation doesn't contain from then: / i.e. if remaining location is To location
-  } else {
-    clearSelection();
-  }
 }
 
 
@@ -165,7 +180,6 @@ function togglePinLabelVisibility(pin, show) {
   if (isActive) {
     return;
   }
-
   if (show) {
     document.querySelector(labelId).classList.remove('hidden');
   } else {
@@ -198,14 +212,6 @@ function filterDestBySearch(destinations) {
     );
 });
 }
-//HEADER FOR DESTINATION DATA
-const apiKey = "61a623ce81b6874e24b2ea01";
-
-const restdbHeaders = {
-    "Content-Type": "application/json; charset=utf-8",
-    "x-apikey": apiKey,
-    "cache-control": "no-cache"
-};
 
 //GET DESTINATIONS DATA
 
@@ -276,7 +282,9 @@ function updateToFromLocations(isFromLocation, destination) {
 
 function getRouteConnection(from, to) {
   let routes = [];
-  // Step 1 (check for directRoute)
+
+    // Step 1 (check for directRoute)
+
   const directRoute = globalRoutes.find(gRoute => {
     if (gRoute.routeName.includes(from) && gRoute.routeName.includes(to)) {
       return true;
@@ -328,7 +336,6 @@ function getRouteConnection(from, to) {
 function showResultsScreen() {
   const resultsContainer = document.querySelector('#resultScreen');
   resultsContainer.classList.remove('hidden');
-  populateResultScreen();
 }
 
 function populateResultScreen(){
@@ -336,7 +343,8 @@ function populateResultScreen(){
   //Dispaly to and from
   const fromLocation = toFromLocations.find(location => location.isFromLocation);
   const toLocation = toFromLocations.find(location => location.isToLocation);
-  document.querySelector("#routeTitle h1").textContent = `${makeUpperCase(fromLocation.airport)} - ${makeUpperCase(toLocation.airport)}`
+
+  document.querySelector("#routeTitle h1").textContent = `From ${makeUpperCase(fromLocation.airport)} to ${makeUpperCase(toLocation.airport)}`
   document.querySelector("#fromLocationContainer h2").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
   document.querySelector("#toLocationContainer h2").textContent = `Depart from ${makeUpperCase(toLocation.airport)} (${toLocation.code})`
 
@@ -355,14 +363,15 @@ function updateRouteVisibility(shouldShowRoute) {
   if (routes.length > 0) {
     routes.forEach(route => {
       showRoutesInfo(route);
-
       setTimeout(function() {
       const routeElement = document.querySelector(`#${route.routeName}`);
       routeElement.classList.remove('hidden');
       }, 2000);
     });
+    populateResultScreen();
 
   } else {
+    document.getElementById("notFoundWindow").classList.remove("hidden");
     console.log('Too many transits');
 
   }
@@ -406,74 +415,69 @@ function clickDestination(destination){
   
   if (toFromLocations.includes(destination) || toFromLocations.length === 2) {
     return;
-  }
+  } else {
 
   updateToFromLocations(toFromLocations.length === 0, destination);
   updateRouteVisibility(toFromLocations.length === 2);
 
-  //code to be executed after 1 second
   setTimeout(function() {
-    updateScreen();
+    updateScreens();
     buildList();
     addLabel(destination);
   }, 500);
+}
 }
 
 function clearSelection() {
 
   toFromLocations = [];
 
+  const pins = document.querySelectorAll("#mapOverlay svg .pin");
   const routes = document.querySelectorAll('.route');
   const labels = document.querySelectorAll('.label');
   const combinedElements = [...routes, ...labels];
-  hideElements(combinedElements);
-
   const activeLabels = document.querySelectorAll('.label.isActive');
-  activeLabels.forEach(label => label.classList.remove('isActive'));
 
-  const pins = document.querySelectorAll('#mapOverlay svg .pin');
-  pins.forEach(pin => {
-    pin.classList.remove('hidden');
-  });
+  addClassForEach(combinedElements, 'hidden');
+  removeClassForEach(pins, 'hidden');
+  removeClassForEach(activeLabels, 'isActive');
 
-  document.getElementById("resultScreen").classList.add("hidden");
-  document.getElementById("departFrom").classList.add("hidden");
-  document.getElementById("textContainer").classList.remove("hidden");
-
-  document.querySelector(".routeContainer").innerHTML = "";
+  updateScreens();
   buildList();
 }
 
-function updateScreen() {
-  // 1 - NONE SELECTED
+function updateScreens() {
 
   if (toFromLocations.length <= 1){
     document.getElementById("resultScreen").classList.add("hidden");
     document.getElementById("textContainer").classList.remove("hidden");
+    document.querySelector(".routeContainer").innerHTML = "";
+    document.getElementById("notFoundWindow").classList.add("hidden");
+    updateScreenOne();
 
-    if (toFromLocations.length === 0) {
-      document.getElementById("listTitle").textContent = "I'm travelling from:";
-      document.getElementById("resultScreen").classList.add("hidden");
-      document.querySelector("#departFrom h1").textContent = "";
-    }
-
-    // 2 - 1 SELECTED
-    else if (toFromLocations.length === 1) {
-      const fromLocation = toFromLocations.find(location => location.isFromLocation);
-      document.getElementById("listTitle").textContent = "I'm travelling to:";
-      document.getElementById("departFrom").classList.remove("hidden");
-      document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
-    }
-
+  } else if (toFromLocations.length === 2) {
+      document.getElementById("resultLoaderScreen").classList.remove("hidden");
+      document.getElementById("textContainer").classList.remove("changeScreen");
+      document.getElementById("textContainer").classList.add("hidden");
+      resultLoadAnimation();
+      showResultsScreen();
+  }
 }
-  // 3 - 2 SELECTED
-  else if (toFromLocations.length === 2) {
-    document.getElementById("resultLoaderScreen").classList.remove("hidden");
-    document.getElementById("textContainer").classList.remove("changeScreen");
-    document.getElementById("textContainer").classList.add("hidden");
-    resultLoadAnimation();
-    showResultsScreen();
 
+function updateScreenOne(){
+
+  if (toFromLocations.length === 0) {
+    document.getElementById("listTitle").textContent = "I'm travelling from:";
+    document.getElementById("resultScreen").classList.add("hidden");
+    document.querySelector("#departFrom h1").textContent = "";
+    document.getElementById("departFrom").classList.add("hidden");
+  }
+
+  else if (toFromLocations.length === 1) {
+    const fromLocation = toFromLocations.find(location => location.isFromLocation);
+    document.getElementById("listTitle").textContent = "I'm travelling to:";
+    document.getElementById("departFrom").classList.remove("hidden");
+    document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
   }
 }
 
@@ -512,7 +516,6 @@ function filterByDestinationClicked(destinations){
     return destinations;
   }
 }
-
 
 function checkIfHasFromDest(destinations){
   return destinations.some(e => e.isFromLocation === true)

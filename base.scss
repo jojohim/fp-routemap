@@ -108,6 +108,12 @@ ul{
         transform: translateX(0);
     }
 }
+
+#textContainer {
+    .closeIcon{
+        right: 3vw;
+    }
+}
 //#mapOverlay svg .pin:before {
 //    content: attr(data-hover);
 //    visibility: hidden;
@@ -154,6 +160,10 @@ ul{
 }
 
 #resultScreen {
+    .closeIcon{
+        right: 1vw;
+    }
+
     article{
         padding: 1vw;
     }
@@ -218,8 +228,30 @@ ul{
 
 .closeIcon{
     transition: 0.3s;
+    position: absolute;
 }
+
 .closeIcon:hover{
     cursor: pointer;
     opacity: 0.7;
+}
+
+///////NOT FOUND PLACEHOLDER TEXT
+
+#notFoundWindow {
+
+    h1{
+        color: grey;
+        position: relative;
+        top: 40%;
+        left: 37%;
+    }
+
+    img {
+        position: relative;
+        height: clamp(40px, 2vw, 2vw);
+        top: 5%;
+        left: 5%;
+
+    }
 }

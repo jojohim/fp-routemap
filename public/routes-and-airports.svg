@@ -15,7 +15,7 @@
     <path class="route" id="nuuk-narsarsuaq" d="M653.21,1722.54s55.5,172.58,254.72,276.85" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="narsarsuaq-qaqortoq" d="M899,2047s32.18,1.56,24.24-32.34" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="keflavik-nuuk" d="M665.58,1712.16s357.66-342.21,990.11-81.43" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
-    <path class="route" id="reykjavik-kulusuk" d="M1198.92,1586.52s202.48-91.27,483.32,15.28" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
+    <path class="route" id="kulusuk-reykjavik" d="M1198.92,1586.52s202.48-91.27,483.32,15.28" fill="none" stroke="#272e64" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="sisimiut-nuuk" d="M607.63,1463.07S544.94,1605.89,642,1712.16" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="ilulissat-qaarsut" d="M686.43,1156.92s8.38,65.91,40.17,107.85" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>
     <path class="route" id="ilulissat-qeqertarsuaq" d="M655.14,1260.13s22.25,13.77,62.48,16.4" fill="none" stroke="#bc252b" stroke-miterlimit="10" stroke-width="4"/>

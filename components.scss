@@ -10,8 +10,15 @@ h1{
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 600;
     color: $secondary-color;
-    margin: 15px 0;
     font-size: clamp(18px, 1.3em, 1.3vw);
+}
+
+#resultScreen h1{
+  margin: 0 0 1vw 0;
+}
+
+#textConatiner h1{
+  margin: 2vw 0 2vw 0;
 }
 
 h2{
