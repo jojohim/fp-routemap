@@ -36,7 +36,6 @@ body{
 
 
 .hidden {
-    transition: 0.3s;
     display: none;
 }
 
@@ -191,6 +190,14 @@ body{
 
     // RESULT SCREEN ICONS
 
+#priceGraphPopup{
+    .closeIcon{
+        padding-top: 0.5vw;
+        width: clamp(25px, 1vw, 1vw);
+        height: min-content;
+    }
+    }
+
 @mixin icon-settings{
     content: "";
     margin-right: 5px;
@@ -200,6 +207,13 @@ body{
     height: 15px;
     width: 15px;
     vertical-align: -10%;
+}
+
+.infoIcon::after{
+    background: url("info-icon.svg");
+    margin-left: 5px;
+    @include icon-settings;
+    cursor: pointer;
 }
 
 .food::before{
@@ -247,14 +261,10 @@ body{
 //////////////RESULT FOOTER
 
 #resultFooter{
-    position: absolute;
-    bottom: 0;
-    min-width: 34vw;
-    max-width: 34vw;
-    padding: 1vw;
+
+    padding: 0.5vw;
     display: flex;
     justify-content: space-evenly;
-    background-color: $accent-1;
 
     .btn{
         margin: 0.5vw;

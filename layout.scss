@@ -20,17 +20,17 @@
     padding: 1vw 3vw; 
 }
 
+.infoIcon{
+    height: 4vh;
+    margin-right: 1vw;
+}
+
 .disclaimerWindow{
     width: 36vw;
     right: 1vw;           
     display: flex;
     align-items: center;
     justify-content: center;
-
-    img{
-        height: 4vh;
-        margin-right: 1vw;
-    }
 }
 
 .destItem p{
@@ -41,6 +41,35 @@
     transform: translateX(2px);
     font-weight: 600;
     color: $secondary-color;
+}
+
+#priceGraphPopup{
+    @include windowSettings;
+    z-index: 5;
+    padding: 0.5vw 2vw 2vw 2vw;
+
+    h2{
+        text-align: center;
+    }
+
+    img{
+        height: clamp(100px,6vw, 6vw);
+    }
+}
+
+.schedulePopupWindow{
+    @include windowSettings;
+    z-index: 5;
+    padding: 0vw 2vw 1vw 1vw;
+    height: max-content;
+    width: 20vw;
+
+    .closeIcon{
+        padding-top: 10px;
+    }
+    h2{
+        color: black;
+    }
 }
 
 //#screenOneHeader{
@@ -60,7 +89,7 @@
 
     .formWindow{
         @include windowSettings;
-        width: 36vw;
+        width: clamp(420px, 36vw, 36vw);
         right: 1vw;  
         overflow: scroll;
         z-index: 2;
@@ -72,10 +101,11 @@
     .disclaimerWindow{
         @include windowSettings;
         height: 10vh;
+        width: clamp(420px, 36vw, 36vw);
         margin: 2vh 2vh 0 0;
     }
-    
 }
+
 /////MEDIA QUERY PHONE 
 @media (max-width: 600px) {
 

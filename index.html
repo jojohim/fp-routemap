@@ -20,7 +20,7 @@
     <section class="screenOne formWindow">
       <div id="textContainer">
       <article id="departFrom" class="hidden">
-        <img class="closeIcon" src="closeIcon.svg">
+        <img class="closeIcon clearAllButton" src="closeIcon.svg">
         <h1>Depart from</h1>
       <div class="line"></div>
     </article>
@@ -42,10 +42,15 @@
       <article id="resultHeader">
         <div id="routeTitle">
           <h1>ROUTE SELECTED</h1>
-          <img class="closeIcon" src="closeIcon.svg">
+          <img class="closeIcon clearAllButton" src="closeIcon.svg">
         </div>
-        <p>Price from: <span id="priceFrom"></span> · Economy · One-Way <span class="infoIcon priceInfoIcon"></span></p>
-        <p>Flight duration: <span id="durationTotal"></span></p>
+        <p><strong>Price from: <span id="priceFrom"></span></strong> · Economy · One-Way <span class="infoIcon priceInfoIcon"></span></p>
+        <div id="priceGraphPopup" class="hidden">
+          <img src="closeIcon.svg" class="closeIcon">
+          <h2>Price Graph by Month</h2>
+          <img src="priceGraph.svg">
+        </div>
+        <p><strong>Flight duration: <span id="durationTotal"></span></strong></p>
     </article>
     <article id="routePresentation">
       <div id="fromLocationContainer">
@@ -63,10 +68,15 @@
         <div class="routeInfo">
         <div class="line"></div>
           <div class="topColumn column">
-            <p><span class="flightDuration">xxhrs xxmins</span><br>
+            <p><i><span class="flightDuration">xxhrs xxmins</span></i><br>
               Availability<span class="infoIcon scheduleInfoIcon"></span></p>
             <p><span class="machineName">MachineName</span><br>
                 <span class="capacity">xx passengers</span></p>
+          </div>
+          <div class="schedulePopupWindow hidden">
+            <img class="closeIcon" src="closeIcon.svg">
+            <h3 class="scheduleHeader">SCHEDULE HEADER</h3>
+            <p class="scheduleText"></p>
           </div>
 
           <img class="machineImg" src="machine-cutouts/airbus-ag.png">
@@ -80,10 +90,11 @@
           </div>
       </template>
     </article>
-      <article id="resultFooter">
-        <a href="https://www.airgreenland.com/" target="_blank" class="btn" id="agButton">AIR GREENLAND</a>
-        <a href="https://www.icelandair.com/" target="_blank" class="btn" id="iaButton">ICELANDAIR</a>
-        </article>
+    <article id="resultFooter">
+      <h3>Book Flights with:</h3>
+      <a href="https://www.airgreenland.com/" target="_blank" class="btn" id="agButton">AIR GREENLAND</a>
+      <a href="https://www.icelandair.com/" target="_blank" class="btn" id="iaButton">ICELANDAIR</a>
+      </article>
    </section>
     
     <section id="resultLoaderScreen" class="hidden formWindow">

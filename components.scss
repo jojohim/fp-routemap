@@ -10,7 +10,7 @@ h1{
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 600;
     color: $secondary-color;
-    font-size: clamp(18px, 1.3em, 1.3vw);
+    font-size: clamp(20px, 1.4em, 1.4vw);
 }
 
 #resultScreen h1{
@@ -24,13 +24,18 @@ h1{
 h2{
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 600;
-    font-size: clamp(16px, 1.2em, 1.2vw);
+    font-size: clamp(18px, 1.3em, 1.3vw);
 }
 
+h3{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 1.2em, 1.2vw);
+}
 p{
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
-    font-size: clamp(14px, 1em, 1vw);
+    font-size: clamp(14px, 1em, 1em);
 }
 
 #resultScreen p{

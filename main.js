@@ -81,10 +81,11 @@ function setEventListeners(){
     pin.addEventListener("mouseover", () => togglePinLabelVisibility(pin, true));
     pin.addEventListener("mouseleave", (e) => togglePinLabelVisibility(pin, false));
   })
+
   // CLEAR ALL ON CLICK EL
-    const closeIcons = document.querySelectorAll('.closeIcon');
-    closeIcons.forEach(closeIcon => {
-      closeIcon.addEventListener("click", clearSelection);
+    const clearAllButtons = document.querySelectorAll('.clearAllButton');
+    clearAllButtons.forEach(clearAllButton => {
+      clearAllButton.addEventListener("click", clearSelection);
     })
 
   //CLOSE ELEMENT CLICK EL
@@ -93,8 +94,19 @@ function setEventListeners(){
     const closeElement = label.querySelector('.close');
     closeElement.addEventListener('click', ( )=> handleCloseElClicked(label));
   }); 
+
+  //PRICE INFO ICON 
+  const priceGraphWindow = document.querySelector("#priceGraphPopup")
+  document.querySelector(".priceInfoIcon").addEventListener('click', () => {togglePopUpWindow(priceGraphWindow)});
 }
 
+function togglePopUpWindow(domEl){
+
+  domEl.classList.remove("hidden");
+  domEl.querySelector(".closeIcon").addEventListener("click", ()=> {
+  domEl.classList.add("hidden");
+  }) 
+}
 
 function addClassForEach(elements, className) {
   elements.forEach(element => element.classList.add(className));
@@ -117,24 +129,9 @@ async function getAllRoutes(routesURL) {
 
 function handleRoutes(routesResponseArray){
   routesResponseArray.forEach(route =>{
-    const routeObject = getRouteItems(route);
-    globalRoutes.push(routeObject);
+    //const routeObject = getRouteItems(route);
+    globalRoutes.push(route);
   });
-}
-
-function getRouteItems(route){
-  return {
-    routeName: route.route,
-    airline: route.airline,
-    capacity: route.capacity,
-    machine: route.machine,
-    price: route.price,
-    duration: route.duration,
-    availability: route.availability,
-    luggage: route.luggage,
-    entertainment: route.entertainment,
-    food: route.food,
-  }
 }
 
 function handleCloseElClicked(label){
@@ -169,7 +166,6 @@ function updateRemainingLocation(location){
       isToLocation: false
     }
   ]
-
   updateScreens();
 }
 
@@ -234,19 +230,6 @@ function handleDest(destResponseArray){
     globalDestinations.push(destination);
   });
 }
-
-//function getItems(destination){
-//
-//  return {
-//    airport: destination.airport,
-//    code: destination.code,
-//    country: destination.country,
-//    type: destination.type,
-//    connectsTo: destination.connectsTo, 
-//    isFromLocation: false,
-//    isToLocation: false,
-//  }
-//}
 
 function displayDestList(destinations){
   document.querySelector("ul#destList").innerHTML = "";
@@ -358,7 +341,6 @@ function updateRouteVisibility(shouldShowRoute) {
 
   } else {
     document.getElementById("notFoundWindow").classList.remove("hidden");
-    console.log('Too many transits');
 
   }
 }
@@ -377,8 +359,6 @@ function addAirlineButton(routes){
   const iaButton = document.getElementById("iaButton");
   const containsAGRoute = routes.some(e => e.airline === "Air Greenland");
   const containsIARoute = routes.some(e => e.airline === "Icelandair");
-
-  console.log(`${containsIARoute}, ${containsAGRoute}`);
 
   if (containsAGRoute && !containsIARoute){
     iaButton.classList.add("hidden");
@@ -399,6 +379,36 @@ function addAirlineButton(routes){
 function populateResultScreen(routes){
   const fromLocation = toFromLocations.find(location => location.isFromLocation);
   const toLocation = toFromLocations.find(location => location.isToLocation);
+  const routesPrices = [];
+  const routeDurationMins = [];
+  const routeDurationHrs = [];
+
+  routes.forEach(route => {
+    routesPrices.push(route.price);
+    routeDurationMins.push(route.durationMins);
+    routeDurationHrs.push(route.durationHrs);
+
+    showRouteInfo(route);
+    setTimeout(function() {
+    const routeElement = document.querySelector(`#${route.routeName}`);
+    routeElement.classList.remove('hidden');
+    }, 2000);
+  });
+
+  //if totalMinutes more than 60 subtract 60 from minutes and add 1 hour to total hours
+  let totalHrs =  getSum(routeDurationHrs);
+  let totalMins = getSum(routeDurationMins);
+
+  if (totalMins >= 60){
+    totalHrs === totalHrs++;
+    totalMins -= 60;
+    console.log(totalHrs, totalMins)
+  } 
+  //display totalDuration
+  document.getElementById("durationTotal").textContent = `${totalHrs}h ${totalMins}m`;
+  
+  //display price
+  document.getElementById("priceFrom").textContent = `${getSum(routesPrices)} DKK `
 
   // add icon infront of 
   document.getElementById("fromLocationResult").classList.add(`${fromLocation.type}`);
@@ -409,17 +419,13 @@ function populateResultScreen(routes){
   document.querySelector("#fromLocationContainer h2").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
   document.querySelector("#toLocationContainer h2").textContent = `Arrive in ${makeUpperCase(toLocation.airport)} (${toLocation.code})`
 
-  //Display price total and flight duration total
-  document.querySelector("#priceFrom").textContent = sum;
+}
 
-    //display routes for each
-  routes.forEach(route => {
-    showRouteInfo(route);
-    setTimeout(function() {
-    const routeElement = document.querySelector(`#${route.routeName}`);
-    routeElement.classList.remove('hidden');
-    }, 2000);
-  });
+function getSum(elements){
+
+  //takes array to calculate sum
+  const reducer = (accumulator, curr) => accumulator + curr;
+  return elements.reduce(reducer);
 }
 
 function addTransitDestinationToView(routesLength){
@@ -444,14 +450,25 @@ function showRouteInfo(route){
 
   const copy = document.querySelector("template#routeTemplate").content.cloneNode(true);
 
-  copy.querySelector(".flightDuration").textContent = `${route.duration}`;
+  copy.querySelector(".flightDuration").textContent = `${route.durationHrs}h ${route.durationMins}m`;
   copy.querySelector(".machineName").textContent = `${route.machine}`;
   copy.querySelector(".machineImg").src = findMachineImage(route.machine, route.airline);
   copy.querySelector(".capacity").textContent = `${route.capacity} passengers`;
+  //Schedule popup
+  copy.querySelector(".scheduleText").textContent = route.availability;
+  copy.querySelector(".scheduleHeader").textContent = `Flight Schedule`;
+  const scheduleWindow = copy.querySelector(".schedulePopupWindow");
+  copy.querySelector(".scheduleInfoIcon").addEventListener('click', () => {togglePopUpWindow(scheduleWindow)});
+
 
   copy.querySelector(".food").textContent = `${route.food}`;
   copy.querySelector(".luggage").textContent = `${route.luggage}kg`;
 
+  addIcons(route, copy)
+
+}
+
+function addIcons(route, copy){
   if (!route.entertainment){
     copy.querySelector(".entertainment").classList.add("hidden");
   } 
@@ -463,7 +480,6 @@ function showRouteInfo(route){
   }
 
   document.querySelector(".routeContainer").appendChild(copy);
-
 }
 
 function findMachineImage(machine, airline){
