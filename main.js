@@ -1,4 +1,9 @@
 import './styles.scss';
+import {globalDestinations, globalRoutes, fetchData} from './modules/settings.js';
+import {filterDestBySearch, settings, filterListByDest} from './modules/listFilters.js';
+import {addClassForEach, removeClassForEach, togglePopUpWindow, makeUpperCase, getSum, checkIfHasFromDest} from './modules/utility.js';
+import {resultLoadAnimation, findMachineImage, addAirlineButton, addIcons, getImageSize} from './modules/resultsScreen.js';
+import {addLabel, togglePinLabelVisibility} from './modules/mapView.js';
 
 window.addEventListener("load", function(){
   const pageLoader = document.querySelector(".loader");
@@ -6,27 +11,13 @@ window.addEventListener("load", function(){
 })
 window.addEventListener("DOMContentLoaded", start);
 
-//HEADER FOR DESTINATION DATA
-const apiKey = "61a623ce81b6874e24b2ea01";
-
-const restdbHeaders = {
-    "Content-Type": "application/json; charset=utf-8",
-    "x-apikey": apiKey,
-    "cache-control": "no-cache"
-};
-
 // ARRAYS 
-let globalDestinations = [];
 let globalFilteredDest = [];
 let toFromLocations = [];
-let globalRoutes = [];
 let connectingDestination = {};
 
 // Search Input
 const searchInput = document.getElementById("searchbar");
-let settings = {
-  searchQuery: ""
-}
 
 async function start(){
 
@@ -46,19 +37,6 @@ async function handleSVGData(){
   const routes = document.querySelectorAll('#mapOverlay svg .route');
   addClassForEach(labels, 'hidden');
   addClassForEach(routes, 'hidden');
-}
-
-async function fetchData(){
-    // Fetching data and drawing svg data
-    const destinationsURL = "https://routemap-fa64.restdb.io/rest/destinations";
-    let destResponseArray = await getAllDestinations(destinationsURL);
-  
-    const routesURL = "https://routemap-fa64.restdb.io/rest/routes"
-    let routesResponseArray = await getAllRoutes(routesURL);
-  
-    // More setup (eventlistners, data parsing)
-    handleRoutes(routesResponseArray);
-    handleDest(destResponseArray);
 }
 
 function setEventListeners(){
@@ -100,40 +78,6 @@ function setEventListeners(){
   document.querySelector(".priceInfoIcon").addEventListener('click', () => {togglePopUpWindow(priceGraphWindow)});
 }
 
-function togglePopUpWindow(domEl){
-
-  domEl.classList.remove("hidden");
-  domEl.querySelector(".closeIcon").addEventListener("click", ()=> {
-  domEl.classList.add("hidden");
-  }) 
-}
-
-function addClassForEach(elements, className) {
-  elements.forEach(element => element.classList.add(className));
-}
-
-function removeClassForEach(elements, className) {
-  elements.forEach(element => element.classList.remove(className));
-}
-
-
-
-async function getAllRoutes(routesURL) {
-  const response = await fetch(routesURL, {
-    method: "get",
-    headers: restdbHeaders,
-  });
-  const routesData = await response.json();
-  return routesData;
-}
-
-function handleRoutes(routesResponseArray){
-  routesResponseArray.forEach(route =>{
-    //const routeObject = getRouteItems(route);
-    globalRoutes.push(route);
-  });
-}
-
 function handleCloseElClicked(label){
 
   const pins = document.querySelectorAll("#mapOverlay svg .pin");
@@ -169,23 +113,6 @@ function updateRemainingLocation(location){
   updateScreens();
 }
 
-
-function togglePinLabelVisibility(pin, show) {
-  const pinId = pin.id;
-  const labelId = `#${pinId.split('Pin')[0]}Label`;
-  const label = document.querySelector(labelId);
-  const isActive = label.classList.contains('isActive');
-
-  if (isActive) {
-    return;
-  }
-  if (show) {
-    document.querySelector(labelId).classList.remove('hidden');
-  } else {
-    document.querySelector(labelId).classList.add('hidden');
-  }
-}
-
 function checkPin(pin){
   const clickedDest = pin.id.slice(0, -3);
   const destinationInArray = globalDestinations.find(({airport}) => airport === clickedDest);
@@ -202,33 +129,6 @@ function buildList(){
 function checkSearch(){
   settings.searchQuery = searchInput.value;
   buildList();
-}
-
-function filterDestBySearch(destinations) {
-  return destinations.filter(function(destination) {
-    return (
-      destination.airport.toLowerCase().includes(settings.searchQuery.toLowerCase())
-    );
-});
-}
-
-//GET DESTINATIONS DATA
-
-async function getAllDestinations(destinationsURL) {
-  const response = await fetch(destinationsURL, {
-      method: "get",
-      headers: restdbHeaders,
-  });
-  const destinationsData = await response.json();
-  return destinationsData;
-}
-
-//HANDLE DESTINATIONS
-function handleDest(destResponseArray){
-  destResponseArray.forEach(destination =>{
-    //const destinationObject = getItems(destination);
-    globalDestinations.push(destination);
-  });
 }
 
 function displayDestList(destinations){
@@ -248,11 +148,6 @@ function displayDest(destination){
  document.querySelector("ul#destList").appendChild(copy);
 }
 
-function makeUpperCase(item){
-  const fixedItem = item.charAt(0).toUpperCase() + item.slice(1);
-  return fixedItem;
-}
-
 function updateToFromLocations(isFromLocation, destination) {
     //IF globalFilteredDest array DOES NOT include isFromLocation = true THEN: 
   if (isFromLocation){
@@ -267,56 +162,36 @@ function updateToFromLocations(isFromLocation, destination) {
 }
 
 function getRouteConnection(from, to) {
+
   let routes = [];
-
-    // Step 1 (check for directRoute)
-
-  const directRoute = globalRoutes.find(gRoute => {
-    if (gRoute.routeName.includes(from) && gRoute.routeName.includes(to)) {
-      return true;
-    }
-    return false;
-  });
+  connectingDestination = globalDestinations.find(destination => destination.connectsTo.includes(from) && destination.connectsTo.includes(to));
+  const directRoute = checkForDirectRoute(from, to);
 
   if (directRoute) {
     routes = [directRoute]
     return routes;
-  } 
+  } else if(connectingDestination){
 
-  // Step 2 (check for connecting location)
-  connectingDestination = globalDestinations.find(destination => {
-    if (destination.connectsTo.includes(from) && destination.connectsTo.includes(to)) {
-      return true
-    }
-
-    return false;
-  });
-
-  if (connectingDestination) {
     const connectingAirport = connectingDestination.airport;
-    const firstRoute = globalRoutes.find(gRoute => {
-      if (gRoute.routeName.includes(from) && gRoute.routeName.includes(connectingAirport)) {
-        return true
-      }
-  
-      return false;
-    });
+    const firstRoute = getConnectingRoute(from, connectingAirport);
+    const secondRoute = getConnectingRoute(to, connectingAirport);
 
-    const secondRoute = globalRoutes.find(gRoute => {
-      if (gRoute.routeName.includes(connectingAirport) && gRoute.routeName.includes(to)) {
-        return true
-      }
-  
-      return false;
-    });
-
-    if (firstRoute && secondRoute) {
-      routes = [firstRoute, secondRoute]
-    }
-
+    routes = [firstRoute, secondRoute];
+    return routes;
+  } else {
+    return routes;
   }
 
-  return routes;
+}
+
+function checkForDirectRoute(from, to){
+  const directRoute = globalRoutes.find(gRoute => gRoute.routeName.includes(from) && gRoute.routeName.includes(to));
+  return directRoute;
+}
+
+function getConnectingRoute(location, connectingAirport){
+ const connectingRoute = globalRoutes.find(gRoute => gRoute.routeName.includes(location) && gRoute.routeName.includes(connectingAirport));
+ return connectingRoute;
 }
 
 function showResultsScreen() {
@@ -324,24 +199,25 @@ function showResultsScreen() {
   resultsContainer.classList.remove('hidden');
 }
 
-function updateRouteVisibility(shouldShowRoute) {
+function updateResultVisibility(shouldShowRoute) {
   if (!shouldShowRoute) {
     return;
+  } else{
+    findResultToShow()
   }
+}
+
+function findResultToShow(){
 
   const fromLocation = toFromLocations.find(location => location.isFromLocation).airport;
   const toLocation = toFromLocations.find(location => location.isToLocation).airport;
   const routes = getRouteConnection(fromLocation, toLocation);
-  //routes.forEach(route => {
-  //  selectedRoutes.push(route);
-  //})
 
   if (routes.length > 0) {
     handleRoutesToShow(routes)
 
   } else {
     document.getElementById("notFoundWindow").classList.remove("hidden");
-
   }
 }
 
@@ -353,79 +229,53 @@ function handleRoutesToShow(routes){
 
 }
 
-function addAirlineButton(routes){
-
-  const agButton = document.getElementById("agButton");
-  const iaButton = document.getElementById("iaButton");
-  const containsAGRoute = routes.some(e => e.airline === "Air Greenland");
-  const containsIARoute = routes.some(e => e.airline === "Icelandair");
-
-  if (containsAGRoute && !containsIARoute){
-    iaButton.classList.add("hidden");
-
-  } else if (!containsAGRoute && containsIARoute){
-    agButton.classList.add("hidden");
-
-  } else if (containsAGRoute && containsIARoute){
-    return;
-  }
-
-  //if routes contain Air Greenland as airline add agButton 
-  //if routes contain AirIceland as airline add aiButton 
-  //(MAKE SURE TO UNHIDE ALL WHEN RESET);
-
-}
-
 function populateResultScreen(routes){
-  const fromLocation = toFromLocations.find(location => location.isFromLocation);
-  const toLocation = toFromLocations.find(location => location.isToLocation);
   const routesPrices = [];
   const routeDurationMins = [];
   const routeDurationHrs = [];
 
+  //GET ELS FOR EACH ROUTE AND SHOW EACH ROUTE
   routes.forEach(route => {
     routesPrices.push(route.price);
     routeDurationMins.push(route.durationMins);
     routeDurationHrs.push(route.durationHrs);
-
     showRouteInfo(route);
-    setTimeout(function() {
+   setTimeout(function() {
     const routeElement = document.querySelector(`#${route.routeName}`);
     routeElement.classList.remove('hidden');
     }, 2000);
   });
 
-  //if totalMinutes more than 60 subtract 60 from minutes and add 1 hour to total hours
+  //TOTAL PRICE AND DURATION
+  getTotalRouteDuration(routeDurationHrs, routeDurationMins);
+  document.getElementById("priceFrom").textContent = `${getSum(routesPrices)} DKK `
+
+  //DISPLAY SELECTED FROM AND TO IN RESULTS
+  const fromLocation = toFromLocations.find(location => location.isFromLocation);
+  const toLocation = toFromLocations.find(location => location.isToLocation);
+  showResultDests(fromLocation, toLocation);
+}
+
+function showResultDests(fromLocation, toLocation){
+  // add icon infront of selected dests
+  document.getElementById("fromLocationResult").classList.add(`${fromLocation.type}`);
+  document.getElementById("toLocationResult").classList.add(`${toLocation.type}`);
+  //Dispaly to and from 
+  document.querySelector("#routeTitle h1").textContent = `From ${makeUpperCase(fromLocation.airport)} to ${makeUpperCase(toLocation.airport)}`
+  document.querySelector("#fromLocationContainer h2").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
+  document.querySelector("#toLocationContainer h2").textContent = `Arrive in ${makeUpperCase(toLocation.airport)} (${toLocation.code})`
+}
+
+function getTotalRouteDuration(routeDurationHrs, routeDurationMins){
   let totalHrs =  getSum(routeDurationHrs);
   let totalMins = getSum(routeDurationMins);
 
   if (totalMins >= 60){
     totalHrs === totalHrs++;
     totalMins -= 60;
-    console.log(totalHrs, totalMins)
   } 
   //display totalDuration
   document.getElementById("durationTotal").textContent = `${totalHrs}h ${totalMins}m`;
-  
-  //display price
-  document.getElementById("priceFrom").textContent = `${getSum(routesPrices)} DKK `
-
-  // add icon infront of 
-  document.getElementById("fromLocationResult").classList.add(`${fromLocation.type}`);
-  document.getElementById("toLocationResult").classList.add(`${toLocation.type}`);
-
-  //Dispaly to and from 
-  document.querySelector("#routeTitle h1").textContent = `From ${makeUpperCase(fromLocation.airport)} to ${makeUpperCase(toLocation.airport)}`
-  document.querySelector("#fromLocationContainer h2").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
-  document.querySelector("#toLocationContainer h2").textContent = `Arrive in ${makeUpperCase(toLocation.airport)} (${toLocation.code})`
-
-}
-
-function getSum(elements){
-
-  //takes array to calculate sum
-  const reducer = (accumulator, curr) => accumulator + curr;
-  return elements.reduce(reducer);
 }
 
 function addTransitDestinationToView(routesLength){
@@ -460,6 +310,8 @@ function showRouteInfo(route){
   const scheduleWindow = copy.querySelector(".schedulePopupWindow");
   copy.querySelector(".scheduleInfoIcon").addEventListener('click', () => {togglePopUpWindow(scheduleWindow)});
 
+  const machineImage = copy.querySelector(".machineImg");
+  getImageSize(route.machine, machineImage);
 
   copy.querySelector(".food").textContent = `${route.food}`;
   copy.querySelector(".luggage").textContent = `${route.luggage}kg`;
@@ -468,34 +320,7 @@ function showRouteInfo(route){
 
 }
 
-function addIcons(route, copy){
-  if (!route.entertainment){
-    copy.querySelector(".entertainment").classList.add("hidden");
-  } 
-  if (!route.food){
-    copy.querySelector(".food").classList.add("hidden");
-  }
-  if (!route.luggage){
-    copy.querySelector(".luggage").classList.add("hidden");
-  }
 
-  document.querySelector(".routeContainer").appendChild(copy);
-}
-
-function findMachineImage(machine, airline){
-  if (machine === "Dash 8-200" && airline === "Air Greenland"){
-    return "machine-cutouts/dash8-ag.png";
-  } else if (machine === "Dash 8-200" && airline === "Icelandair"){
-    return "machine-cutouts/dash8-ia.png";
-  } else if (machine === "Boeing 737 All Series" || machine === "Airbus A330-200"){
-    return "machine-cutouts/airbus-ag.png";
-  } else if (machine === "Bell 212 Helicopter"){
-    return "machine-cutouts/bell-212-ag.png";
-  } else if (machine === "Eurocopter Ec155"){
-    return "machine-cutouts/eurocopter-ag.png";
-  }
-
-}
 function clickDestination(destination){
   
   if (toFromLocations.includes(destination) || toFromLocations.length === 2) {
@@ -503,7 +328,7 @@ function clickDestination(destination){
   } else {
 
   updateToFromLocations(toFromLocations.length === 0, destination);
-  updateRouteVisibility(toFromLocations.length === 2);
+  updateResultVisibility(toFromLocations.length === 2);
 
   setTimeout(function() {
     updateScreens();
@@ -569,42 +394,13 @@ function updateScreenOne(){
   }
 }
 
-function resultLoadAnimation(){
-  setTimeout(function() {
-    document.getElementById("resultLoaderScreen").classList.add("hidden");
-  }, 2000);
-}
-
-function addLabel(destination){
-  const labelId = `${destination.airport}Label`;
-  const label = document.querySelector(`svg g #${labelId}`);
-  label.classList.add("isActive");
-}
-
 function filterByDestinationClicked(destinations){
   //reset search input
   if (checkIfHasFromDest(toFromLocations)) {
     const fromLocation = toFromLocations.find(element => element.isFromLocation === true);
-    if (fromLocation.country == "Denmark" || fromLocation.country == "Iceland"){
-    destinations.forEach((destination) => {
-      if (destination.country !== fromLocation.country && destination.country !== "Greenland") {
-        const pinId = `#${destination.airport}Pin`;
-        const pin = document.querySelector(pinId);
-        pin.classList.add('hidden');
-      }
-    })
-    // Return destinations only with greenlandic locations
-    const filteredDestinations = destinations.filter(destination => destination.country == "Greenland")
-    return filteredDestinations;
-    } else if (fromLocation.country == "Greenland"){
-      return destinations.filter(destination => destination.airport !== fromLocation.airport);
-    }
+    return(filterListByDest(destinations, fromLocation));
   }
   else{
     return destinations;
   }
-}
-
-function checkIfHasFromDest(destinations){
-  return destinations.some(e => e.isFromLocation === true)
 }

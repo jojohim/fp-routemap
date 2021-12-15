@@ -152,9 +152,7 @@ body{
 ///////RESULT SCREEN STYLING 
 
 #resultHeader {
-    background-color: $accent-1;
     height: min-content;
-    padding: 1vw;
 }
 
 #routeTitle {
@@ -176,16 +174,28 @@ body{
     }
 
     .machineImg {
-        width: 250px;
         padding: 10px 0;
         height: auto;
         margin: auto;
         display: block;
     }
 
+
     .routeInfo{
         padding: 0 2vw;
     }
+}
+
+.big {
+    width: clamp(280px, 23vw, 23vw);
+}
+
+.medium{
+    width: clamp(200px, 16vw, 16vw);
+}
+
+.small{
+    width: clamp(175px, 15vw, 15vw);
 }
 
     // RESULT SCREEN ICONS
@@ -262,9 +272,7 @@ body{
 
 #resultFooter{
 
-    padding: 0.5vw;
-    display: flex;
-    justify-content: space-evenly;
+    padding: 1vw;
 
     .btn{
         margin: 0.5vw;

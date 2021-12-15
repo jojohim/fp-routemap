@@ -26,7 +26,6 @@
 }
 
 .disclaimerWindow{
-    width: 36vw;
     right: 1vw;           
     display: flex;
     align-items: center;
@@ -72,16 +71,8 @@
     }
 }
 
-//#screenOneHeader{
-//    height: min-content;
-//    margin-top: 0;
-//    padding-bottom: 1vw;
-//    background-color: white;
-//}
-
-
 /////DESKTOP ONLY 
-@media (min-width: 601px){
+@media (min-width: 801px){
 
     body {
         background-color: #83B5F4;
@@ -104,10 +95,27 @@
         width: clamp(420px, 36vw, 36vw);
         margin: 2vh 2vh 0 0;
     }
+
+    #resultHeader {
+        background-color: $accent-1;
+        padding: 1vw;
+    }
+
+    #resultFooter{
+        display: flex;
+        justify-content: space-evenly;
+        align-content: center;
+        align-items: center;
+    }
+
+    a{
+        padding: 0.5vw 1vw;;
+    }
 }
 
+
 /////MEDIA QUERY PHONE 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
 
 
     .disclaimerWindow{
@@ -120,6 +128,18 @@
     #legendWindow,
     #mapOverlay{
         display: none;
+    }
+
+    #resultHeader {
+        padding: 4vw 1vw 1vw 1vw;
+    }
+
+    #resultFooter{
+        text-align: center;
+    }
+
+    a{
+        padding: 2vw 3vw;
     }
 
 }
