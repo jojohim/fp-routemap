@@ -44,10 +44,12 @@ export function addAirlineButton(routes){
     } else if (containsAGRoute && containsIARoute){
       return;
     }
-  
+
   }
 
+
   export function addIcons(route, copy){
+
     if (!route.entertainment){
       copy.querySelector(".entertainment").classList.add("hidden");
     } 

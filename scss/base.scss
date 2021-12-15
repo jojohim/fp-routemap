@@ -1,39 +1,35 @@
 //contains all the resets, variables, mixins, and utility classes
-//VARIABLES
 
+//VARIABLES
 $primary-color: white;
 $secondary-color: #BD242B;
 $tertiary-color: #111112;
 $accent-1: #F5F5F5;
 $ia-color: #001B71;
 
-body{
-    margin: 0;
-}
 
-#mapOverlay svg{
-    height: 100vh;
+//MIXINS
+
+@mixin windowSettings{
+    box-shadow: 4px 3px 21px -8px rgba(0,0,0,0.56);
     position: absolute;
-    z-index: 0;
+    background-color: white;
+    border-radius: 10px;
 }
 
-#routePresentation{
-    position: relative;
-    padding: 1vw;
-
-}
-#mapBG{
-    height: 100vh;
-    position: absolute;
-    z-index: -1;
-}
-
-.line{
-    height: 1px;
-    background-color: grey;
-    width: 100%;
+@mixin icon-settings{
+    content: "";
+    margin-right: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    vertical-align: -10%;
 }
 
+
+//GENERAL UTILITY CLASSES
 
 .hidden {
     display: none;
@@ -51,108 +47,65 @@ body{
     display: none;
 }
 
-@keyframes animateLine {
-    to {
-        stroke-dashoffset: 0;
+.pin:hover{
+    cursor: pointer;
+}
+
+.big {
+    width: clamp(280px, 23vw, 23vw);
+}
+
+.medium{
+    width: clamp(200px, 16vw, 16vw);
+}
+
+.small{
+    width: clamp(175px, 15vw, 15vw);
+}
+
+/////DISCLAIMER WINDOW 
+
+#disclaimerWindow{
+    img{
+        margin-right: 1.5vw;
     }
 }
 
-.route:not(.hidden) {
-    stroke-dasharray: 2000;
-    stroke-dashoffset: 2000;
-    animation: animateLine 2s linear forwards;
-}
-
-.label:not(.hidden){
-    animation: fadeIn 0.3s linear forwards;
-}
-
-@keyframes fadeIn{
-
-    0%{
-        transform: translateY(-10px);
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-}
-
-//ANIMATION WHEN SCREEN IS CHANGED
-
-.changeScreen{
-    animation: fadeOutIn 1.5s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes fadeOutIn{
-    0% {
-        opacity: 1;
-    }
-
-    15%{
-        opacity: 1;
-    }
-
-    45%{
-        transform: translateX(5px);
-        opacity: 0;
-    }
-
-    55%{
-        opacity: 0;
-        transform: translateX(-10px);
-    }
-
-    100%{
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+/////SCREEN ONE STYLING 
 
 #textContainer {
     .closeIcon{
         right: 3vw;
     }
 }
-//#mapOverlay svg .pin:before {
-//    content: attr(data-hover);
-//    visibility: hidden;
-//    opacity: 0;
-//    width: 140px;
-//    background-color: black;
-//    color: #fff;
-//    text-align: center;
-//    border-radius: 5px;
-//    padding: 5px 0;
-//    transition: opacity 0.3s ease-in-out;
-//
-//    position: absolute;
-//    left: 0;
-//    top: 110%;
-//}
-//
-//#mapOverlay svg .pin:hover:before {
-//    opacity: 1;
-//    visibility: visible;
-//}
 
-
-
-/*#mapOverlay svg .pin:hover::after{
-    transition: 0.3s ease-in-out;
-    opacity: 0.75;
-
-}*/
-
-.pin:hover{
+.destItem p:hover{
     cursor: pointer;
+    transform: translateX(2px);
+    font-weight: 600;
+    color: $secondary-color;
+}
+
+.destItem p:active,
+.destItem p:focus,
+.destItem p:target{
+    font-weight: 600;
 }
 
 ///////RESULT SCREEN STYLING 
 
 #resultHeader {
     height: min-content;
+}
+
+#priceGraphPopup{
+    @include windowSettings;
+    z-index: 5;
+    padding: 0.5vw 2vw 2vw 2vw;
+
+    img{
+        height: clamp(100px,6vw, 6vw);
+    }
 }
 
 #routeTitle {
@@ -164,7 +117,6 @@ body{
     .closeIcon{
         right: 1vw;
     }
-
     h2{
         color: $secondary-color;
         span{
@@ -186,19 +138,8 @@ body{
     }
 }
 
-.big {
-    width: clamp(280px, 23vw, 23vw);
-}
 
-.medium{
-    width: clamp(200px, 16vw, 16vw);
-}
-
-.small{
-    width: clamp(175px, 15vw, 15vw);
-}
-
-    // RESULT SCREEN ICONS
+    //RESULT SCREEN ICONS
 
 #priceGraphPopup{
     .closeIcon{
@@ -207,17 +148,6 @@ body{
         height: min-content;
     }
     }
-
-@mixin icon-settings{
-    content: "";
-    margin-right: 5px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: inline-block;
-    height: 15px;
-    width: 15px;
-    vertical-align: -10%;
-}
 
 .infoIcon::after{
     background: url("info-icon.svg");
@@ -241,6 +171,7 @@ body{
     @include icon-settings;
 }
 
+    //RESULT SCREEN UTILITY CLASSES
 
 .column {
     display: flex;
@@ -254,28 +185,18 @@ body{
     justify-content: space-between;
 }
 
-.closeIcon{
-    transition: 0.3s;
-    position: absolute;
-}
-
-.closeIcon:hover{
-    cursor: pointer;
-    opacity: 0.7;
-}
-
 .transitDestination{
     font-weight: 400;
   }
 
-//////////////RESULT FOOTER
+    //RESULT FOOTER
 
 #resultFooter{
-
     padding: 1vw;
 
     .btn{
         margin: 0.5vw;
+        padding: 10px 20px;
     }
     #iaButton{
         border: 2px solid $ia-color;
@@ -303,27 +224,19 @@ body{
     }
 }
 
-///////NOT FOUND PLACEHOLDER TEXT
+////NOT FOUND PLACEHOLDER
 
 #notFoundWindow {
-
-    h1{
-        color: grey;
-        position: relative;
-        top: 37%;
-        text-align: center;
-    }
-
     img {
         position: relative;
         height: clamp(40px, 2vw, 2vw);
         top: 5%;
         left: 5%;
-
     }
 }
 
-///////LEGEND
+///////LEGEND ICONS
+
 .heliport::before{
     background: url("heliport-icon.svg");
     @include icon-settings;

@@ -1,0 +1,116 @@
+//everything that is reusable – buttons, navbars, cards, and so on
+
+//FONTS
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400&display=swap');
+
+h1, 
+h2, 
+h3,
+p,
+a{
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1{
+    font-weight: 600;
+    color: $secondary-color;
+    font-size: clamp(20px, 1.4em, 1.4vw);
+}
+
+h2{
+    font-weight: 600;
+    font-size: clamp(18px, 1.3em, 1.3vw);
+}
+
+h3{
+  font-weight: 400;
+  font-size: clamp(16px, 1.2em, 1.2vw);
+}
+
+p{
+    font-weight: 400;
+    font-size: clamp(14px, 1em, 1em);
+}
+
+a{
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+ul{
+    list-style: none;
+    margin-top: 2vw;
+    padding: 0;
+}
+
+//FONT EXCEPTIONS 
+#resultScreen h1{
+  margin: 0 0 0.2vw 0;
+}
+
+#resultScreen p{
+  margin: 5px 0;
+}
+
+#textConatiner h1{
+  margin: 2vw 0 2vw 0;
+}
+
+#disclaimerWindow a{
+    padding: 0.5vw 1vw;;
+}
+
+.destItem p{
+  transition: 0.3s ease-in-out;
+}
+
+#notFoundWindow {
+  h1{
+      color: grey;
+      position: relative;
+      top: 37%;
+      text-align: center;
+  }
+}
+
+#priceGraphPopup {
+  h2{
+    text-align: center;
+  }
+}
+
+//SEARCH BAR
+
+#searchbar{
+    width: clamp(90%, 28vw, 28vw);
+    padding: clamp(12px, 0.5vw, 0.5vw);
+    margin: 1vw 0;
+    border: 1.5px solid $tertiary-color;
+    border-radius: 20px;
+}
+
+//LINE
+
+.line{
+  height: 1px;
+  background-color: grey;
+  width: 100%;
+}
+
+//REUSABLE ICONS
+.infoIcon{
+  height: 4vh;
+  margin-right: 1vw;
+}
+
+.closeIcon{
+  transition: 0.3s;
+  position: absolute;
+}
+
+.closeIcon:hover{
+  cursor: pointer;
+  opacity: 0.7;
+}
+

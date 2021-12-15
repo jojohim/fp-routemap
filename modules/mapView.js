@@ -13,8 +13,7 @@ export function togglePinLabelVisibility(pin, show) {
   
     if (isActive) {
       return;
-    }
-    if (show) {
+    } else if (show) {
       document.querySelector(labelId).classList.remove('hidden');
     } else {
       document.querySelector(labelId).classList.add('hidden');

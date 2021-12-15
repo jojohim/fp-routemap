@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="international-airport-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite - Greenland Route Map</title>
   </head>
@@ -12,23 +12,25 @@
       <img src="loading.gif" alt="loading...">
     </div>
 
-    <section class="disclaimerWindow">
-      <img src="info-icon.svg">
+    <section id="disclaimerWindow">
+      <img src="info-icon.svg" alt="info icon in red">
       <p>This map is for illustrative purposes only.<br> Flights might defer based on operational conditions. </p>
     </section>
 
     <section class="screenOne formWindow">
       <div id="textContainer">
       <article id="departFrom" class="hidden">
-        <img class="closeIcon clearAllButton" src="closeIcon.svg">
+        <img class="closeIcon clearAllButton" alt="close icon to delete selection" src="closeIcon.svg">
         <h1>Depart from</h1>
       <div class="line"></div>
     </article>
+    <article id="listContainer">
       <h2 id="listTitle">I'm travelling from:</h2>
       <input type="text" id="searchbar" placeholder="Search destinations..">
       <ul id="destList">
         <!--destination template will be appended here-->
       </ul>
+    </article>
       <template id="destTemplate">
         <li class="destItem">
         <p data-field="airport" class="destName">DESTINATION NAME</p>
@@ -42,13 +44,13 @@
       <article id="resultHeader">
         <div id="routeTitle">
           <h1>ROUTE SELECTED</h1>
-          <img class="closeIcon clearAllButton" src="closeIcon.svg">
+          <img class="closeIcon clearAllButton" alt="close icon to delete selection" src="closeIcon.svg">
         </div>
         <p><strong>Price from: <span id="priceFrom"></span></strong> · Economy · One-Way <span class="infoIcon priceInfoIcon"></span></p>
         <div id="priceGraphPopup" class="hidden">
-          <img src="closeIcon.svg" class="closeIcon">
+          <img src="closeIcon.svg" alt="close icon to close popup window" class="closeIcon">
           <h2>Price Graph by Month</h2>
-          <img src="priceGraph.svg">
+          <img src="priceGraph.svg" alt="graph showing price variations by month">
         </div>
         <p><strong>Flight duration: <span id="durationTotal"></span></strong></p>
     </article>
@@ -74,12 +76,12 @@
                 <span class="capacity">xx passengers</span></p>
           </div>
           <div class="schedulePopupWindow hidden">
-            <img class="closeIcon" src="closeIcon.svg">
+            <img class="closeIcon" alt="close icon to close popup window" src="closeIcon.svg">
             <h3 class="scheduleHeader">SCHEDULE HEADER</h3>
             <p class="scheduleText"></p>
           </div>
 
-          <img class="machineImg" src="machine-cutouts/airbus-ag.png">
+          <img class="machineImg" alt="image of machine which operates on this route" src="machine-cutouts/airbus-ag.png">
 
           <div class="bottomColumn column">
             <p class="food">Meals and Snacks</p>
@@ -102,7 +104,7 @@
     </section>
 
     <section id="notFoundWindow" class="hidden formWindow">
-      <img id="backIcon" src="back-icon.svg">
+      <img id="backIcon" alt="back icon to view previous window" src="back-icon.svg">
       <h1>Route not found.<br>Route includes more than 1 stop</h1>
     </section>
 
@@ -115,7 +117,7 @@
     </section>
 
     <section id="mapOverlay"></section>
-    <img id="mapBG" src="map-bg.png">
+    <img id="mapBG" alt="map showing Greenland, Iceland and Denmark" src="map-bg.png">
     <script type="module" src="/main.js"></script>
   </body>
 </html>

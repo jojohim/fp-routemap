@@ -1,9 +1,7 @@
 //all the Sass code handling the layout, which is the container and grid systems
-@mixin windowSettings{
-    box-shadow: 4px 3px 21px -8px rgba(0,0,0,0.56);
-    position: absolute;
-    background-color: white;
-    border-radius: 10px;
+
+body{
+    margin: 0;
 }
 
 #legendWindow{
@@ -16,44 +14,33 @@
     padding: 0 10px 0 10px;
 }
 
+#mapOverlay svg{
+    height: 100vh;
+    position: absolute;
+    z-index: 0;
+}
+
+#routePresentation{
+    position: relative;
+    padding: 1vw;
+
+}
+
+#mapBG{
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+}
+
 #textContainer {
     padding: 1vw 3vw; 
 }
 
-.infoIcon{
-    height: 4vh;
-    margin-right: 1vw;
-}
-
-.disclaimerWindow{
+#disclaimerWindow{
     right: 1vw;           
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.destItem p{
-    transition: 0.3s ease-in-out;
-}
-.destItem p:hover{
-    cursor: pointer;
-    transform: translateX(2px);
-    font-weight: 600;
-    color: $secondary-color;
-}
-
-#priceGraphPopup{
-    @include windowSettings;
-    z-index: 5;
-    padding: 0.5vw 2vw 2vw 2vw;
-
-    h2{
-        text-align: center;
-    }
-
-    img{
-        height: clamp(100px,6vw, 6vw);
-    }
 }
 
 .schedulePopupWindow{
@@ -89,7 +76,7 @@
         height: 85vh;
     }
 
-    .disclaimerWindow{
+    #disclaimerWindow{
         @include windowSettings;
         height: 10vh;
         width: clamp(420px, 36vw, 36vw);
@@ -107,10 +94,6 @@
         align-content: center;
         align-items: center;
     }
-
-    a{
-        padding: 0.5vw 1vw;;
-    }
 }
 
 
@@ -118,7 +101,7 @@
 @media (max-width: 800px) {
 
 
-    .disclaimerWindow{
+    #disclaimerWindow{
         background-color: $accent-1;
         flex-direction: column;
         padding-top: 4vw;

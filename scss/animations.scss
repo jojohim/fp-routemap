@@ -1,0 +1,126 @@
+//keyframes and classes to animate
+
+//START ANIMATION
+
+.loader{
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img{
+      width:200px;
+  }
+}
+
+.loader.hide{
+    animation: fadeOut 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut{
+    100%{
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+    }
+}
+
+//ANIMATE ROUTE LINE IN SVG 
+
+@keyframes animateLine {
+  to {
+      stroke-dashoffset: 0;
+  }
+}
+
+.route:not(.hidden) {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: animateLine 2s linear forwards;
+}
+
+// ADD HOVER EFFECT FOR LABEL
+.label:not(.hidden){
+  animation: fadeIn 0.3s linear forwards;
+}
+
+#listContainer{
+  transition: 0.3s;
+}
+
+.fadeIn{
+  animation: fadeIn 0.5s linear forwards;
+}
+
+@keyframes fadeIn{
+
+  0%{
+      transform: translateY(-10px);
+      opacity: 0;
+  }
+  100%{
+      opacity: 1;
+  }
+}
+
+
+//RESULT SCREEN LOAD ANIMATIONN
+.dotFlashing {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    right: 50%;
+    width: 15px;
+    height: 15px;
+   border-radius: 50%;
+    background-color: $secondary-color;
+    color: $secondary-color;
+    animation: dotFlashing 0.5s infinite linear alternate;
+    animation-delay: .15s;
+  }
+  
+  .dotFlashing::before, .dotFlashing::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+  
+  .dotFlashing::before {
+    left: -20px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: $secondary-color;
+    color: $secondary-color;
+    animation: dotFlashing 0.5s infinite alternate;
+    animation-delay: 0s;
+  }
+  
+  .dotFlashing::after {
+    left: 20px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: $secondary-color;
+    color: $secondary-color;
+    animation: dotFlashing 0.5s infinite alternate;
+    animation-delay: 0.3s;
+  }
+  
+  @keyframes dotFlashing {
+    0% {
+      background-color: $secondary-color;
+    }
+    50%,
+    100% {
+      background-color: $accent-1;
+    }
+  }

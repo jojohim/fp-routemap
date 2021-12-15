@@ -1,9 +1,11 @@
-import './styles.scss';
+import './scss/styles.scss';
 import {globalDestinations, globalRoutes, fetchData} from './modules/settings.js';
 import {filterDestBySearch, settings, filterListByDest} from './modules/listFilters.js';
 import {addClassForEach, removeClassForEach, togglePopUpWindow, makeUpperCase, getSum, checkIfHasFromDest} from './modules/utility.js';
 import {resultLoadAnimation, findMachineImage, addAirlineButton, addIcons, getImageSize} from './modules/resultsScreen.js';
 import {addLabel, togglePinLabelVisibility} from './modules/mapView.js';
+
+"use strict";
 
 window.addEventListener("load", function(){
   const pageLoader = document.querySelector(".loader");
@@ -41,76 +43,86 @@ async function handleSVGData(){
 
 function setEventListeners(){
 
-  let labels = document.querySelectorAll('#mapOverlay svg #labels .label');
-  const pins = document.querySelectorAll("#mapOverlay svg .pin");
+  const priceGraphWindow = document.querySelector("#priceGraphPopup")
 
-  //BACK BUTTON EL
+  //Multiline eventlisteners
+  setBackEventListener();
+  setPinsEventListener();
+  setLabelsEventListener();
+  setClearAllEventListener();
+
+  //single line eventlisteners
+  document.querySelector(".priceInfoIcon").addEventListener('click', () => {togglePopUpWindow(priceGraphWindow)});
+  searchInput.addEventListener("keyup", checkSearch);
+}
+
+function setBackEventListener(){
   document.querySelector("#notFoundWindow #backIcon").addEventListener("click", () =>{
     const fromLabel = document.querySelector(`svg #labels #${toFromLocations[1].airport}Label`);
     handleCloseElClicked(fromLabel);
   })
+}
 
-  //SEARCH INPUT EL
-  searchInput.addEventListener("keyup", checkSearch);
+function setClearAllEventListener(){
+  // CLEAR ALL ON CLICK EL
+  const clearAllButtons = document.querySelectorAll('.clearAllButton');
+  clearAllButtons.forEach(clearAllButton => {
+    clearAllButton.addEventListener("click", clearSelection);
+  })
+}
 
-  //PIN HOVER AND CLICK EL
+function setLabelsEventListener(){
+  let labels = document.querySelectorAll('#mapOverlay svg #labels .label');
+
+  addClassForEach(labels, 'hidden');
+  labels.forEach(label => {
+  const closeElement = label.querySelector('.close');
+  closeElement.addEventListener('click', ( )=> handleCloseElClicked(label));
+}); 
+}
+
+function setPinsEventListener(){
+  const pins = document.querySelectorAll("#mapOverlay svg .pin");
+
   pins.forEach(pin => {
     pin.addEventListener("click", () => checkPin(pin));
     pin.addEventListener("mouseover", () => togglePinLabelVisibility(pin, true));
     pin.addEventListener("mouseleave", (e) => togglePinLabelVisibility(pin, false));
   })
-
-  // CLEAR ALL ON CLICK EL
-    const clearAllButtons = document.querySelectorAll('.clearAllButton');
-    clearAllButtons.forEach(clearAllButton => {
-      clearAllButton.addEventListener("click", clearSelection);
-    })
-
-  //CLOSE ELEMENT CLICK EL
-    addClassForEach(labels, 'hidden');
-    labels.forEach(label => {
-    const closeElement = label.querySelector('.close');
-    closeElement.addEventListener('click', ( )=> handleCloseElClicked(label));
-  }); 
-
-  //PRICE INFO ICON 
-  const priceGraphWindow = document.querySelector("#priceGraphPopup")
-  document.querySelector(".priceInfoIcon").addEventListener('click', () => {togglePopUpWindow(priceGraphWindow)});
 }
-
 function handleCloseElClicked(label){
 
   const pins = document.querySelectorAll("#mapOverlay svg .pin");
   const routes = document.querySelectorAll('.route');
   const locationToRemove = label.id.split('Label')[0];
 
+  //hide label and routes
   addClassForEach(routes, 'hidden');
   label.classList.remove('isActive')
   label.classList.add("hidden");
 
+  //filter out clicked 
   toFromLocations = toFromLocations.filter(location => location.airport !== locationToRemove);
   const remainingLocation = toFromLocations[0];
   
   if (toFromLocations.length > 0) {
-
-    updateRemainingLocation(remainingLocation);
+    toFromLocations = [];
+    updateToFromLocations(true, remainingLocation);
     removeClassForEach(pins, 'hidden');
-
+    updateScreens();
   } else {
     clearSelection();
   }
 }
 
-function updateRemainingLocation(location){
+function updateToFromLocations(isFromLocation, location){
 
-  toFromLocations = [
-    {
-      ...location,
-      isFromLocation: true,
-      isToLocation: false
-    }
-  ]
-  updateScreens();
+  toFromLocations.push({
+    ...location,
+    isFromLocation,
+    isToLocation: !isFromLocation,
+  });
+
 }
 
 function checkPin(pin){
@@ -133,7 +145,7 @@ function checkSearch(){
 
 function displayDestList(destinations){
   document.querySelector("ul#destList").innerHTML = "";
-  destinations.forEach(displayDest);
+  destinations.forEach(displayDest); 
 }
 
 function displayDest(destination){
@@ -148,19 +160,6 @@ function displayDest(destination){
  document.querySelector("ul#destList").appendChild(copy);
 }
 
-function updateToFromLocations(isFromLocation, destination) {
-    //IF globalFilteredDest array DOES NOT include isFromLocation = true THEN: 
-  if (isFromLocation){
-    document.getElementById("textContainer").classList.add("changeScreen");
-  }
-
-  toFromLocations.push({
-    ...destination,
-    isFromLocation,
-    isToLocation: !isFromLocation
-  });
-}
-
 function getRouteConnection(from, to) {
 
   let routes = [];
@@ -169,19 +168,15 @@ function getRouteConnection(from, to) {
 
   if (directRoute) {
     routes = [directRoute]
-    return routes;
   } else if(connectingDestination){
-
     const connectingAirport = connectingDestination.airport;
     const firstRoute = getConnectingRoute(from, connectingAirport);
     const secondRoute = getConnectingRoute(to, connectingAirport);
-
     routes = [firstRoute, secondRoute];
-    return routes;
   } else {
     return routes;
   }
-
+  return routes;
 }
 
 function checkForDirectRoute(from, to){
@@ -194,56 +189,48 @@ function getConnectingRoute(location, connectingAirport){
  return connectingRoute;
 }
 
-function showResultsScreen() {
-  const resultsContainer = document.querySelector('#resultScreen');
-  resultsContainer.classList.remove('hidden');
-}
 
 function updateResultVisibility(shouldShowRoute) {
   if (!shouldShowRoute) {
     return;
   } else{
-    findResultToShow()
+    findJourneyToShow();
+    const resultsContainer = document.querySelector('#resultScreen');
+    resultsContainer.classList.remove('hidden');
   }
 }
 
-function findResultToShow(){
-
+function findJourneyToShow(){
   const fromLocation = toFromLocations.find(location => location.isFromLocation).airport;
   const toLocation = toFromLocations.find(location => location.isToLocation).airport;
   const routes = getRouteConnection(fromLocation, toLocation);
 
   if (routes.length > 0) {
-    handleRoutesToShow(routes)
+    handleJourneyToShow(routes)
 
   } else {
     document.getElementById("notFoundWindow").classList.remove("hidden");
   }
 }
 
-function handleRoutesToShow(routes){
+function handleJourneyToShow(routes){
 
-    populateResultScreen(routes);
+    handleSelectedRoutes(routes);
+    populateJourneyHeader(routes);
     addAirlineButton(routes);
     addTransitDestinationToView(routes.length);
 
 }
 
-function populateResultScreen(routes){
+function populateJourneyHeader(routes){
   const routesPrices = [];
   const routeDurationMins = [];
   const routeDurationHrs = [];
 
-  //GET ELS FOR EACH ROUTE AND SHOW EACH ROUTE
   routes.forEach(route => {
     routesPrices.push(route.price);
     routeDurationMins.push(route.durationMins);
     routeDurationHrs.push(route.durationHrs);
-    showRouteInfo(route);
-   setTimeout(function() {
-    const routeElement = document.querySelector(`#${route.routeName}`);
-    routeElement.classList.remove('hidden');
-    }, 2000);
   });
 
   //TOTAL PRICE AND DURATION
@@ -254,6 +241,16 @@ function populateResultScreen(routes){
   const fromLocation = toFromLocations.find(location => location.isFromLocation);
   const toLocation = toFromLocations.find(location => location.isToLocation);
   showResultDests(fromLocation, toLocation);
+}
+
+function handleSelectedRoutes(routes){
+    routes.forEach(route => {
+      showRouteInfo(route);
+     setTimeout(function() {
+      const routeElement = document.querySelector(`#${route.routeName}`);
+      routeElement.classList.remove('hidden');
+      }, 2000);
+    });
 }
 
 function showResultDests(fromLocation, toLocation){
@@ -281,8 +278,9 @@ function getTotalRouteDuration(routeDurationHrs, routeDurationMins){
 function addTransitDestinationToView(routesLength){
   if (routesLength >= 2) {
     //get second route 
-    const routeElements = document.getElementsByClassName("routeInfo")
+    const routeElements = document.getElementsByClassName("routeInfo");
     const secondRouteElement = routeElements[1];
+    
     //create new text el
     const connectingDestinationText = document.createElement("h2");
     connectingDestinationText.textContent = `Transit in ${makeUpperCase(connectingDestination.airport)} (${connectingDestination.code})`;
@@ -290,7 +288,7 @@ function addTransitDestinationToView(routesLength){
     connectingDestinationText.classList.add(`transitDestination`);
     //insert before second element
     const routesContainer = document.querySelector(".routeContainer");
-    routesContainer.insertBefore(connectingDestinationText, secondRouteElement)
+    routesContainer.insertBefore(connectingDestinationText, secondRouteElement);
   } else {
     return;
   }
@@ -299,23 +297,20 @@ function addTransitDestinationToView(routesLength){
 function showRouteInfo(route){
 
   const copy = document.querySelector("template#routeTemplate").content.cloneNode(true);
+  const scheduleWindow = copy.querySelector(".schedulePopupWindow");
+  const machineImage = copy.querySelector(".machineImg");
 
   copy.querySelector(".flightDuration").textContent = `${route.durationHrs}h ${route.durationMins}m`;
   copy.querySelector(".machineName").textContent = `${route.machine}`;
   copy.querySelector(".machineImg").src = findMachineImage(route.machine, route.airline);
   copy.querySelector(".capacity").textContent = `${route.capacity} passengers`;
-  //Schedule popup
   copy.querySelector(".scheduleText").textContent = route.availability;
   copy.querySelector(".scheduleHeader").textContent = `Flight Schedule`;
-  const scheduleWindow = copy.querySelector(".schedulePopupWindow");
   copy.querySelector(".scheduleInfoIcon").addEventListener('click', () => {togglePopUpWindow(scheduleWindow)});
-
-  const machineImage = copy.querySelector(".machineImg");
-  getImageSize(route.machine, machineImage);
-
   copy.querySelector(".food").textContent = `${route.food}`;
   copy.querySelector(".luggage").textContent = `${route.luggage}kg`;
 
+  getImageSize(route.machine, machineImage);
   addIcons(route, copy)
 
 }
@@ -325,18 +320,15 @@ function clickDestination(destination){
   
   if (toFromLocations.includes(destination) || toFromLocations.length === 2) {
     return;
-  } else {
-
+  } else{
   updateToFromLocations(toFromLocations.length === 0, destination);
   updateResultVisibility(toFromLocations.length === 2);
+  updateScreens();
+  buildList();
+  addLabel(destination);
+  }
+}
 
-  setTimeout(function() {
-    updateScreens();
-    buildList();
-    addLabel(destination);
-  }, 500);
-}
-}
 
 function clearSelection() {
 
@@ -373,17 +365,18 @@ function updateScreens() {
       document.getElementById("textContainer").classList.remove("changeScreen");
       document.getElementById("textContainer").classList.add("hidden");
       resultLoadAnimation();
-      showResultsScreen();
   }
 }
 
 function updateScreenOne(){
 
   if (toFromLocations.length === 0) {
+    document.getElementById("departFrom").classList.add("fadeIn");
+    document.getElementById("listContainer").classList.add("fadeIn");
     document.getElementById("listTitle").textContent = "I'm travelling from:";
-    document.getElementById("resultScreen").classList.add("hidden");
     document.querySelector("#departFrom h1").textContent = "";
     document.getElementById("departFrom").classList.add("hidden");
+    document.getElementById("resultScreen").classList.add("hidden");
   }
 
   else if (toFromLocations.length === 1) {
@@ -392,6 +385,7 @@ function updateScreenOne(){
     document.getElementById("departFrom").classList.remove("hidden");
     document.querySelector("#departFrom h1").textContent = `Depart from ${makeUpperCase(fromLocation.airport)} (${fromLocation.code})`;
   }
+
 }
 
 function filterByDestinationClicked(destinations){

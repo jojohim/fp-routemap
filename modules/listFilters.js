@@ -14,10 +14,11 @@ export function filterDestBySearch(destinations) {
 
     if (fromLocation.country == "Denmark" || fromLocation.country == "Iceland"){
     const filteredDestinations = destinations.filter(destination => destination.country == "Greenland")
-  
     return filteredDestinations;
   
     } else if (fromLocation.country == "Greenland"){
-      return destinations.filter(destination => destination.airport !== fromLocation.airport);
+      const filteredDestinations = destinations.filter(destination => destination.airport !== fromLocation.airport);
+      return filteredDestinations;
     }
+
   }
