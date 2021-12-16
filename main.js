@@ -1,5 +1,5 @@
 import './scss/styles.scss';
-import {globalDestinations, globalRoutes, fetchData} from './modules/settings.js';
+import {globalDestinations, globalRoutes, fetchData} from './modules/getData.js';
 import {filterDestBySearch, settings, filterListByDest} from './modules/listFilters.js';
 import {addClassForEach, removeClassForEach, togglePopUpWindow, makeUpperCase, getSum, checkIfHasFromDest} from './modules/utility.js';
 import {resultLoadAnimation, findMachineImage, addAirlineButton, addIcons, getImageSize} from './modules/resultsScreen.js';
